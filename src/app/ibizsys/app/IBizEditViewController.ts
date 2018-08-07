@@ -768,44 +768,42 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public getFrontUIActionParam(uiaction: any = {}): any {
-
-        // var arg = arguments.callee.$.getFrontUIActionParam.call(this, uiaction);
-        // if (uiaction.actiontarget == 'SINGLEKEY' || uiaction.actiontarget == 'MULTIKEY') {
-        //     var dataInfo = '';
-        //     var keys = '';
-        //     var field = this.getForm().findField('srforikey');
-        //     if (field) {
-        //         keys = field.getValue();
-        //     }
-        //     if (keys == undefined || keys == '') {
-        //         field = this.getForm().findField('srfkey');
-        //         if (field) {
-        //             keys = field.getValue();
-        //         }
-        //     }
-        //     return $.extend(arg, { srfkeys: keys, srfkey: keys });
-        // }
-        // return arg;
-
-        let arg = super.getFrontUIActionParam(uiaction, {});
+        let arg = this.getFrontUIActionParam(uiaction);
         if (Object.is(uiaction.actiontarget, 'SINGLEKEY') || Object.is(uiaction.actiontarget, 'MULTIKEY')) {
-            // let dataInfo = '';
+
+            let vlaueitem = 'srfkey';
+            let paramkey = 'srfkeys';
+            let paramjo = null;
+            let paramitems = null;
+            if (uiaction.actionparams) {
+                let actionparams = uiaction.actionparams;
+                vlaueitem = (actionparams.vlaueitem && !Object.is(actionparams.vlaueitem, '')) ? actionparams.vlaueitem.toLowerCase() : vlaueitem;
+                paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
+                paramjo = actionparams.paramjo ? actionparams.paramjo : {};
+            }
+
+            let dataInfo = '';
             let keys = '';
-            const form = this.getForm();
-            if (!form) {
-                return arg;
+            let field = this.getForm().findField('srforikey');
+            if (field) {
+                keys = field.getValue();
             }
-
-            const _srfkeyFiled = form.findField('srfkey');
-            if (!_srfkeyFiled) {
-                return arg;
+            if (!keys || Object.is(keys, '')) {
+                field = this.getForm().findField('srfkey');
+                if (field) {
+                    keys = field.getValue();
+                }
+                field = this.getForm().findField(vlaueitem);
+                if (field) {
+                    paramitems = field.getValue();
+                }
             }
-
-            keys = _srfkeyFiled.getValue();
-            if (keys === undefined || Object.is(keys, '')) {
-                keys = _srfkeyFiled.getValue();
+            let data = { srfkeys: keys, srfkey: keys };
+            data[paramkey] = (paramitems != null) ? paramitems : keys;
+            if (paramjo) {
+                Object.assign(data, paramjo);
             }
-            return Object.assign(arg, { srfkeys: keys, srfkey: keys });
+            return Object.assign(arg, data);
         }
         return arg;
     }
@@ -818,46 +816,36 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public getBackendUIActionParam(uiaction: any = {}): any {
-
-        // if (uiaction.actiontarget == 'SINGLEKEY' || uiaction.actiontarget == 'MULTIKEY') {
-        //     var dataInfo = '';
-        //     var keys = '';
-
-        //     var field = this.getForm().findField('srfkey');
-        //     if (field) {
-        //         keys = field.getValue();
-        //     }
-        //     field = this.getForm().findField('srfmajortext');
-        //     if (field) {
-        //         dataInfo = field.getValue();
-        //     }
-        //     return $.extend({ srfkeys: keys, dataInfo: dataInfo }this.getForm().getValues());
-        //     //return {srfkeys: keys,dataInfo: dataInfo};
-        // }
-        // return {};
-
         if (Object.is(uiaction.actiontarget, 'SINGLEKEY') || Object.is(uiaction.actiontarget, 'MULTIKEY')) {
+            let vlaueitem = 'srfkey';
+            let paramkey = 'srfkeys';
+            let paramjo = null;
+            let infoitem = 'srfmajortext';
+            if (uiaction.actionparams) {
+                let actionparams = uiaction.actionparams;
+                vlaueitem = (actionparams.vlaueitem && !Object.is(actionparams.vlaueitem, '')) ? actionparams.vlaueitem.toLowerCase() : vlaueitem;
+                paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
+                infoitem = (actionparams.textitem && !Object.is(actionparams.textitem, '')) ? actionparams.textitem.toLowerCase() : infoitem;
+                paramjo = actionparams.paramjo ? actionparams.paramjo : {};
+            }
+
             let dataInfo = '';
             let keys = '';
 
-            const form = this.getForm();
-            if (!form) {
-                return {};
+            let field = this.getForm().findField(vlaueitem);
+            if (field) {
+                keys = field.getValue();
             }
-
-            const _srfkeyFiled = form.findField('srfkey');
-            if (!_srfkeyFiled) {
-                return {};
+            field = this.getForm().findField(infoitem);
+            if (field) {
+                dataInfo = field.getValue();
             }
-            keys = _srfkeyFiled.getValue();
-
-            const _srfmajortextFiled = form.findField('srfmajortext');
-            if (!_srfmajortextFiled) {
-                return {};
+            let data = { dataInfo: dataInfo };
+            data[paramkey] = keys;
+            if (paramjo) {
+                Object.assign(data, paramjo);
             }
-            dataInfo = _srfmajortextFiled.getValue();
-
-            return Object.assign({ srfkeys: keys, dataInfo: dataInfo }, this.getForm().getValues());
+            return Object.assign(data, this.getForm().getValues());
         }
         return {};
     }
