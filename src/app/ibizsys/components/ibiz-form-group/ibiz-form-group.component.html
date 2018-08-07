@@ -1,0 +1,25 @@
+<nz-layout [ngStyle]="{'display':visible?'block':'none'}" class="ibiz-form-group">
+    <nz-header class="ibiz-group-title" *ngIf="showheader">
+        <div class="from-group-comp">
+            <span (click)="onFlex()">
+              <i *ngIf="flex" class="anticon anticon-right"></i>
+              <i *ngIf="!flex" class="anticon anticon-down"></i>
+              {{text}}
+            </span>
+            <div>
+              <nz-popover [nzTrigger]="'click'" [nzPlacement]="'leftBottom'" [nzOverlayClassName]="'action-menu'">
+                <button nz-button nz-popover *ngIf="isShowMore" (click)="showMore()"><i class="anticon anticon-menu-fold"></i></button>
+                <ng-template #nzTemplate>
+                  <div *ngFor="let action of contentChild?.actions" class="action-item" (click)="onMoreAction(action)">
+                      <span *ngIf="action.check" class="action-item-check">•</span>&nbsp;&nbsp;<span>{{action.text}}</span>
+                  </div>
+                </ng-template>
+              </nz-popover>
+              <i *ngIf="isShowNew" class="anticon anticon-plus" (click)="onNewAction()"></i>
+            </div>
+          </div>
+    </nz-header>
+    <nz-content class="ibiz-group-content" [ngClass]="{'hidden': flex, 'no-padding': !showheader}">
+      <ng-content select=".ibiz-content"></ng-content>
+    </nz-content>
+</nz-layout>

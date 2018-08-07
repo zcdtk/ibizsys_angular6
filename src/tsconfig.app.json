@@ -1,0 +1,52 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "types": []
+  },
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts"
+  ],
+  "paths": {
+    "@shared": [
+      "app/shared"
+    ],
+    "@shared/*": [
+      "app/shared/*"
+    ],
+    "@core": [
+      "app/core"
+    ],
+    "@core/*": [
+      "app/core/*"
+    ],
+    "@testing": [
+      "testing"
+    ],
+    "@testing/*": [
+      "testing/*"
+    ],
+    "@env": [
+      "environments"
+    ],
+    "@env/*": [
+      "environments/*"
+    ],
+    "@pages": [
+      "app/pages"
+    ],
+    "@pages/*": [
+      "app/pages/*"
+    ],
+    "@user": [
+      "app/user"
+    ],
+    "@user/*": [
+      "app/user/*"
+    ],
+    "ibizsys": [
+      "app/ibizsys"
+    ]
+  }
+}

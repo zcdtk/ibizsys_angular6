@@ -1,0 +1,14 @@
+{
+  "/Angular6": { 
+    "target": "http://127.0.0.1:8080/MBDevSys"
+  },
+  "/angular6": {
+    "target": "http://127.0.0.1:8080/MBDevSys"
+  },
+  "/ibizutil": {
+    "target": "http://127.0.0.1:8080/MBDevSys"
+  },
+  "/api": {
+    "target": "http://127.0.0.1:8080/MBDevSys"
+  }
+}
