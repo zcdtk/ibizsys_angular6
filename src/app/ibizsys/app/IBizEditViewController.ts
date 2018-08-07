@@ -209,7 +209,7 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public getForm(): any {
-        return this.getControl('form');
+        return this.$controls.get('form');
     }
 
     /**
