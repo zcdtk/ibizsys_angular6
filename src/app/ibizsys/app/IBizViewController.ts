@@ -791,9 +791,6 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
     public onFillUpdatePanelParam(params: any = {}): void {
     }
 
-
-    // 附加方法
-
     /**
      * 初始化注册界面行为
      * 
@@ -809,7 +806,6 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
      * @memberof IBizViewController
      */
     public regUICounters(): void {
-
     }
 
     /**
@@ -818,13 +814,11 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
      * @memberof IBizViewController
      */
     public unRegUICounters(): void {
-        if (Object.keys(this.$uicounters).length === 0) {
+        if (this.$uiCounters.size === 0) {
             return;
         }
-
-        const _nameArr: Array<any> = Object.keys(this.$uicounters);
-        _nameArr.forEach(name => {
-            const _counter: IBizUICounter = this.getUICounter(name);
+        this.$uiCounters.forEach((name: string) => {
+            const _counter: IBizUICounter = this.$uiCounters.get(name);
             if (_counter) {
                 _counter.close();
             }

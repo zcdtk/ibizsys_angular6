@@ -51,9 +51,7 @@ export class IBizControl extends IBizControlBase {
         this.$url = opts.url;
         this.$iBizNotification = opts.iBizNotification;
         this.$viewController = opts.viewController;
-        if (this.$viewController) {
-            this.$iBizHttp = this.$viewController.$iBizHttp;
-        }
+        this.$iBizHttp = opts.iBizHttp;
     }
 
     /**
