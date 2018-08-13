@@ -11,9 +11,10 @@ import { LayoutModule } from './layout/layout.module';
 import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { RouteRoutingModule } from './routes-routing.module';
-import { IBizAppService } from '@ibizsys/IBizAppService';
-import { IBizHttp } from '@ibizsys/util/IBizHttp';
-import { IBizNotification } from '@ibizsys/util/IBizNotification';
+import { IBizApp } from '@core/IBizApp';
+import { IBizHttp } from '@core/http/IBizHttp';
+import { IBizNotification } from '@core/notice/IBizNotification';
+
 import { DefaultInterceptor } from '@core/net/default.interceptor';
 
 import localeZhHans from '@angular/common/locales/zh-Hans';
@@ -36,7 +37,7 @@ registerLocaleData(localeZhHans);
   providers: [
     { provide: LOCALE_ID, useValue: 'zh-Hans' },
     { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
-    IBizAppService,
+    IBizApp,
     IBizHttp,
     IBizNotification,
   ],
