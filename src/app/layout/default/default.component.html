@@ -1,11 +1,13 @@
 <nz-layout class="layout">
   <nz-header>
     <div class="logo"></div>
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
-      <li nz-menu-item (click)="collapsedMenus()">收缩菜单</li>
-      <li nz-menu-item>nav 2</li>
-      <li nz-menu-item>nav 3</li>
-    </ul>
+    <div class="top-nav-wrap">
+      <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
+        <li nz-menu-item>收缩菜单</li>
+        <li nz-menu-item>nav 2</li>
+        <li nz-menu-item>nav 3</li>
+      </ul>
+    </div>
   </nz-header>
   <router-outlet></router-outlet>
 </nz-layout>
