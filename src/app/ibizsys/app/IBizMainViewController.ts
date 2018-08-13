@@ -56,8 +56,7 @@ export class IBizMainViewController extends IBizDynamicViewController {
 
         const toolbar: any = this.getToolBar();
         if (toolbar) {
-            // 工具栏点击事件
-            toolbar.on(IBizEvent.IBizToolbar_ITEMCLICK).subscribe((params) => {
+            toolbar.on(IBizEvent.IBizToolbar_ITEMCLICK, (params) => {
                 this.onClickTBItem(params);
             });
         }
@@ -397,7 +396,7 @@ export class IBizMainViewController extends IBizDynamicViewController {
      * @memberof IBizMainViewController
      */
     public getToolBar(): any {
-        return this.$controls.get('toolbar');
+        return this.getControl('toolbar');
     }
 
     /**

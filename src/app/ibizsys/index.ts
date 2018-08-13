@@ -29,3 +29,7 @@ export { IBizUICounter } from './util/IBizUICounter';
 export { IBizUtil } from './util/IBizUtil';
 export { IBizXMLWriter } from './util/IBizXMLWriter';
 // util end
+
+// module begin
+export { IBizComponentsModule } from './components/ibiz-components.module';
+// module end

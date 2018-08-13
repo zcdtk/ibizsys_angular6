@@ -10,14 +10,14 @@ import { Injectable } from '@angular/core';
  * @implements {CanActivate}
  */
 @Injectable()
-export class IBizAppService {
+export class IBizApp {
 
     /**
      * 是否全屏，默认显示菜单与头部导航文件
      * 
      * @private
      * @type {boolean}
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     private $fullScreen: boolean = false;
 
@@ -26,7 +26,7 @@ export class IBizAppService {
      *
      * @private
      * @type {boolean}
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     private $showMenu: boolean = true;
 
@@ -34,7 +34,7 @@ export class IBizAppService {
      * 已加载视图控制器对象
      * 
      * @type {Array<any>}
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public $ibizViewControllers: Array<any> = [];
 
@@ -42,7 +42,7 @@ export class IBizAppService {
      * 所有激活路由参数
      * 
      * @type {Array<any>}
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public $activatedRouteDatas: Array<any> = [];
 
@@ -51,16 +51,16 @@ export class IBizAppService {
      *
      * @private
      * @type {string}
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     private $appData: string;
 
     /**
-     * Creates an instance of IBizAppService.
-     * 创建 IBizAppService 实例
+     * Creates an instance of IBizApp.
+     * 创建 IBizApp 实例
      * 
      * @param {SettingsService} themeSettings 
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     constructor() { }
 
@@ -68,7 +68,7 @@ export class IBizAppService {
      * 设置当前视图控制对象
      * 
      * @param {*} viewController 
-     * @memberof IbizAppService
+     * @memberof IBizApp
      */
     public setViewController(viewController: any): void {
         this.$ibizViewControllers.push(viewController);
@@ -79,7 +79,7 @@ export class IBizAppService {
      *
      * @param {string} uuid 
      * @returns {*}
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public getParentViewController(uuid: string): any {
         const index: number = this.$ibizViewControllers.findIndex(item => Object.is(uuid, item.getUUID()));
@@ -93,7 +93,7 @@ export class IBizAppService {
      * 清除当前视图控制器对象
      *
      * @param {string} uuid
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public deleteViewController(uuid: string): void {
         const index: number = this.$ibizViewControllers.findIndex(item => Object.is(uuid, item.getUUID()));
@@ -106,7 +106,7 @@ export class IBizAppService {
      * 设置是否全屏参数
      * 
      * @param {*} full_srceen 
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public setFullScreen(fullScreen: boolean): void {
         setTimeout(() => {
@@ -119,7 +119,7 @@ export class IBizAppService {
      * 获取是否全屏参数
      * 
      * @returns {boolean} 
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public getFullScreen(): boolean {
         return this.$fullScreen;
@@ -130,7 +130,7 @@ export class IBizAppService {
      *
      * @param {*} [_data={}] 路由数据
      * @returns {*} 当前路由数据
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public addActivatedRouteDatas(_data: any = {}): any {
 
@@ -145,7 +145,7 @@ export class IBizAppService {
             const routerurl_arr: Array<any> = routerurl.split('/');
             let sub_url: Array<any> = [];
 
-            let allData_lenght: number = this.$activatedRouteDatas.length;
+            const allData_lenght: number = this.$activatedRouteDatas.length;
             if (routerurl_arr.length - allData_lenght > 0) {
                 sub_url = [...routerurl_arr.slice(0, allData_lenght + 2)];
             }
@@ -165,7 +165,7 @@ export class IBizAppService {
      * 
      * @param {*} [data={}] 
      * @returns {void} 
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public deleteActivatedRouteDatas(data: any = {}): void {
         if (Object.keys(data).length === 0) {
@@ -185,7 +185,7 @@ export class IBizAppService {
      * 
      * @param {*} [data={}] 
      * @returns {void} 
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public updateActivatedRouteDatas(data: any = {}): void {
         if (Object.keys(data).length === 0) {
@@ -207,7 +207,7 @@ export class IBizAppService {
      * 
      * @param {number} index 
      * @returns {*} 
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public getActivatedRouteDatas(index: number): any {
         let data: any = {};
@@ -221,7 +221,7 @@ export class IBizAppService {
      * 设置主菜单状态
      *
      * @param {boolean} state
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public setMainMenuState(state: boolean): void {
         setTimeout(() => {
@@ -233,7 +233,7 @@ export class IBizAppService {
      * 获取主菜单状态
      *
      * @returns {boolean}
-     * @memberof IBizAppService
+     * @memberof IBizApp
      */
     public getMainMenuState(): boolean {
         return this.$showMenu;

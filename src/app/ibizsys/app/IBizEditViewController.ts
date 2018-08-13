@@ -35,7 +35,7 @@ export class IBizEditViewController extends IBizMainViewController {
      * @type {*}
      * @memberof IBizEditViewController
      */
-    private $lastwfuiaction: any = {};
+    private $lastwfuiaction: any = {}
 
     /**
      * 最后工作流操作参数
@@ -83,31 +83,31 @@ export class IBizEditViewController extends IBizMainViewController {
         const form: any = this.getForm();
         if (form) {
             // 表单保存之前
-            form.on(IBizEvent.IBizEditForm_FORMBEFORESAVE).subscribe((data) => {
+            form.on(IBizEvent.IBizEditForm_FORMBEFORESAVE, (data) => {
                 this.onFormBeforeSaved(data);
             });
             // 表单保存完成
-            form.on(IBizEvent.IBizForm_FORMSAVED).subscribe((data) => {
+            form.on(IBizEvent.IBizForm_FORMSAVED, (data) => {
                 this.onFormSaved(data);
             });
             // 表单加载完成
-            form.on(IBizEvent.IBizForm_FORMLOADED).subscribe((data) => {
+            form.on(IBizEvent.IBizForm_FORMLOADED, (data) => {
                 this.onFormLoaded();
             });
             // 表单删除完成
-            form.on(IBizEvent.IBizForm_FORMREMOVED).subscribe((data) => {
+            form.on(IBizEvent.IBizForm_FORMREMOVED, (data) => {
                 this.onFormRemoved();
             });
             // 工作流启动完成
-            form.on(IBizEvent.IBizForm_FORMWFSTARTED).subscribe((data) => {
+            form.on(IBizEvent.IBizForm_FORMWFSTARTED, (data) => {
                 this.onFormWFStarted();
             });
             // 工作流提交完成
-            form.on(IBizEvent.IBizForm_FORMWFSUBMITTED).subscribe((data) => {
+            form.on(IBizEvent.IBizForm_FORMWFSUBMITTED, (data) => {
                 this.onFormWFSubmitted();
             });
             // 编辑表单实体界面行为
-            form.on(IBizEvent.IBizEditForm_UIACTIONFINISHED).subscribe((data) => {
+            form.on(IBizEvent.IBizEditForm_UIACTIONFINISHED, (data) => {
                 if (data.reloadData) {
                     this.refreshReferView();
                 }
@@ -116,7 +116,7 @@ export class IBizEditViewController extends IBizMainViewController {
                 }
             });
             // 表单属性值变化
-            form.on(IBizEvent.IBizForm_FORMFIELDCHANGED).subscribe((data) => {
+            form.on(IBizEvent.IBizForm_FORMFIELDCHANGED, (data) => {
                 if (data == null) {
                     this.onFormFieldChanged('', null, null);
                 } else {
@@ -125,7 +125,7 @@ export class IBizEditViewController extends IBizMainViewController {
                 }
             });
             // 表单权限发生变化
-            form.on(IBizEvent.IBizForm_DATAACCACTIONCHANGE).subscribe((data) => {
+            form.on(IBizEvent.IBizForm_DATAACCACTIONCHANGE, (data) => {
                 this.onDataAccActionChange(data);
             });
         }
@@ -554,12 +554,12 @@ export class IBizEditViewController extends IBizMainViewController {
         if (!this.getForm()) {
             return;
         }
-        const srforikey = this.getForm().findField('srforikey');
+        let srforikey = this.getForm().findField('srforikey');
         if (srforikey) {
             arg.srfsourcekey = srforikey.getValue();
         }
         if (!arg.srfsourcekey || Object.is(arg.srfsourcekey, '')) {
-            const srfkey = this.getForm().findField('srfkey');
+            let srfkey = this.getForm().findField('srfkey');
             if (srfkey) {
                 arg.srfsourcekey = srfkey.getValue();
             }
@@ -704,7 +704,9 @@ export class IBizEditViewController extends IBizMainViewController {
         }
 
         if (Object.is(uiaction.actionmode, 'WFBACKEND')) {
-            const arg = { srfwfiatag: uiaction.tag };
+            let arg = {
+                srfwfiatag: uiaction.tag
+            };
             this.getForm().wfsubmit(arg);
             return;
         }
@@ -718,7 +720,8 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public startWF(arg: any = {}): void {
-        const startuiaction = this.getUIAction('WFStartWizard');
+
+        let startuiaction = this.getUIAction('WFStartWizard');
         if (startuiaction) {
             this.doUIAction(startuiaction, {});
         } else {
@@ -765,7 +768,7 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public getFrontUIActionParam(uiaction: any = {}): any {
-        let arg = super.getFrontUIActionParam(uiaction);
+        let arg = this.getFrontUIActionParam(uiaction);
         if (Object.is(uiaction.actiontarget, 'SINGLEKEY') || Object.is(uiaction.actiontarget, 'MULTIKEY')) {
 
             let vlaueitem = 'srfkey';
@@ -773,7 +776,7 @@ export class IBizEditViewController extends IBizMainViewController {
             let paramjo = null;
             let paramitems = null;
             if (uiaction.actionparams) {
-                const actionparams = uiaction.actionparams;
+                let actionparams = uiaction.actionparams;
                 vlaueitem = (actionparams.vlaueitem && !Object.is(actionparams.vlaueitem, '')) ? actionparams.vlaueitem.toLowerCase() : vlaueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
                 paramjo = actionparams.paramjo ? actionparams.paramjo : {};
@@ -819,7 +822,7 @@ export class IBizEditViewController extends IBizMainViewController {
             let paramjo = null;
             let infoitem = 'srfmajortext';
             if (uiaction.actionparams) {
-                const actionparams = uiaction.actionparams;
+                let actionparams = uiaction.actionparams;
                 vlaueitem = (actionparams.vlaueitem && !Object.is(actionparams.vlaueitem, '')) ? actionparams.vlaueitem.toLowerCase() : vlaueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
                 infoitem = (actionparams.textitem && !Object.is(actionparams.textitem, '')) ? actionparams.textitem.toLowerCase() : infoitem;
