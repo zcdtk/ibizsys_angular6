@@ -3,7 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscriber } from 'rxjs';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
 import { IBizEnvironment } from '@env/IBizEnvironment';
-import { IBizAppService } from '@ibizsys/IBizAppService';
+import { IBizApp } from '@core/IBizApp';
 
 /**
  * 根节点路由守卫
@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
      * @param {ITokenService} tokenService
      * @memberof AuthGuard
      */
-    constructor(private httpClient: HttpClient, private ibizappservice: IBizAppService) { }
+    constructor(private httpClient: HttpClient, private iBizApp: IBizApp) { }
 
     /**
      * 根据主题UI 服务对象判断是否登录
@@ -83,7 +83,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         post.subscribe((data: any) => {
             if (data && data.ret === 0) {
                 if (data.remotetag) {
-                    this.ibizappservice.setAppData(data.remotetag);
+                    this.iBizApp.setAppData(data.remotetag);
                 }
             }
             observer.next(true);

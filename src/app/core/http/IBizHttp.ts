@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 
 import { IBizEnvironment } from '@env/IBizEnvironment';
-import { IBizAppService } from '@ibizsys/IBizAppService';
+import { IBizApp } from '@core/IBizApp';
 
 /**
  * IBizHttp
@@ -46,7 +46,7 @@ export class IBizHttp {
      * @param {ITokenService} tokenService
      * @memberof IBizHttp
      */
-    constructor(private httpClient: HttpClient, private ibizappservice: IBizAppService) { }
+    constructor(private httpClient: HttpClient, private iBizApp: IBizApp) { }
 
     /**
      * 全局http post方法，处理loading状态
@@ -61,12 +61,12 @@ export class IBizHttp {
             // const userInfo: any = this.tokenService.get();
             // Object.assign(opt, { srfloginkey: userInfo.token });
         }
-        if (this.ibizappservice.getAppData()) {
-            Object.assign(opt, { srfappdata: this.ibizappservice.getAppData() });
+        if (this.iBizApp.getAppData()) {
+            Object.assign(opt, { srfappdata: this.iBizApp.getAppData() });
         }
-        let subject = new Subject();
+        const subject = new Subject();
         this.beginLoading();
-        let post = this.httpClient.post(this.Base + url, new HttpParams({ 'fromObject': opt }), {
+        const post = this.httpClient.post(this.Base + url, new HttpParams({ 'fromObject': opt }), {
             headers: new HttpHeaders({
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -102,12 +102,12 @@ export class IBizHttp {
             // const userInfo: any = this.tokenService.get();
             // Object.assign(opt, { srfloginkey: userInfo.token });
         }
-        if (this.ibizappservice.getAppData()) {
-            Object.assign(opt, { srfappdata: this.ibizappservice.getAppData() });
+        if (this.iBizApp.getAppData()) {
+            Object.assign(opt, { srfappdata: this.iBizApp.getAppData() });
         }
-        let subject = new Subject();
+        const subject = new Subject();
 
-        let post2 = this.httpClient.post(this.Base + url, new HttpParams({ 'fromObject': opt }), {
+        const post2 = this.httpClient.post(this.Base + url, new HttpParams({ 'fromObject': opt }), {
             headers: new HttpHeaders({
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -138,9 +138,9 @@ export class IBizHttp {
      * @memberof IBizHttp
      */
     public get(url: string): Observable<any> {
-        let subject = new Subject();
+        const subject = new Subject();
         this.beginLoading();
-        let get = this.httpClient.get(this.Base + url);
+        const get = this.httpClient.get(this.Base + url);
         get.subscribe((data: any) => {
             this.endLoading();
             if (data.notlogin) {
