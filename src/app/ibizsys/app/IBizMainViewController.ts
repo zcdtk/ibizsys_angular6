@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
-import { IBizDynamicViewController } from './IBizDynamicViewController';
 import { IBizEvent } from '../IBizEvent';
+import { IBizViewController } from './IBizViewController';
 
 /**
  * 
@@ -9,7 +9,7 @@ import { IBizEvent } from '../IBizEvent';
  * @class IBizMainViewController
  * @extends {IBizViewController}
  */
-export class IBizMainViewController extends IBizDynamicViewController {
+export class IBizMainViewController extends IBizViewController {
 
     /**
      * 是否显示工具栏，默认显示
