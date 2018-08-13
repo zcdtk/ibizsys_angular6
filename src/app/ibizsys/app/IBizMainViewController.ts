@@ -396,7 +396,7 @@ export class IBizMainViewController extends IBizDynamicViewController {
      * @memberof IBizMainViewController
      */
     public getToolBar(): any {
-        return this.getControl('toolbar');
+        return this.$controls.get('toolbar');
     }
 
     /**

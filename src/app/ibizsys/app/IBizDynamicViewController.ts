@@ -111,9 +111,9 @@ export class IBizDynamicViewController extends IBizViewController {
 
         this.$dynamicService = new IBizDynamicControl({ url: opt.url, viewController: this, notification: this.$iBizNotification });
         this.$toobarService = new IBizToolbar({ url: opt.url, viewController: this, notification: this.$iBizNotification });
-        this.regControl('dynamicToolbar', this.$toobarService);
+        this.$controls.set('dynamicToolbar', this.$toobarService);
         this.$formService = new IBizDynamicEditForm({ name: 'form', url: opt.url, viewController: this, notification: this.$iBizNotification });
-        this.regControl('form', this.$formService);
+        this.$controls.set('form', this.$formService);
     }
 
     /**
