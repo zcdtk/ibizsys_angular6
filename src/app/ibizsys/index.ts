@@ -13,7 +13,6 @@ export { IBizToolbar } from './widget/IBizToolbar';
 
 // formitem begin
 export { IBizFormField } from './formitem/IBizFormField';
-export { IBizDynamicFieldBase } from './formitem/IBizDynamicFieldBase';
 export { IBizFormDRPanel } from './formitem/IBizFormDRPanel';
 export { IBizFormGroup } from './formitem/IBizFormGroup';
 export { IBizFormIFrame } from './formitem/IBizFormIFrame';
