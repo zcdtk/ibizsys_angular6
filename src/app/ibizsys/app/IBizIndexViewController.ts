@@ -38,7 +38,7 @@ export class IBizIndexViewController extends IBizIndexViewControllerBase {
         super.onInitComponents();
         const appMenu: any = this.getAppMenu();
         if (appMenu) {
-            appMenu.on(IBizEvent.IBizAppMenu_LOADED).subscrib((items: Array<any>) => {
+            appMenu.on(IBizEvent.IBizAppMenu_LOADED).subscribe((items: Array<any>) => {
                 this.appMenuLoaded(items);
             });
         }
