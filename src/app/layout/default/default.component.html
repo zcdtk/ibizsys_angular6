@@ -3,9 +3,14 @@
     <div class="logo"></div>
     <div class="top-nav-wrap">
       <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
-        <li nz-menu-item>收缩菜单</li>
-        <li nz-menu-item>nav 2</li>
-        <li nz-menu-item>nav 3</li>
+        <li nz-menu-item>
+          <button nz-button [nzType]="'primary'" (click)="toggleCollapsed()" style="margin-bottom: 10px;">
+            <i class="anticon" [class.anticon-menu-unfold]="isCollapsed" [class.anticon-menu-fold]="!isCollapsed">
+            </i>
+          </button>
+        </li>
+        <!-- <li nz-menu-item>nav 2</li>
+        <li nz-menu-item>nav 3</li> -->
       </ul>
     </div>
   </nz-header>
