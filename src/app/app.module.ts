@@ -11,9 +11,11 @@ import { LayoutModule } from './layout/layout.module';
 import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { RouteRoutingModule } from './routes-routing.module';
+
 import { IBizApp } from '@core/IBizApp';
 import { IBizHttp } from '@core/http/IBizHttp';
 import { IBizNotification } from '@core/notice/IBizNotification';
+import { SettingService } from '@core/setting.service';
 
 import { DefaultInterceptor } from '@core/net/default.interceptor';
 
@@ -40,6 +42,7 @@ registerLocaleData(localeZhHans);
     IBizApp,
     IBizHttp,
     IBizNotification,
+    SettingService
   ],
   bootstrap: [AppComponent]
 })
