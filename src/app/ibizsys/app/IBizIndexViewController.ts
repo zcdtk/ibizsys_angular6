@@ -1,5 +1,6 @@
 import { IBizIndexViewControllerBase } from './IBizIndexViewControllerBase';
 import { IBizEvent } from '../IBizEvent';
+import { SettingService } from '@core/setting.service';
 
 /**
  * 首页应用视图
@@ -9,6 +10,23 @@ import { IBizEvent } from '../IBizEvent';
  * @extends {IBizMainViewController}
  */
 export class IBizIndexViewController extends IBizIndexViewControllerBase {
+
+    /**
+     * 是否收缩内容
+     *
+     * @type {boolean}
+     * @memberof IBizIndexViewController
+     */
+    public isCollapsed: boolean = false;
+
+    /**
+     * 基础设置服务
+     *
+     * @private
+     * @type {SettingService}
+     * @memberof IBizIndexViewController
+     */
+    private settingService: SettingService;
 
     /**
      * 视图类型
@@ -27,6 +45,7 @@ export class IBizIndexViewController extends IBizIndexViewControllerBase {
      */
     constructor(opts: any = {}) {
         super(opts);
+        this.settingService = opts.settingService;
     }
 
     /**
@@ -56,6 +75,17 @@ export class IBizIndexViewController extends IBizIndexViewControllerBase {
             appMenu.load();
         }
         this.setMianMenuState();
+    }
+
+    /**
+     * 视图初始化完成
+     *
+     * @memberof IBizIndexViewController
+     */
+    public onInited(): void {
+        this.settingService.menuCollapsed().subscribe((state) => {
+            this.isCollapsed = state;
+        });
     }
 
     /**
