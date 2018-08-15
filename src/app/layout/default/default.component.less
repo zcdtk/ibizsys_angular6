@@ -1,19 +1,23 @@
 :host {
+    .ant-layout-header {
+        display: flex;
+        background: #1890ff;
+        padding: 0px;
+        height: 64px;
+        line-height: 64px;
+    }
     .logo {
-        margin-left: -16px;
-        width: 224px;
         transition: width 0.2s cubic-bezier(0.25, 0, 0.15, 1);
+    }
+    .collapsed {
+        width: 80px;
+    }
+    .expanded {
+        width: 240px;
     }
     .top-nav-wrap {
         flex: 1;
         display: flex;
         justify-content: space-between;
-    }
-    .ant-layout-header {
-        display: flex;
-        background: #001529;
-        padding: 0px;
-        height: 64px;
-        line-height: 64px;
     }
 }

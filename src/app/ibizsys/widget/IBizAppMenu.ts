@@ -39,78 +39,11 @@ export class IBizAppMenu extends IBizControl {
         this.post(params, this.getBackendUrl()).subscribe(success => {
             if (success.ret === 0) {
                 this.$items = success.items;
-                const data = this.doMenus(success.items);
-                this.fire(IBizEvent.IBizAppMenu_LOADED, data);
+                this.fire(IBizEvent.IBizAppMenu_LOADED, this.$items);
             }
         }, error => {
             console.log(error);
         });
-    }
-
-
-    /**
-     * 处理菜单数据
-     * 
-     * @private
-     * @param {*} items 
-     * @returns {*} 
-     * @memberof StartupService
-     */
-    private doMenus(items: Array<any>): any[] {
-        let datas: Array<any> = [];
-        items.forEach(item => {
-            const data = this.renderMenuItemRoute(item.appfuncid);
-            if (data) {
-                item.link = data.codename ? data.codename : data.funcid;
-            }
-            if (Object.is(item.iconcls, '')) {
-                item.iconcls = 'fa fa-cogs';
-            }
-            if (Object.is(item.icon, '')) {
-                item.icon = item.iconcls;
-            }
-
-            item.children = [];
-            if (item.items) {
-                item.items.forEach(element => {
-                    let data1 = this.renderMenuItemRoute(element.appfuncid);
-                    if (data1) {
-                        element.link = data1.codename ? data1.codename : data1.funcid;
-                    }
-                    if (Object.is(element.iconcls, '')) {
-                        element.iconcls = 'fa fa-cogs';
-                    }
-                    if (Object.is(element.icon, '')) {
-                        element.icon = element.iconcls;
-                    }
-                    item.children.push(element);
-
-                    element.children = [];
-                    if (element.items) {
-                        element.items.forEach(eledata => {
-                            const data2 = this.renderMenuItemRoute(eledata.appfuncid);
-                            if (data2) {
-                                eledata.link = data2.codename ? data2.codename : data2.funcid;
-                            }
-                            if (Object.is(eledata.iconcls, '')) {
-                                eledata.iconcls = 'fa fa-cogs';
-                            }
-                            if (Object.is(eledata.icon, '')) {
-                                eledata.icon = eledata.iconcls;
-                            }
-                            element.children.push(eledata);
-
-                        });
-
-                    }
-
-                });
-            }
-            const children: Array<any> = [];
-            children.push(item);
-            datas.push({ children: children });
-        });
-        return datas;
     }
 
     /**
