@@ -1,0 +1,7 @@
+<div class="logo" [class.collapsed]="isCollapsed" [class.expanded]="!isCollapsed"></div>
+<div class="top-nav-wrap">
+    <button nz-button [nzType]="'primary'" (click)="toggleCollapsed()" style="margin-bottom: 10px;">
+        <i class="anticon" [class.anticon-menu-unfold]="isCollapsed" [class.anticon-menu-fold]="!isCollapsed">
+        </i>
+    </button>
+</div>
