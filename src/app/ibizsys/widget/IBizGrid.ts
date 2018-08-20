@@ -260,26 +260,26 @@ export class IBizGrid extends IBizMDControl {
         Object.assign(params, arg);
         Object.assign(params, { srfaction: 'remove', srfctrlid: this.getName() });
         this.post(params).subscribe(response => {
-            if (response.ret === 0) {
-                if (this.$allChecked) {
-                    const rows = this.$curPage * this.$limit;
-                    if (this.$totalrow <= rows) {
-                        this.$curPage = this.$curPage - 1;
-                        if (this.$curPage === 0) {
-                            this.$curPage = 1;
-                        }
+            if (response.ret !== 0) {
+                this.$iBizNotification.error('', '删除数据失败,' + response.info);
+                return;
+            }
+            if (this.$allChecked) {
+                const rows = this.$curPage * this.$limit;
+                if (this.$totalrow <= rows) {
+                    this.$curPage = this.$curPage - 1;
+                    if (this.$curPage === 0) {
+                        this.$curPage = 1;
                     }
                 }
-                this.load({});
-                this.fire(IBizEvent.IBizDataGrid_REMOVED, {});
-                if (response.info && response.info !== '') {
-                    this.$iBizNotification.success('', '删除成功!');
-                }
-                this.$selection = [];
-                IBizUtil.processResult(response);
-            } else {
-                this.$iBizNotification.error('', '删除数据失败,' + response.info);
             }
+            this.load({});
+            this.fire(IBizEvent.IBizDataGrid_REMOVED, {});
+            if (response.info && response.info !== '') {
+                this.$iBizNotification.success('', '删除成功!');
+            }
+            this.$selection = [];
+            IBizUtil.processResult(response);
         }, error => {
             this.$iBizNotification.error('', '删除数据失败');
         });
@@ -381,26 +381,23 @@ export class IBizGrid extends IBizMDControl {
         } else {
             Object.assign(params, { start: (this.$curPage * this.$limit) - this.$limit, limit: this.$curPage * this.$limit });
         }
-        this.post(params).subscribe(
-            res => {
-                if (res.ret === 0) {
-                    if (res.downloadurl) {
-                        let downloadurl: string = res.downloadurl;
-                        if (downloadurl.indexOf('/') === 0) {
-                            downloadurl = downloadurl.substring(downloadurl.indexOf('/') + 1, downloadurl.length);
-                        } else {
-                            downloadurl = downloadurl;
-                        }
-                        IBizUtil.download(downloadurl);
-                    }
-                } else {
-                    this.$iBizNotification.warning('警告', res.info);
-                }
-            },
-            error => {
-                console.log(error.info);
+        this.post(params).subscribe(res => {
+            if (res.ret !== 0) {
+                this.$iBizNotification.warning('警告', res.info);
+                return;
             }
-        );
+            if (res.downloadurl) {
+                let downloadurl: string = res.downloadurl;
+                if (downloadurl.indexOf('/') === 0) {
+                    downloadurl = downloadurl.substring(downloadurl.indexOf('/') + 1, downloadurl.length);
+                } else {
+                    downloadurl = downloadurl;
+                }
+                IBizUtil.download(downloadurl);
+            }
+        }, error => {
+            console.log(error.info);
+        });
     }
 
     /**
@@ -754,9 +751,6 @@ export class IBizGrid extends IBizMDControl {
     public editRowSave(data: any = {}, rowindex: number): void {
         const _index: number = this.$backupData.findIndex(item => Object.is(item.srfkey, data.srfkey));
         const srfaction: string = (_index !== -1) ? 'update' : 'create';
-        // if (Object.is(srfaction, 'create')) {
-        //     delete data.srfkey;
-        // }
         let params: any = { srfaction: srfaction, srfctrlid: 'grid' };
         const _names: Array<any> = Object.keys(data);
         _names.forEach(name => {
