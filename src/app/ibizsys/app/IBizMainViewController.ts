@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
-import { IBizEvent } from '../IBizEvent';
 import { IBizViewController } from './IBizViewController';
+import { IBizEvent } from '../IBizEvent';
 
 /**
  * 
@@ -56,7 +56,7 @@ export class IBizMainViewController extends IBizViewController {
 
         const toolbar: any = this.getToolBar();
         if (toolbar) {
-            toolbar.on(IBizEvent.IBizToolbar_ITEMCLICK, (params) => {
+            toolbar.on(IBizEvent.IBizToolbar_ITEMCLICK).subscribe((params) => {
                 this.onClickTBItem(params);
             });
         }
@@ -69,18 +69,30 @@ export class IBizMainViewController extends IBizViewController {
      */
     public onLoad(): void {
         super.onLoad();
-        if (this.$iBizHttp) {
-            this.$iBizHttp.post(this.getBackendUrl(), { 'srfaction': 'loadmodel' }).subscribe(
-                (data) => {
-                    if (data.dataaccaction && Object.keys(data.dataaccaction).length > 0) {
-                        Object.assign(this.$dataaccaction, data.dataaccaction);
-                        this.onDataAccActionChange(data.dataaccaction);
-                    }
-                },
-                (error) => {
-                    console.log(error);
-                });
+        this.loadModel();
+    }
+
+    /**
+     * 加载视图模型
+     *
+     * @memberof IBizMainViewController
+     */
+    public loadModel(): void {
+        if (!this.$iBizHttp) {
+            return;
         }
+        this.$iBizHttp.post(this.getBackendUrl(), { srfaction: 'loadmodel' }).subscribe((data) => {
+            if (data.ret !== 0) {
+                console.log(data.info);
+                return;
+            }
+            if (data.dataaccaction && Object.keys(data.dataaccaction).length > 0) {
+                Object.assign(this.$dataaccaction, data.dataaccaction);
+                this.onDataAccActionChange(data.dataaccaction);
+            }
+        }, (error) => {
+            console.log(error.info);
+        });
     }
 
     /**
@@ -347,7 +359,7 @@ export class IBizMainViewController extends IBizViewController {
      */
     public closeWindow(): void {
         if (this.isModal()) {
-            this.nzModalRef.destroy('onOk');
+            // this.nzModalSubject.destroy('onOk');
         } else if (this.$iBizApp.getFullScreen()) {
             const win = this.getWindow();
             win.close();
@@ -415,7 +427,7 @@ export class IBizMainViewController extends IBizViewController {
             const name_arr: Array<any> = Object.keys(toolbar.getItems());
             const btn_items = toolbar.getItems();
             name_arr.forEach((name) => {
-                let uiaction: any = this.$uiactions[name];
+                const uiaction: any = this.$uiactions[name];
                 const btn_item = btn_items[name];
                 if (btn_item.target && (Object.is(btn_item.target, 'SINGLEKEY') || Object.is(btn_item.target, 'MULTIKEY'))) {
                     toolbar.setItemDisabled(name, !hasdata);
@@ -446,6 +458,9 @@ export class IBizMainViewController extends IBizViewController {
         let viewParam: any = {};
         viewParam.srfviewparam = JSON.stringify(view.viewParam);
         Object.assign(viewParam, { 'srfaction': 'GETRDVIEW' });
+        if (this.$iBizHttp) {
+            return;
+        }
         this.$iBizHttp.post(view.redirectUrl, viewParam).subscribe(
             response => {
                 if (!response.rdview || response.ret !== 0) {

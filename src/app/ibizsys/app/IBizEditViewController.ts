@@ -1,5 +1,5 @@
-import { IBizEvent } from './../IBizEvent';
 import { IBizMainViewController } from './IBizMainViewController';
+import { IBizEvent } from '../IBizEvent';
 
 /**
  * 编辑视图控制器
@@ -35,7 +35,7 @@ export class IBizEditViewController extends IBizMainViewController {
      * @type {*}
      * @memberof IBizEditViewController
      */
-    private $lastwfuiaction: any = {}
+    private $lastwfuiaction: any = {};
 
     /**
      * 最后工作流操作参数
@@ -140,7 +140,13 @@ export class IBizEditViewController extends IBizMainViewController {
         super.onLoad();
         const editForm: any = this.getForm();
         if (editForm) {
-            editForm.autoLoad(this.getViewParam());
+            let viewParams: any = {};
+            Object.assign(viewParams, this.getViewParam());
+            if (viewParams && (viewParams.srfkeys && !Object.is(viewParams.srfkeys, ''))) {
+                Object.assign(viewParams, { srfkey: viewParams.srfkeys });
+                delete viewParams.srfkeys;
+            }
+            editForm.autoLoad(viewParams);
         }
     }
 
@@ -350,7 +356,7 @@ export class IBizEditViewController extends IBizMainViewController {
         if (!this.isModal() && Object.keys(this.$activatedRouteData).length > 0) {
             const data = { fullcaption: _StrInfo, caption: this.$dataInfo };
             Object.assign(this.$activatedRouteData, data);
-            this.$iBizApp.updateActivatedRouteDatas(this.$activatedRouteData);
+            this.$iBizApp.updateActivatedRouteDatas(this.$activatedRouteData)
         }
     }
 
@@ -489,7 +495,7 @@ export class IBizEditViewController extends IBizMainViewController {
     public doSaveAndExit(): void {
 
         this.$afterformsaveaction = 'exit';
-        const window = this.getWindow();
+        let window = this.getWindow();
         // if (window) {
         //     window.dialogResult = 'cancel';
         // }
@@ -768,7 +774,7 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public getFrontUIActionParam(uiaction: any = {}): any {
-        let arg = this.getFrontUIActionParam(uiaction);
+        let arg = super.getFrontUIActionParam(uiaction);
         if (Object.is(uiaction.actiontarget, 'SINGLEKEY') || Object.is(uiaction.actiontarget, 'MULTIKEY')) {
 
             let vlaueitem = 'srfkey';
@@ -782,24 +788,18 @@ export class IBizEditViewController extends IBizMainViewController {
                 paramjo = actionparams.paramjo ? actionparams.paramjo : {};
             }
 
-            let dataInfo = '';
-            let keys = '';
             let field = this.getForm().findField('srforikey');
             if (field) {
-                keys = field.getValue();
+                paramitems = field.getValue();
             }
-            if (!keys || Object.is(keys, '')) {
-                field = this.getForm().findField('srfkey');
-                if (field) {
-                    keys = field.getValue();
-                }
+            if (!paramitems || Object.is(paramitems, '')) {
                 field = this.getForm().findField(vlaueitem);
                 if (field) {
                     paramitems = field.getValue();
                 }
             }
-            let data = { srfkeys: keys, srfkey: keys };
-            data[paramkey] = (paramitems != null) ? paramitems : keys;
+            let data = {};
+            data[paramkey] = paramitems;
             if (paramjo) {
                 Object.assign(data, paramjo);
             }
@@ -845,6 +845,10 @@ export class IBizEditViewController extends IBizMainViewController {
             if (paramjo) {
                 Object.assign(data, paramjo);
             }
+            let formData = this.getForm().getValues();
+            if (formData.srfkey) {
+                delete formData.srfkey;
+            }
             return Object.assign(data, this.getForm().getValues());
         }
         return {};
@@ -856,29 +860,6 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public initFloatToolbar(): void {
-        // var offset = 60;
-        // var duration = 300;
-        // if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {  // ios supported
-        //     $(window).bind('touchend touchcancel touchleave', function (e) {
-        //         if ($(this).scrollTop() > offset) {
-        //             $('.scroll-to-top').fadeIn(duration);
-        //         } else {
-        //             $('.scroll-to-top').fadeOut(duration);
-        //         }
-        //     });
-        // } else {
-        //     $(window).scroll(function () {
-        //         if ($(this).scrollTop() > offset) {
-        //             $('.scroll-to-top').fadeIn(duration);
-        //         } else {
-        //             $('.scroll-to-top').fadeOut(duration);
-        //         }
-        //     });
-        // }
-        // $('.scroll-to-top').click(function (e) {
-        //     e.preventDefault();
-        //     return false;
-        // });
     }
 
     /**
@@ -1003,3 +984,4 @@ export class IBizEditViewController extends IBizMainViewController {
         }
     }
 }
+
