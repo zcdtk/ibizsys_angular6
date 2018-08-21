@@ -189,10 +189,21 @@ export class IBizMDViewController extends IBizMainViewController {
      * @memberof IBizMDViewController
      */
     public onQuickSearch($event: any): void {
-        if (!Object.is(this.$searchValue, $event)) {
-            this.$searchValue = $event;
+        if (!$event || $event.keyCode !== 13) {
+            return;
         }
 
+        if (this.isEnableQuickSearch()) {
+            this.onSearchFormSearched(true);
+        }
+    }
+
+    /**
+     * 搜索按钮执行搜索
+     *
+     * @memberof IBizMDViewController
+     */
+    public btnSearch(): void {
         if (this.isEnableQuickSearch()) {
             this.onSearchFormSearched(true);
         }

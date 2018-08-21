@@ -203,7 +203,7 @@ export class IBizMainViewController extends IBizViewController {
         if (modal) {
             this.openModal(frontview).subscribe((result) => {
                 if (result && Object.is(result.ret, 'OK')) {
-                    if (result.refreshView && uiaction.reload) {
+                    if (uiaction.reload) {
                         this.onRefresh();
                     }
                 }

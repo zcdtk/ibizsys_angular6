@@ -251,7 +251,7 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
      * @memberof IBizViewController
      */
     public viewParamChange(change: any) {
-        if (change.srfparentkey && !Object.is(change.srfparentkey, '')) {
+        if (change && change.srfparentkey && !Object.is(change.srfparentkey, '')) {
             this.addViewParam(change);
             this.refresh();
         }
