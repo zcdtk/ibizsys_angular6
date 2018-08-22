@@ -588,41 +588,41 @@ export class IBizMDViewController extends IBizMainViewController {
 
     /**
      * 常规新建数据
-     * 
-     * @param {any} arg 
-     * @returns {*} 
+     *
+     * @param {*} [arg={}]
+     * @returns {*}
      * @memberof IBizMDViewController
      */
-    public doNewDataNormal(arg): any {
+    public doNewDataNormal(arg: any = {}): any {
 
         let view = this.getNewDataView(arg);
         if (view == null) {
             return false;
         }
-        const openMode = view.openMode;
-        if (!openMode || Object.is(openMode, '')) {
-            view.openMode = 'INDEXVIEWTAB';
+        // const openMode = view.openMode;
+        // if (!openMode || Object.is(openMode, '')) {
+        //     view.openMode = 'INDEXVIEWTAB';
+        // }
+        if (!view.routerlink || Object.is(view.routerlink, '')) {
+            return false;
         }
-        if (!view.state) {
-            view.state = 'new';
-            let viewParam: any = {};
-            Object.assign(viewParam, view.viewParam);
+        let viewParam: any = {};
+        Object.assign(viewParam, view.viewParam);
 
-            if (viewParam && viewParam.srfnewmode && !Object.is(viewParam.srfnewmode, '')) {
-                const srfnewmode: string = viewParam.srfnewmode.split('@').join('__');
-                view.state = view.state + '_' + srfnewmode.toLowerCase();
-            }
+        if (viewParam && viewParam.srfnewmode && !Object.is(viewParam.srfnewmode, '')) {
+            const srfnewmode: string = viewParam.srfnewmode.split('@').join('__');
+            view.routerlink = view.routerlink + '_' + srfnewmode.toLowerCase();
         }
         return this.openDataView(view);
     }
 
     /**
      * 编辑数据
-     * 
-     * @param {any} arg 
+     *
+     * @param {*} [arg={}]
      * @memberof IBizMDViewController
      */
-    public onEditData(arg): void {
+    public onEditData(arg: any = {}): void {
 
         let loadParam: any = {};
         if (this.getViewParam()) {
@@ -666,29 +666,28 @@ export class IBizMDViewController extends IBizMainViewController {
         if (view == null) {
             return false;
         }
-        let openMode = view.openMode;
-        if (!openMode || Object.is(openMode, '')) {
-            view.openMode = 'INDEXVIEWTAB';
+        // let openMode = view.openMode;
+        // if (!openMode || Object.is(openMode, '')) {
+        //     view.openMode = 'INDEXVIEWTAB';
+        // }
+        if (!view.routerlink || Object.is(view.routerlink, '')) {
+            return false;
         }
-        if (!view.state) {
-            view.state = 'edit';
+        let viewParam: any = {};
+        Object.assign(viewParam, view.viewParam);
 
-            let viewParam: any = {};
-            Object.assign(viewParam, view.viewParam);
+        if (Object.keys(viewParam).length > 0) {
+            let srfeditmode: string = '';
+            if (viewParam.srfeditmode && !Object.is(viewParam.srfeditmode, '')) {
+                srfeditmode = viewParam.srfeditmode.split('@').join('__');
+            }
+            // 实体主状态
+            if (viewParam.srfeditmode2 && !Object.is(viewParam.srfeditmode2, '') && !Object.is(viewParam.srfeditmode2, 'MSTAG:null')) {
+                srfeditmode = viewParam.srfeditmode2.split(':').join('__');
+            }
 
-            if (Object.keys(viewParam).length > 0) {
-                let srfeditmode: string = '';
-                if (viewParam.srfeditmode && !Object.is(viewParam.srfeditmode, '')) {
-                    srfeditmode = viewParam.srfeditmode.split('@').join('__');
-                }
-                // 实体主状态
-                if (viewParam.srfeditmode2 && !Object.is(viewParam.srfeditmode2, '') && !Object.is(viewParam.srfeditmode2, 'MSTAG:null')) {
-                    srfeditmode = viewParam.srfeditmode2.split(':').join('__');
-                }
-
-                if (!Object.is(srfeditmode, '')) {
-                    view.state = `${view.state}_${srfeditmode.toLowerCase()}`;
-                }
+            if (!Object.is(srfeditmode, '')) {
+                view.routerlink = `${view.routerlink}_${srfeditmode.toLowerCase()}`;
             }
         }
 
@@ -711,10 +710,10 @@ export class IBizMDViewController extends IBizMainViewController {
             return false;
         }
 
-        if (!openMode || Object.is(openMode, 'INDEXVIEWTAB')) {
+        if (!openMode || Object.is(openMode, '') || Object.is(openMode, 'INDEXVIEWTAB')) {
             let data: any = {};
             Object.assign(data, view.viewParam);
-            this.openView(view.state, data);
+            this.openView(view.routerlink, data);
             return false;
         }
 

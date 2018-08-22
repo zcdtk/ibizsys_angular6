@@ -290,7 +290,7 @@ export class IBizForm extends IBizControl {
         }
 
         if (field) {
-            field.on(IBizEvent.IBizFormItem_VALUECHANGED).subscrib((data: any = {}) => {
+            field.on(IBizEvent.IBizFormItem_VALUECHANGED).subscribe((data: any = {}) => {
                 if (this.$ignoreformfieldchange) {
                     return;
                 }
