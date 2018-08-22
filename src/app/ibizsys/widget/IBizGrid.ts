@@ -410,20 +410,11 @@ export class IBizGrid extends IBizMDControl {
     }
 
     /**
-     * 第几页跳转
-     * 
-     * @memberof IBizGrid
-     */
-    public clickPageIndex() {
-        this.$pageChangeFlag = true;
-    }
-
-    /**
      * 分页页数改变
      * 
      * @memberof IBizGrid
      */
-    public changePageIndex() {
+    public pageIndexChange() {
         this.refresh();
     }
 
@@ -432,7 +423,7 @@ export class IBizGrid extends IBizMDControl {
      * 
      * @memberof IBizGrid
      */
-    public changePageSize(): void {
+    public pageSizeChange(): void {
         this.$curPage = 1;
         this.refresh();
     }
