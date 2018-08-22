@@ -11,7 +11,7 @@ export class SettingService {
      * @type {*}
      * @memberof SettingService
      */
-    private _user: any = {};
+    private _user: string = 'USER';
 
     /**
      * 布局信息
@@ -20,47 +20,16 @@ export class SettingService {
      * @type {*}
      * @memberof SettingService
      */
-    private _layout: any = {};
+    private _layout: string = 'LAYOUT';
 
     /**
-     * 获取用户信息
+     * token信息
      *
+     * @private
+     * @type {string}
      * @memberof SettingService
      */
-    get user() {
-        return this._user;
-    }
-
-    /**
-     * 设置用户信息
-     *
-     * @memberof SettingService
-     */
-    set user(data) {
-        Object.assign(this._user, data);
-    }
-
-    /**
-     * 获取布局信息
-     *
-     * @readonly
-     * @memberof SettingService
-     */
-    get layout() {
-        return this._layout;
-    }
-
-    /**
-     * 设置布局
-     *
-     * @memberof SettingService
-     */
-    set layout(obj) {
-        if (!obj.name || Object.is(obj.name, '')) {
-            return;
-        }
-        this._layout[obj.name] = obj.value;
-    }
+    private _token: string = 'TOKEN';
 
     /**
      * 
@@ -132,5 +101,53 @@ export class SettingService {
      */
     public collapsed(state: boolean): void {
         this.menuSubject.next(state);
+    }
+
+    /**
+     * 获取缓存信息
+     *
+     * @private
+     * @param {string} key
+     * @returns {*}
+     * @memberof SettingService
+     */
+    private get(key: string): any {
+        return JSON.parse(localStorage.getItem(key) || 'null') || null;
+    }
+
+    /**
+     * 设置信息
+     *
+     * @private
+     * @param {string} key
+     * @param {*} value
+     * @memberof SettingService
+     */
+    private set(key: string, value: any) {
+        localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    public setToken(token: any = {}): void {
+        this.set(this._token, token);
+    }
+
+    public getToken(): any {
+        return this.get(this._token);
+    }
+
+    public setUser(user: any = {}): void {
+        this.set(this._user, user);
+    }
+
+    public getUser(): any {
+        return this.get(this._user);
+    }
+
+    public setLayout(layout: any = {}): void {
+        this.set(this._layout, layout);
+    }
+
+    public getLayout(): any {
+        return this.get(this._layout);
     }
 }

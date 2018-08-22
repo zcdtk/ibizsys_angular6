@@ -1,9 +1,10 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscriber } from 'rxjs';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
 import { IBizEnvironment } from '@env/IBizEnvironment';
 import { IBizApp } from '@core/IBizApp';
+import { SettingService } from '@core/setting.service';
 
 /**
  * 根节点路由守卫
@@ -22,7 +23,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
      * @param {ITokenService} tokenService
      * @memberof AuthGuard
      */
-    constructor(private httpClient: HttpClient, private iBizApp: IBizApp) { }
+    constructor(private httpClient: HttpClient, private iBizApp: IBizApp, private setting: SettingService) { }
 
     /**
      * 根据主题UI 服务对象判断是否登录
@@ -71,10 +72,10 @@ export class AuthGuard implements CanActivate, CanActivateChild {
             Object.assign(opt, route.params);
         }
         if (IBizEnvironment.LocalDeve) {
-            // const userInfo: any = this.tokenService.get();
-            // Object.assign(opt, { srfloginkey: userInfo.token });
+            const token: any = this.setting.getToken();
+            Object.assign(opt, token ? { srfloginkey: token.token } : {});
         }
-        let post = this.httpClient.post('..' + url, new HttpParams({ 'fromObject': opt }), {
+        const post = this.httpClient.post('..' + url, new HttpParams({ 'fromObject': opt }), {
             headers: new HttpHeaders({
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'

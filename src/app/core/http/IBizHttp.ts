@@ -4,6 +4,7 @@ import { Subject, Observable } from 'rxjs';
 
 import { IBizEnvironment } from '@env/IBizEnvironment';
 import { IBizApp } from '@core/IBizApp';
+import { SettingService } from '@core/setting.service';
 
 /**
  * IBizHttp
@@ -46,7 +47,7 @@ export class IBizHttp {
      * @param {ITokenService} tokenService
      * @memberof IBizHttp
      */
-    constructor(private httpClient: HttpClient, private iBizApp: IBizApp) { }
+    constructor(private httpClient: HttpClient, private iBizApp: IBizApp, private setting: SettingService) { }
 
     /**
      * 全局http post方法，处理loading状态
@@ -58,8 +59,8 @@ export class IBizHttp {
      */
     public post(url: string, opt: any = {}): Observable<any> {
         if (IBizEnvironment.LocalDeve) {
-            // const userInfo: any = this.tokenService.get();
-            // Object.assign(opt, { srfloginkey: userInfo.token });
+            const token: any = this.setting.getToken();
+            Object.assign(opt, token ? { srfloginkey: token.token } : {});
         }
         if (this.iBizApp.getAppData()) {
             Object.assign(opt, { srfappdata: this.iBizApp.getAppData() });
@@ -99,8 +100,8 @@ export class IBizHttp {
      */
     public post2(url: string, opt: any = {}): Observable<any> {
         if (IBizEnvironment.LocalDeve) {
-            // const userInfo: any = this.tokenService.get();
-            // Object.assign(opt, { srfloginkey: userInfo.token });
+            const token: any = this.setting.getToken();
+            Object.assign(opt, token ? { srfloginkey: token.token } : {});
         }
         if (this.iBizApp.getAppData()) {
             Object.assign(opt, { srfappdata: this.iBizApp.getAppData() });
