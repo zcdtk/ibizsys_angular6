@@ -63,13 +63,6 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public onInit(): void {
-        if (!this.isModal() && this.$iBizApp) {
-            const _routeDataLength: number = this.$iBizApp.$activatedRouteDatas.length;
-            if (_routeDataLength !== 0) {
-                const lastData_index: number = _routeDataLength - 1;
-                Object.assign(this.$activatedRouteData, this.$iBizApp.$activatedRouteDatas[lastData_index]);
-            }
-        }
         super.onInit();
     }
 

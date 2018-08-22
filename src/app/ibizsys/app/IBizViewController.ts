@@ -187,6 +187,10 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
         this.$iBizHttp = opts.iBizHttp;
         this.$iBizNotification = opts.iBizNotification;
         this.$uuid = IBizUtil.createUUID();
+        if (this.$iBizApp) {
+            const _index = this.$iBizApp.$activatedRouteDatas.length - 1;
+            Object.assign(this.$activatedRouteData, this.$iBizApp.$activatedRouteDatas[_index]);
+        }
     }
 
     /**
