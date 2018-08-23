@@ -8,15 +8,13 @@ import { LayoutFullScreenComponent } from './fullscreen/fullscreen.component';
 import { LayoutPassportComponent } from './passport/passport.component';
 import { HeaderComponent } from './default/header/header.component';
 import { LoginComponent } from './passport/login/login.component';
-import { UserComponentComponent }  from './default/header/components/user-component/user-component.component';
 
 const component = [
   LayoutDefaultComponent,
   LayoutFullScreenComponent,
   LayoutPassportComponent,
   HeaderComponent,
-  LoginComponent,
-  UserComponentComponent
+  LoginComponent
 ];
 
 @NgModule({
@@ -28,4 +26,3 @@ const component = [
   declarations: [...component]
 })
 export class LayoutModule { }
-
