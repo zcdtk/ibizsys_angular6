@@ -1,16 +1,25 @@
-import { Component, ContentChild, TemplateRef, Input } from '@angular/core';
+import { Component, TemplateRef, ContentChild, Input } from '@angular/core';
 
 @Component({
     selector: 'app-ibiz-form',
-    template: `<form nz-form notab="false">
-      <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
-      </form>
-      `,
-    styles: []
+    templateUrl: './ibiz-form.component.html',
+    styleUrls: ['./ibiz-form.component.less']
 })
 export class IBizFormComponent {
-    @ContentChild(TemplateRef)
-    template: TemplateRef<any>;
+
+    /**
+     * 
+     *
+     * @type {TemplateRef<any>}
+     * @memberof IBizFormComponent
+     */
+    @ContentChild(TemplateRef) template: TemplateRef<any>;
+
+    /**
+     * 
+     *
+     * @memberof IBizFormComponent
+     */
     @Input()
     set fields(val) {
         this.context = { '$implicit': val };

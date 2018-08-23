@@ -2,12 +2,24 @@ import { Component, TemplateRef, ContentChild, Input } from '@angular/core';
 
 @Component({
     selector: 'app-ibiz-form-item',
-    template: `<ng-container *ngTemplateOutlet="template; context: context"></ng-container>`,
-    styles: []
+    templateUrl: './ibiz-form-item.component.html',
+    styleUrls: ['./ibiz-form-item.component.less']
 })
 export class IBizFormItemComponent {
-    @ContentChild(TemplateRef)
-    template: TemplateRef<any>;
+
+    /**
+     * 
+     *
+     * @type {TemplateRef<any>}
+     * @memberof IBizFormItemComponent
+     */
+    @ContentChild(TemplateRef) template: TemplateRef<any>;
+
+    /**
+     * 
+     *
+     * @memberof IBizFormItemComponent
+     */
     @Input()
     set field(val) {
         this.context = { '$implicit': val };
@@ -16,7 +28,7 @@ export class IBizFormItemComponent {
      * 模板输出上下文对象
      *
      * @type {*}
-     * @memberof IBizFormComponent
+     * @memberof IBizFormItemComponent
      */
     public context: any = {};
 
