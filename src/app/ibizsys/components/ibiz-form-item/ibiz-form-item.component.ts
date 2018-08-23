@@ -22,6 +22,7 @@ export class IBizFormItemComponent {
      */
     @Input()
     set field(val) {
+        console.log(val);
         this.context = { '$implicit': val };
     }
     /**

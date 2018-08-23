@@ -1,1 +1,8 @@
-<ng-container *ngTemplateOutlet="template; context: context"></ng-container>
+<nz-card [nzBordered]="false" [nzExtra]="" [nzTitle]="grouptitle">
+    <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
+</nz-card>
+<ng-template #grouptitle>
+    <i class="anticon anticon-down"></i>
+    <i class="anticon anticon-up"></i>
+    <div>123123123123</div>
+</ng-template>

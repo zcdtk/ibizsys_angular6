@@ -21,7 +21,8 @@ export class IBizFormGroupComponent {
      * @memberof IBizFormGroupComponent
      */
     @Input()
-    set field(val) {
+    set group(val) {
+        console.log(val);
         this.context = { '$implicit': val };
     }
 
