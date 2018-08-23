@@ -1,31 +1,7 @@
-<div class="logo" [class.collapsed]="isCollapsed" [class.expanded]="!isCollapsed">
-    <a [routerLink]="['/']">
-        <ng-container *ngIf="!isCollapsed">
-            <img src="./assets/img/logo-full.png" class="nav-logo-full"/>
-        </ng-container>
-        <ng-container *ngIf="isCollapsed">
-            <img src="./assets/img/logo.png" class="nav-logo" />
-        </ng-container>
-    </a>
-</div>
+<div class="logo" [class.collapsed]="isCollapsed" [class.expanded]="!isCollapsed"></div>
 <div class="top-nav-wrap">
-    <ul>
-        <li (click)="toggleCollapsed()">
-            <div class="item">
-                <ng-container *ngIf="!isCollapsed">
-                    <i class="anticon anticon-menu-fold nav-css-ico"></i>
-                </ng-container>
-                <ng-container *ngIf="isCollapsed">
-                    <i class="anticon anticon-menu-unfold  nav-css-ico"></i>
-                </ng-container>
-            </div>
-        </li>
-    </ul>
-    <ul class="nav-user-info">
-        <li>
-            <div class="item">
-                <app-user-component></app-user-component>
-            </div>
-        </li>
-    </ul>
+    <button nz-button [nzType]="'primary'" (click)="toggleCollapsed()" style="margin-bottom: 10px;">
+        <i class="anticon" [class.anticon-menu-unfold]="isCollapsed" [class.anticon-menu-fold]="!isCollapsed">
+        </i>
+    </button>
 </div>
