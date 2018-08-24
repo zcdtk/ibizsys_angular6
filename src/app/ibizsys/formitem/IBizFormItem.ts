@@ -51,6 +51,14 @@ export class IBizFormItem extends IBizObject {
     public disabled: boolean;
 
     /**
+     * 标签是否为空
+     *
+     * @type {boolean}
+     * @memberof IBizFormItem
+     */
+    public emptyCaption: boolean;
+
+    /**
      * 表达校验错误信息
      *
      * @type {string}
@@ -148,6 +156,7 @@ export class IBizFormItem extends IBizObject {
         this.allowEmpty = opts.allowEmpty ? true : false;
         this.caption = opts.caption;
         this.disabled = opts.disabled ? true : false;
+        this.emptyCaption = opts.emptyCaption ? true : false;
         this.fieldType = opts.fieldType;
         this.form = opts.form;
         this.hidden = opts.hidden ? true : false;
