@@ -40,7 +40,8 @@ export class IBizFormGroupComponent {
     @Input()
     set group(val) {
         this.ctrl = val;
-        this.titleBarState = this.ctrl.titleBarCloseMode === 0 || this.ctrl.titleBarCloseMode === 1 ? true : false;
+        const state = this.ctrl.titleBarCloseMode === 0 || this.ctrl.titleBarCloseMode === 1;
+        this.titleBarState = (!this.ctrl.showCaption) || state ? true : false;
         this.context = { '$implicit': val };
     }
 
