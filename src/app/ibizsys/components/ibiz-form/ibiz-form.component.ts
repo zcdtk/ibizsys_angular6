@@ -8,7 +8,7 @@ import { Component, TemplateRef, ContentChild, Input } from '@angular/core';
 export class IBizFormComponent {
 
     /**
-     * 
+     * 子节点内容
      *
      * @type {TemplateRef<any>}
      * @memberof IBizFormComponent
@@ -16,13 +16,12 @@ export class IBizFormComponent {
     @ContentChild(TemplateRef) template: TemplateRef<any>;
 
     /**
-     * 
+     * 所有编辑器对象
      *
      * @memberof IBizFormComponent
      */
     @Input()
     set fields(val) {
-        console.log(val);
         this.context = { '$implicit': val };
     }
     /**
@@ -34,5 +33,4 @@ export class IBizFormComponent {
     public context: any = {};
 
     constructor() { }
-
 }

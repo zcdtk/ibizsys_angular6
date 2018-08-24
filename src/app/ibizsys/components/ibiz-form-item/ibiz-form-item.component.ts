@@ -8,7 +8,15 @@ import { Component, TemplateRef, ContentChild, Input } from '@angular/core';
 export class IBizFormItemComponent {
 
     /**
-     * 
+     * 表达那控制器对象
+     *
+     * @type {*}
+     * @memberof IBizFormItemComponent
+     */
+    public ctrl: any;
+
+    /**
+     * 子节点内容
      *
      * @type {TemplateRef<any>}
      * @memberof IBizFormItemComponent
@@ -16,13 +24,13 @@ export class IBizFormItemComponent {
     @ContentChild(TemplateRef) template: TemplateRef<any>;
 
     /**
-     * 
+     * 表单项控制器绑定
      *
      * @memberof IBizFormItemComponent
      */
     @Input()
     set field(val) {
-        console.log(val);
+        this.ctrl = val;
         this.context = { '$implicit': val };
     }
     /**

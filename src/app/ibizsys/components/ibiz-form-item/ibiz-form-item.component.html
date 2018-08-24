@@ -1,7 +1,7 @@
 <nz-form-item>
-    <nz-form-label ></nz-form-label>
-    <nz-form-control >
+    <nz-form-label [style.width]="'130px'" [style.float]="'left'">{{ctrl.caption}}</nz-form-label>
+    <nz-form-control [style.margin-left]="'130px'">
         <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
-        <nz-form-explain>Please input your username!</nz-form-explain>
+        <nz-form-explain *ngIf="ctrl.hasError">{{ctrl.errorInfo}}</nz-form-explain>
     </nz-form-control>
 </nz-form-item>

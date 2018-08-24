@@ -1,8 +1,10 @@
-<nz-card [nzBordered]="false" [nzExtra]="" [nzTitle]="grouptitle">
-    <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
+<nz-card [nzBordered]="false" [class.expanded-card]="titleBarState" [class.collapsed-card]="!titleBarState" [nzTitle]="ctrl.showCaption ? grouptitle : ''">
+    <ng-container  *ngTemplateOutlet="template; context: context"></ng-container>
 </nz-card>
 <ng-template #grouptitle>
-    <i class="anticon anticon-down"></i>
-    <i class="anticon anticon-up"></i>
-    <div>123123123123</div>
+    <span *ngIf="ctrl.titleBarCloseMode !== 0" (click)="toggleCollapsed()" class="titleBar">
+        <i class="anticon" [class.anticon-down]="titleBarState" [class.anticon-right]="!titleBarState"></i>
+        &nbsp;&nbsp;
+    </span>
+    <span>{{ctrl.caption}}</span>
 </ng-template>
