@@ -4,7 +4,7 @@
 <ng-template #grouptitle>
     <span *ngIf="ctrl.titleBarCloseMode !== 0" (click)="toggleCollapsed()" class="titleBar">
         <i class="anticon" [class.anticon-down]="titleBarState" [class.anticon-right]="!titleBarState"></i>
-        &nbsp;&nbsp;
+        &nbsp;
     </span>
     <span>{{ctrl.caption}}</span>
 </ng-template>

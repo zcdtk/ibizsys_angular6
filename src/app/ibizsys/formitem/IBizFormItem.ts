@@ -11,6 +11,55 @@ import { IBizEvent } from '../IBizEvent';
 export class IBizFormItem extends IBizObject {
 
     /**
+     * 是否是必填
+     * 
+     * @type {boolean}
+     * @memberof IBizFormItem
+     */
+    public allowEmpty: boolean;
+
+    /**
+     * 属性动态配置值<代码表>
+     *
+     * @type {Array<any>}
+     * @memberof IBizFormItem
+     */
+    public config: Array<any> = [];
+
+    /**
+     * 标题
+     *
+     * @type {string}
+     * @memberof IBizFormItem
+     */
+    public caption: string;
+
+    /**
+     * 属性动态配置值<用户字典>
+     *
+     * @type {Array<any>}
+     * @memberof IBizFormItem
+     */
+    public dictitems: Array<any> = [];
+
+    /**
+     * 表单项是否禁用
+     *
+     * @type {boolean}
+     * @memberof IBizFormItem
+     */
+    public disabled: boolean;
+
+    /**
+     * 表达校验错误信息
+     *
+     * @type {string}
+     * @memberof IBizFormItem
+     */
+    public errorInfo: string = '';
+
+
+    /**
      *表单项类型
      * 
      * @private
@@ -29,54 +78,12 @@ export class IBizFormItem extends IBizObject {
     public form: any;
 
     /**
-     * 表单项的值
-     * 
-     * @private
-     * @type {string}
-     * @memberof IBizFormItem
-     */
-    private $value: string;
-
-    /**
-     * 表单项名称
-     * 
-     * @type {string}
-     * @memberof IBizFormItem
-     */
-    public name: string;
-
-    /**
-     * 表单项是否禁用
-     * 
-     * @private
-     * @type {boolean}
-     * @memberof IBizFormItem
-     */
-    public disabled: boolean;
-
-    /**
      * 隐藏表单项
-     * 
+     *
      * @type {boolean}
      * @memberof IBizFormItem
      */
     public hidden: boolean;
-
-    /**
-     * 是否可见
-     * 
-     * @type {boolean}
-     * @memberof IBizFormItem
-     */
-    public visible: boolean;
-
-    /**
-     * 是否是必填
-     * 
-     * @type {boolean}
-     * @memberof IBizFormItem
-     */
-    public allowEmpty: boolean;
 
     /**
      * 是否有错误信息
@@ -87,6 +94,22 @@ export class IBizFormItem extends IBizObject {
     public hasError: boolean = false;
 
     /**
+     * 表单项名称
+     *
+     * @type {string}
+     * @memberof IBizFormItem
+     */
+    public name: string;
+
+    /**
+     * 是否显示标题
+     *
+     * @type {boolean}
+     * @memberof IBizFormItem
+     */
+    public showCaption: boolean;
+
+    /**
      * 表单项校验状态
      * 
      * @type {string}
@@ -94,29 +117,24 @@ export class IBizFormItem extends IBizObject {
      */
     public validateStatus: string = 'success';
 
+
     /**
-     * 表达校验错误信息
+     * 是否可见
      * 
+     * @type {boolean}
+     * @memberof IBizFormItem
+     */
+    public visible: boolean;
+
+
+    /**
+     * 表单项的值
+     * 
+     * @private
      * @type {string}
      * @memberof IBizFormItem
      */
-    public errorInfo: string = '';
-
-    /**
-     * 属性动态配置值<代码表>
-     *
-     * @type {Array<any>}
-     * @memberof IBizFormItem
-     */
-    public config: Array<any> = [];
-
-    /**
-     * 属性动态配置值<用户字典>
-     *
-     * @type {Array<any>}
-     * @memberof IBizFormItem
-     */
-    public dictitems: Array<any> = [];
+    private $value: string;
 
     /**
      * Creates an instance of IBizFormItem.
@@ -127,13 +145,15 @@ export class IBizFormItem extends IBizObject {
      */
     constructor(opts: any = {}) {
         super(opts);
+        this.allowEmpty = opts.allowEmpty ? true : false;
+        this.caption = opts.caption;
+        this.disabled = opts.disabled ? true : false;
         this.fieldType = opts.fieldType;
         this.form = opts.form;
+        this.hidden = opts.hidden ? true : false;
         this.name = opts.name;
-        this.disabled = opts.disabled;
-        this.hidden = opts.hidden;
+        this.showCaption = opts.showCaption ? true : false;
         this.visible = opts.visible ? true : false;
-        this.allowEmpty = opts.allowEmpty ? true : false;
     }
 
     /**

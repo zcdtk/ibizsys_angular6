@@ -55,6 +55,11 @@ export class IBizFormGroupComponent {
 
     constructor() { }
 
+    /**
+     * 搜索关闭分组内容
+     *
+     * @memberof IBizFormGroupComponent
+     */
     public toggleCollapsed(): void {
         this.titleBarState = !this.titleBarState;
     }

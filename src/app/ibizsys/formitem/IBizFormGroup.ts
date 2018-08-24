@@ -10,6 +10,14 @@ import { IBizFormItem } from './IBizFormItem';
 export class IBizFormGroup extends IBizFormItem {
 
     /**
+     * 标题栏关系模式
+     *
+     * @type {number}
+     * @memberof IBizFormGroup
+     */
+    public titleBarCloseMode: number;
+
+    /**
      * 部件集合
      * 
      * @type {*}
@@ -26,6 +34,7 @@ export class IBizFormGroup extends IBizFormItem {
      */
     constructor(opts: any = {}) {
         super(opts);
+        this.titleBarCloseMode = opts.titleBarCloseMode;
     }
 
     /**
