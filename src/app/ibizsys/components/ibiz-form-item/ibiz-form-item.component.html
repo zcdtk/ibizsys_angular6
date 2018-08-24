@@ -1,5 +1,5 @@
 <nz-form-item>
-    <nz-form-label *ngIf="ctrl.showCaption" [style.width]="'130px'" [style.float]="'left'">{{ctrl.caption}}</nz-form-label>
+    <nz-form-label *ngIf="ctrl.showCaption" [style.width]="ctrl.labelWidth" [style.float]="'left'">{{ctrl.caption}}</nz-form-label>
     <nz-form-control [style.margin-left]="ctrl.showCaption? ctrl.labelWidth:'0px'">
         <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
         <nz-form-explain *ngIf="ctrl.hasError">{{ctrl.errorInfo}}</nz-form-explain>
