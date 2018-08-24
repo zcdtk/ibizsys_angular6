@@ -1,4 +1,4 @@
-<nz-card [nzBordered]="false" [class.expanded-card]="titleBarState" [class.collapsed-card]="!titleBarState" [nzTitle]="ctrl.showCaption ? grouptitle : ''">
+<nz-card [nzBordered]="ctrl.showCaption" [class.expanded-card]="titleBarState" [class.collapsed-card]="!titleBarState" [nzTitle]="ctrl.showCaption ? grouptitle : ''">
     <ng-container  *ngTemplateOutlet="template; context: context"></ng-container>
 </nz-card>
 <ng-template #grouptitle>
