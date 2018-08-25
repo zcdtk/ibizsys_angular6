@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { NzNotificationService, NzModalService } from 'ng-zorro-antd';
 
 /**
@@ -12,12 +12,15 @@ import { NzNotificationService, NzModalService } from 'ng-zorro-antd';
 @Injectable()
 export class IBizNotification {
 
-    private $sureConfirm = 'OK';
-
-    constructor(
-        private nznotification: NzNotificationService,
-        private Modal: NzModalService
-    ) { }
+    /**
+     * Creates an instance of IBizNotification.
+     * 创建 IBizNotification 实例
+     * 
+     * @param {NzNotificationService} nznotification
+     * @param {NzModalService} Modal
+     * @memberof IBizNotification
+     */
+    constructor(private nznotification: NzNotificationService, private Modal: NzModalService) { }
 
     /**
      * 不带图标的提示
@@ -90,7 +93,7 @@ export class IBizNotification {
     }
 
     /**
-     * 
+     * 信息确认框
      * 
      * @param {string} title 
      * @param {string} content 
@@ -98,15 +101,14 @@ export class IBizNotification {
      * @memberof IBizNotification
      */
     public confirm(title: string, content: string): Observable<any> {
-        // return this.Modal.confirm({
-        //     title: title,
-        //     content: content,
-        // }).map(result => {
-        //     if (result && Object.is(result, 'onOk')) {
-        //         return this.$sureConfirm;
-        //     }
-        // });
-
-        return null;
+        const subject: Subject<any> = new Subject();
+        this.Modal.confirm({
+            nzTitle: title,
+            nzContent: content,
+            nzOnOk: () => {
+                subject.next('OK');
+            }
+        });
+        return subject.asObservable();
     }
 }
