@@ -73,6 +73,8 @@ export class LoginComponent implements OnInit {
                     id: userData.userid,
                     time: +new Date
                 });
+                this.setting.setUser({ name: userData.username, email: userData.loginname, id: userData.userid, time: +new Date });
+                
                 const callbackstring = this.activatedRoute.snapshot.paramMap.get('callback');
                 if (!callbackstring || Object.is(callbackstring, '')) {
                     this.router.navigateByUrl('');
