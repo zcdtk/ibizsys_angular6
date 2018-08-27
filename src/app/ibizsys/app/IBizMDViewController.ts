@@ -75,7 +75,7 @@ export class IBizMDViewController extends IBizMainViewController {
      */
     constructor(opts: any = {}) {
         super(opts);
-        this.regQuickSearchDEFileds();
+        this.regQuickSearchDEFields();
     }
 
     /**
@@ -1428,7 +1428,7 @@ export class IBizMDViewController extends IBizMainViewController {
      * 
      * @memberof IBizMDViewController
      */
-    public regQuickSearchDEFileds(): void {
+    public regQuickSearchDEFields(): void {
 
     }
 }
