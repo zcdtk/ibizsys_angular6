@@ -1,3 +1,2 @@
-<div [ngStyle]="styleCss">
-  <nz-time-picker [nzPlaceHolder]="placeholder" [nzFormat]="datefmt" [ngModel]="$date" [nzDisabled]="disabled" (ngModelChange)="valueChange($event)"></nz-time-picker>
-</div>
+<nz-time-picker [ngStyle]="styleCss" [nzPlaceHolder]="placeholder" [nzFormat]="datefmt" [(ngModel)]="$time" [nzDisabled]="disabled"
+  (ngModelChange)="valueChange($event)"></nz-time-picker>

@@ -20,7 +20,7 @@ export class IBizTimepickerComponent extends IBizComponent {
     datefmt: string;
 
 
-    public $date = new Date();
+    public $time: Date | null = null;
 
     /**
      * Creates an instance of IBizTimepickerComponent.
@@ -54,8 +54,15 @@ export class IBizTimepickerComponent extends IBizComponent {
     }
 
 
-    public setComponentValue (val) {
-        this.$value = '2018-08-27 14:44:12';
+    public setComponentValue(val) {
+        if (!val) {
+            return;
+        }
+        this.$time = new Date();
+        let times: Array<any> = val.split(":");
+        this.$time.setHours(times[0]);
+        this.$time.setMinutes(times[1]);
+        this.$time.setSeconds(times[2]);
     }
 
 }
