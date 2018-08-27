@@ -62,7 +62,7 @@ export class IBizComponent implements OnInit {
      * @type {*}
      * @memberof IBizComponent
      */
-    @Input() disabled: any
+    @Input() disabled: any;
 
     /**
      * 编辑器提示信息
@@ -119,15 +119,11 @@ export class IBizComponent implements OnInit {
 
     ngOnInit(): void {
         // 初始化宽高
-        if (Object.is(this.width, '100%')) {
+        if (this.width) {
             Object.assign(this.styleCss, { width: this.width });
-        } else if (this.width && parseInt(this.width) > 0) {
-            Object.assign(this.styleCss, { width: `${this.width}px` });
         }
-        if (Object.is(this.height, '100%')) {
+        if (this.height) {
             Object.assign(this.styleCss, { height: this.height });
-        } else if (this.height && parseInt(this.height) > 0) {
-            Object.assign(this.styleCss, { height: `${this.height}px` });
         }
     }
 
