@@ -75,7 +75,7 @@ export class IBizMDViewController extends IBizMainViewController {
      */
     constructor(opts: any = {}) {
         super(opts);
-        this.regQuickSearchDEFileds();
+        this.regQuickSearchDEFields();
     }
 
     /**
@@ -104,7 +104,7 @@ export class IBizMDViewController extends IBizMainViewController {
             });
             // 多数据部件状态改变
             mdctrl.on(IBizEvent.IBizMDControl_CHANGEEDITSTATE).subscribe((args) => {
-                this.onGridRowEditChange(undefined, args, undefined);
+                this.onGridRowEditChange(args);
             });
             // 多数据界面行为
             mdctrl.on(IBizEvent.IBizMDControl_UIACTION).subscribe((args) => {
@@ -118,7 +118,7 @@ export class IBizMDViewController extends IBizMainViewController {
                 const columns_name: Array<any> = Object.keys(columns);
                 let _quickFields: Array<any> = [];
                 columns_name.forEach(name => {
-                    let index: number = this.$quickSearchEntityDEFields.findIndex(item => Object.is(item.name, name));
+                    const index: number = this.$quickSearchEntityDEFields.findIndex(item => Object.is(item.name, name));
                     if (index !== -1) {
                         _quickFields.push(columns[name].caption);
                     }
@@ -131,23 +131,25 @@ export class IBizMDViewController extends IBizMainViewController {
         const searchform: any = this.getSearchForm();
         if (searchform) {
             // 搜索表单加载完成
-            searchform.on(IBizEvent.IBizForm_FORMLOADED, (form) => {
+            searchform.on(IBizEvent.IBizForm_FORMLOADED).subscribe((form) => {
                 this.onSearchFormSearched(this.isLoadDefault());
             });
             // 搜索表单搜索触发，手动触发
-            searchform.on(IBizEvent.IBizSearchForm_FORMSEARCHED, (args) => {
+            searchform.on(IBizEvent.IBizSearchForm_FORMSEARCHED).subscribe((args) => {
                 this.onSearchFormSearched(true);
             });
             // 搜索表单重置
-            searchform.on(IBizEvent.IBizSearchForm_FORMRESETED, (args) => {
+            searchform.on(IBizEvent.IBizSearchForm_FORMRESETED).subscribe((args) => {
                 this.onSearchFormReseted();
             });
             // 搜索表单值变化
-            searchform.on(IBizEvent.IBizForm_FORMFIELDCHANGED, (args) => {
-                if (args == null) {
-                    return;
+            searchform.on(IBizEvent.IBizForm_FORMFIELDCHANGED).subscribe((data) => {
+                if (data == null) {
+                    this.onSearchFormFieldChanged('');
+                } else {
+                    this.onSearchFormFieldChanged(data.name);
+                    this.onSearchFormFieldValueCheck(data.name, data.field.getValue());
                 }
-                this.onSearchFormFieldChanged(args.fieldname, args.data, args.oldvalue);
             });
             searchform.setOpen(!this.isEnableQuickSearch());
         }
@@ -261,27 +263,34 @@ export class IBizMDViewController extends IBizMainViewController {
 
     /**
      * 搜索表单属性值发生变化
-     * 
-     * @param {string} fieldname 
-     * @param {*} field 
-     * @param {*} value 
+     *
+     * @param {string} fieldname
      * @memberof IBizMDViewController
      */
-    public onSearchFormFieldChanged(fieldname: string, field: any, value: any): void {
+    public onSearchFormFieldChanged(fieldname: string): void {
+
+    }
+
+    /**
+     * 表单项值检测
+     *
+     * @param {string} fieldname
+     * @param {string} value
+     * @memberof IBizMDViewController
+     */
+    public onSearchFormFieldValueCheck(fieldname: string, value: string): void {
 
     }
 
     /**
      * 数据加载之前
-     * 
-     * @param {any} sender 
-     * @param {any} args 
-     * @param {any} e 
+     *
+     * @param {*} [args={}]
      * @memberof IBizMDViewController
      */
-    public onStoreBeforeLoad(args): void {
+    public onStoreBeforeLoad(args: any = {}): void {
 
-        let fetchParam = {};
+        let fetchParam: any = {};
         if (this.getViewParam() && Object.keys(this.getViewParam()).length > 0) {
             Object.assign(fetchParam, this.getViewParam());
         }
@@ -384,28 +393,7 @@ export class IBizMDViewController extends IBizMainViewController {
      * @param {any} e 
      * @memberof IBizMDViewController
      */
-    public onGridRowEditChange(sender, args, e): void {
-
-        // var editButton = null;
-        // var submitButton = null;
-        // if (this.toolbar && this.toolbar.items) {
-        //     $.each(this.toolbar.items, function (index, ele) {
-        //         if (ele.attr('data-ibiz-tag') == 'NewRow')
-        //             submitButton = ele;
-        //         if (ele.attr('data-ibiz-tag') == 'ToggleRowEdit')
-        //             editButton = ele;
-        //     });
-        // }
-        // this.$isInGridRowEdit = args.state;
-        // if (editButton) {
-        //     if (!args.state) {
-        //         editButton.find('span').html($IGM('MDVIEWCONTROLLER.ONGRIDROWEDITCHANGE.ENABLE', '启用编辑'));
-        //     } else {
-        //         editButton.find('span').html($IGM('MDVIEWCONTROLLER.ONGRIDROWEDITCHANGE.ENABLE2', '关闭编辑'));
-        //     }
-        // }
-        // if (submitButton)
-        //     submitButton[0].disabled = !args.state;
+    public onGridRowEditChange(args): void {
     }
 
     /**
@@ -1428,7 +1416,7 @@ export class IBizMDViewController extends IBizMainViewController {
      * 
      * @memberof IBizMDViewController
      */
-    public regQuickSearchDEFileds(): void {
+    public regQuickSearchDEFields(): void {
 
     }
 }

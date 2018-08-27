@@ -111,9 +111,9 @@ export class IBizEditViewController extends IBizMainViewController {
             // 表单属性值变化
             form.on(IBizEvent.IBizForm_FORMFIELDCHANGED).subscribe((data) => {
                 if (data == null) {
-                    this.onFormFieldChanged('', null, null);
+                    this.onFormFieldChanged('');
                 } else {
-                    this.onFormFieldChanged(data.name, data.value, data.field);
+                    this.onFormFieldChanged(data.name);
                     this.onFormFieldValueCheck(data.name, data.field.getValue());
                 }
             });
@@ -365,14 +365,12 @@ export class IBizEditViewController extends IBizMainViewController {
     }
 
     /**
-     * 表单项更新
-     * 
-     * @param {string} fieldname 
-     * @param {*} field 
-     * @param {string} value 
+     * 表单属性值发生变化
+     *
+     * @param {string} fieldname
      * @memberof IBizEditViewController
      */
-    public onFormFieldChanged(fieldname: string, field: any, value: string): void {
+    public onFormFieldChanged(fieldname: string): void {
 
     }
 
