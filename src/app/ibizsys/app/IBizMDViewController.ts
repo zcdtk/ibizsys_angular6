@@ -118,7 +118,7 @@ export class IBizMDViewController extends IBizMainViewController {
                 const columns_name: Array<any> = Object.keys(columns);
                 let _quickFields: Array<any> = [];
                 columns_name.forEach(name => {
-                    let index: number = this.$quickSearchEntityDEFields.findIndex(item => Object.is(item.name, name));
+                    const index: number = this.$quickSearchEntityDEFields.findIndex(item => Object.is(item.name, name));
                     if (index !== -1) {
                         _quickFields.push(columns[name].caption);
                     }
@@ -261,27 +261,34 @@ export class IBizMDViewController extends IBizMainViewController {
 
     /**
      * 搜索表单属性值发生变化
-     * 
-     * @param {string} fieldname 
-     * @param {*} field 
-     * @param {*} value 
+     *
+     * @param {string} fieldname
      * @memberof IBizMDViewController
      */
-    public onSearchFormFieldChanged(fieldname: string, field: any, value: any): void {
+    public onSearchFormFieldChanged(fieldname: string): void {
+
+    }
+
+    /**
+     * 表单项值检测
+     *
+     * @param {string} fieldname
+     * @param {string} value
+     * @memberof IBizMDViewController
+     */
+    public onSearchFormFieldValueCheck(fieldname: string, value: string): void {
 
     }
 
     /**
      * 数据加载之前
-     * 
-     * @param {any} sender 
-     * @param {any} args 
-     * @param {any} e 
+     *
+     * @param {*} [args={}]
      * @memberof IBizMDViewController
      */
-    public onStoreBeforeLoad(args): void {
+    public onStoreBeforeLoad(args: any = {}): void {
 
-        let fetchParam = {};
+        let fetchParam: any = {};
         if (this.getViewParam() && Object.keys(this.getViewParam()).length > 0) {
             Object.assign(fetchParam, this.getViewParam());
         }
@@ -384,28 +391,7 @@ export class IBizMDViewController extends IBizMainViewController {
      * @param {any} e 
      * @memberof IBizMDViewController
      */
-    public onGridRowEditChange(sender, args, e): void {
-
-        // var editButton = null;
-        // var submitButton = null;
-        // if (this.toolbar && this.toolbar.items) {
-        //     $.each(this.toolbar.items, function (index, ele) {
-        //         if (ele.attr('data-ibiz-tag') == 'NewRow')
-        //             submitButton = ele;
-        //         if (ele.attr('data-ibiz-tag') == 'ToggleRowEdit')
-        //             editButton = ele;
-        //     });
-        // }
-        // this.$isInGridRowEdit = args.state;
-        // if (editButton) {
-        //     if (!args.state) {
-        //         editButton.find('span').html($IGM('MDVIEWCONTROLLER.ONGRIDROWEDITCHANGE.ENABLE', '启用编辑'));
-        //     } else {
-        //         editButton.find('span').html($IGM('MDVIEWCONTROLLER.ONGRIDROWEDITCHANGE.ENABLE2', '关闭编辑'));
-        //     }
-        // }
-        // if (submitButton)
-        //     submitButton[0].disabled = !args.state;
+    public onGridRowEditChange(sender): void {
     }
 
     /**
