@@ -11,6 +11,7 @@ export { IBizDynamicEditForm } from './widget/IBizDynamicEditForm';
 export { IBizEditForm } from './widget/IBizEditForm';
 export { IBizToolbar } from './widget/IBizToolbar';
 export { IBizGrid } from './widget/IBizGrid';
+export { IBizSearchForm } from './widget/IBizSearchForm';
 // control end
 
 // formitem begin
