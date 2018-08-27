@@ -85,12 +85,12 @@ export class DefaultInterceptor implements HttpInterceptor {
                 }
                 break;
             case 401: // 未登录状态码
-                this.goLogin();
+                // this.goLogin();
                 break;
             case 403:
             case 404:
             case 500:
-                this.goLogin();
+                // this.goLogin();
                 break;
         }
         return of(event);
