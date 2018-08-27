@@ -12,6 +12,8 @@ import { IBizNotification } from '@core/notice/IBizNotification';
 })
 export class UserComponent implements OnInit {
 
+    public $user: any = {};
+
     constructor(
         public settings: SettingService,
         private router: Router,
@@ -24,9 +26,7 @@ export class UserComponent implements OnInit {
      * @memberof UserComponentComponent
      */
     ngOnInit() {
-        this.settings.settingChange().subscribe((res: any) => {
-            this.settings.setUser(res);
-        });
+        Object.assign(this.$user, this.settings.getUser());
         // mock
         const token = this.settings.getToken() || {
             token: 'nothing',
@@ -48,13 +48,19 @@ export class UserComponent implements OnInit {
                             id: _data.userid,
                             time: +new Date
                         });
+                        Object.assign(this.$user, {
+                            name: _data.username,
+                            email: _data.loginname,
+                            id: _data.userid,
+                            time: +new Date
+                        });
                         this.settings.setToken({ token: _data.loginkey });
                     }
                 } else {
                     this.settings.setToken(token);
                 }
             }, (error) => {
-                console.log(error)
+                console.log(error);
             });
         }
     }

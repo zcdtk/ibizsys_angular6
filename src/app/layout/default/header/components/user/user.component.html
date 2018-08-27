@@ -1,7 +1,7 @@
 <nz-dropdown [nzPlacement]="'bottomRight'">
   <div class="item d-flex align-items-center px-sm" nz-dropdown>
     <nz-avatar [nzSrc]="'./assets/img/avatar.png'" [nzShape]="'square'"  class="mr-sm"></nz-avatar>
-    {{settings._user}}
+    {{$user.name}}
   </div>
   <div nz-menu class="width-sm">
     <div nz-menu-item (click)="installRTData()">
