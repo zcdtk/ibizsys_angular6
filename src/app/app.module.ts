@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,7 +20,9 @@ import { SettingService } from '@core/setting.service';
 import { DefaultInterceptor } from '@core/net/default.interceptor';
 
 import localeZhHans from '@angular/common/locales/zh-Hans';
+import zh from '@angular/common/locales/zh';
 registerLocaleData(localeZhHans);
+registerLocaleData(zh);
 
 @NgModule({
   declarations: [
