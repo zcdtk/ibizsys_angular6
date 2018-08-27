@@ -104,7 +104,7 @@ export class IBizMDViewController extends IBizMainViewController {
             });
             // 多数据部件状态改变
             mdctrl.on(IBizEvent.IBizMDControl_CHANGEEDITSTATE).subscribe((args) => {
-                this.onGridRowEditChange(undefined, args, undefined);
+                this.onGridRowEditChange(args);
             });
             // 多数据界面行为
             mdctrl.on(IBizEvent.IBizMDControl_UIACTION).subscribe((args) => {
@@ -131,23 +131,25 @@ export class IBizMDViewController extends IBizMainViewController {
         const searchform: any = this.getSearchForm();
         if (searchform) {
             // 搜索表单加载完成
-            searchform.on(IBizEvent.IBizForm_FORMLOADED, (form) => {
+            searchform.on(IBizEvent.IBizForm_FORMLOADED).subscribe((form) => {
                 this.onSearchFormSearched(this.isLoadDefault());
             });
             // 搜索表单搜索触发，手动触发
-            searchform.on(IBizEvent.IBizSearchForm_FORMSEARCHED, (args) => {
+            searchform.on(IBizEvent.IBizSearchForm_FORMSEARCHED).subscribe((args) => {
                 this.onSearchFormSearched(true);
             });
             // 搜索表单重置
-            searchform.on(IBizEvent.IBizSearchForm_FORMRESETED, (args) => {
+            searchform.on(IBizEvent.IBizSearchForm_FORMRESETED).subscribe((args) => {
                 this.onSearchFormReseted();
             });
             // 搜索表单值变化
-            searchform.on(IBizEvent.IBizForm_FORMFIELDCHANGED, (args) => {
-                if (args == null) {
-                    return;
+            searchform.on(IBizEvent.IBizForm_FORMFIELDCHANGED).subscribe((data) => {
+                if (data == null) {
+                    this.onSearchFormFieldChanged('');
+                } else {
+                    this.onSearchFormFieldChanged(data.name);
+                    this.onSearchFormFieldValueCheck(data.name, data.field.getValue());
                 }
-                this.onSearchFormFieldChanged(args.fieldname, args.data, args.oldvalue);
             });
             searchform.setOpen(!this.isEnableQuickSearch());
         }
@@ -391,7 +393,7 @@ export class IBizMDViewController extends IBizMainViewController {
      * @param {any} e 
      * @memberof IBizMDViewController
      */
-    public onGridRowEditChange(sender): void {
+    public onGridRowEditChange(args): void {
     }
 
     /**
