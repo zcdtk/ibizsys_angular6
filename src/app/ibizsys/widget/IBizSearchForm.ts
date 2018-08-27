@@ -1,5 +1,5 @@
-import { IBizForm } from "./IBizForm";
-import { IBizEvent } from "../IBizEvent";
+import { IBizForm } from './IBizForm';
+import { IBizEvent } from '../IBizEvent';
 
 /**
  * 搜索表单部件服务对象
