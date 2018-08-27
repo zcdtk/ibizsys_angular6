@@ -33,36 +33,54 @@ export class IBizTimepickerComponent extends IBizComponent {
         super();
     }
 
-    /**
-     * 数据发生改变
-     *
-     * @param {Date} value
-     * @memberof IBizTimepickerComponent
-     */
-    public valueChange(value: Date): void {
-        let val = this.datePipe.transform(value, this.datefmt);
-        val = val == null ? '' : val;
-        if (this.form) {
-            let itemField = this.form.findField(this.name);
-            if (itemField) {
-                itemField.setValue(val);
+    public openChange(flag: Boolean): void {
+        if (!flag) {
+            let timeStr = (this.$time.toTimeString()).substring(0, 8);
+            if (!timeStr) {
+                return;
+            }
+            let val = timeStr == null ? '' : timeStr;
+            if (this.form) {
+                let itemField = this.form.findField(this.name);
+                if (itemField) {
+                    itemField.setValue(val);
+                }
+            }
+            if (this.grid) {
+                this.grid.colValueChange(this.name, val, this.data);
             }
         }
-        if (this.grid) {
-            this.grid.colValueChange(this.name, val, this.data);
-        }
     }
-
 
     public setComponentValue(val) {
         if (!val) {
             return;
         }
-        this.$time = new Date();
-        let times: Array<any> = val.split(":");
-        this.$time.setHours(times[0]);
-        this.$time.setMinutes(times[1]);
-        this.$time.setSeconds(times[2]);
+        this.$time = new Date(0, 0, 0, 0, 0, 0, 0);
+        if (Object.is(this.datefmt, 'HH:mm:ss')) {
+            let times: Array<any> = val.split(":");
+            this.$time.setHours(times[0]);
+            this.$time.setMinutes(times[1]);
+            this.$time.setSeconds(times[2]);
+        }
+        if (Object.is(this.datefmt, 'HH:mm')) {
+            let times: Array<any> = val.split(":");
+            this.$time.setHours(times[0]);
+            this.$time.setMinutes(times[1]);
+        }
+        if (Object.is(this.datefmt, 'HH')) {
+            let times: Array<any> = val.split(":");
+            this.$time.setHours(times[0]);
+        }
+        if (Object.is(this.datefmt, 'mm')) {
+            let times: Array<any> = val.split(":");
+            this.$time.setMinutes(times[1]);
+        }
+        if (Object.is(this.datefmt, 'ss')) {
+            let times: Array<any> = val.split(":");
+            this.$time.setSeconds(times[2]);
+        }
+
     }
 
 }
