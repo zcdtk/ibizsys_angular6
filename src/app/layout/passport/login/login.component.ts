@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IBizEnvironment } from '@env/IBizEnvironment';
-import { IBizHttp } from '@core/http/IBizHttp';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SettingService } from '@core/setting.service';
+
+import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizHttp, SettingService } from 'ibizsys';
 
 @Component({
     selector: 'app-login',

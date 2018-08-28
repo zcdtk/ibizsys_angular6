@@ -8,7 +8,7 @@ import { LayoutFullScreenComponent } from './fullscreen/fullscreen.component';
 import { LayoutPassportComponent } from './passport/passport.component';
 import { HeaderComponent } from './default/header/header.component';
 import { LoginComponent } from './passport/login/login.component';
-import { UserComponent }  from './default/header/components/user/user.component';
+import { UserComponent } from './default/header/components/user/user.component';
 
 const component = [
   LayoutDefaultComponent,

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBizEnvironment } from '@env/IBizEnvironment';
-import { SettingService } from '@core/setting.service';
-import { IBizHttp } from '@core/http/IBizHttp';
-import { IBizNotification } from '@core/notice/IBizNotification';
+import { SettingService, IBizHttp, IBizNotification } from 'ibizsys';
+
 
 @Component({
     selector: 'app-user',

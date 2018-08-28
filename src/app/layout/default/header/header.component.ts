@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SettingService } from '@core/setting.service';
+import { SettingService } from 'ibizsys';
 
 @Component({
     selector: 'app-header',
