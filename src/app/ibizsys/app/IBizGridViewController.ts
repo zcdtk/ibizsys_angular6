@@ -329,7 +329,7 @@ export class IBizGridViewController extends IBizMDViewController {
                 return null;
             }
 
-            let vlaueitem = 'srfkey';
+            let valueitem = 'srfkey';
             let paramkey = 'srfkeys';
             let paramitems = '';
             let paramjo = null;
@@ -337,7 +337,7 @@ export class IBizGridViewController extends IBizMDViewController {
 
             if (uiaction.actionparams) {
                 let actionparams = uiaction.actionparams;
-                vlaueitem = (actionparams.vlaueitem && !Object.is(actionparams.vlaueitem, '')) ? actionparams.vlaueitem.toLowerCase() : vlaueitem;
+                valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
                 infoitem = (actionparams.textitem && !Object.is(actionparams.textitem, '')) ? actionparams.textitem.toLowerCase() : infoitem;
                 paramjo = actionparams.paramjo ? actionparams.paramjo : {};
@@ -348,8 +348,8 @@ export class IBizGridViewController extends IBizMDViewController {
             selectedData.some((record: any = {}, index: number) => {
                 let srfmajortext = record[infoitem];
 
-                if (vlaueitem) {
-                    let temp = record[vlaueitem];
+                if (valueitem) {
+                    let temp = record[valueitem];
                     if (!Object.is(paramitems, '')) {
                         paramitems += ';';
                     }

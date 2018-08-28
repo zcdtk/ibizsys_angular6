@@ -768,13 +768,13 @@ export class IBizEditViewController extends IBizMainViewController {
         let arg = super.getFrontUIActionParam(uiaction);
         if (Object.is(uiaction.actiontarget, 'SINGLEKEY') || Object.is(uiaction.actiontarget, 'MULTIKEY')) {
 
-            let vlaueitem = 'srfkey';
+            let valueitem = 'srfkey';
             let paramkey = 'srfkeys';
             let paramjo = null;
             let paramitems = null;
             if (uiaction.actionparams) {
                 let actionparams = uiaction.actionparams;
-                vlaueitem = (actionparams.vlaueitem && !Object.is(actionparams.vlaueitem, '')) ? actionparams.vlaueitem.toLowerCase() : vlaueitem;
+                valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
                 paramjo = actionparams.paramjo ? actionparams.paramjo : {};
             }
@@ -784,7 +784,7 @@ export class IBizEditViewController extends IBizMainViewController {
                 paramitems = field.getValue();
             }
             if (!paramitems || Object.is(paramitems, '')) {
-                field = this.getForm().findField(vlaueitem);
+                field = this.getForm().findField(valueitem);
                 if (field) {
                     paramitems = field.getValue();
                 }
@@ -808,13 +808,13 @@ export class IBizEditViewController extends IBizMainViewController {
      */
     public getBackendUIActionParam(uiaction: any = {}): any {
         if (Object.is(uiaction.actiontarget, 'SINGLEKEY') || Object.is(uiaction.actiontarget, 'MULTIKEY')) {
-            let vlaueitem = 'srfkey';
+            let valueitem = 'srfkey';
             let paramkey = 'srfkeys';
             let paramjo = null;
             let infoitem = 'srfmajortext';
             if (uiaction.actionparams) {
                 let actionparams = uiaction.actionparams;
-                vlaueitem = (actionparams.vlaueitem && !Object.is(actionparams.vlaueitem, '')) ? actionparams.vlaueitem.toLowerCase() : vlaueitem;
+                valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
                 infoitem = (actionparams.textitem && !Object.is(actionparams.textitem, '')) ? actionparams.textitem.toLowerCase() : infoitem;
                 paramjo = actionparams.paramjo ? actionparams.paramjo : {};
@@ -823,7 +823,7 @@ export class IBizEditViewController extends IBizMainViewController {
             let dataInfo = '';
             let keys = '';
 
-            let field = this.getForm().findField(vlaueitem);
+            let field = this.getForm().findField(valueitem);
             if (field) {
                 keys = field.getValue();
             }

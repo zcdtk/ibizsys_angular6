@@ -1172,24 +1172,24 @@ export class IBizMDViewController extends IBizMainViewController {
             const selectedData: Array<any> = this.getMDCtrl().getSelection();
             if (!(selectedData == null || selectedData.length === 0)) {
 
-                let vlaueitem = 'srfkey';
+                let valueitem = 'srfkey';
                 let paramkey = 'srfkeys';
                 let paramjo = null;
                 if (uiaction.actionparams) {
                     let actionparams = uiaction.actionparams;
-                    vlaueitem = (actionparams.vlaueitem && !Object.is(actionparams.vlaueitem, '')) ? actionparams.vlaueitem.toLowerCase() : vlaueitem;
+                    valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                     paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
                     paramjo = actionparams.paramjo ? actionparams.paramjo : {};
                 }
 
                 if (Object.is(target, 'SINGLEKEY')) {
-                    arg[paramkey] = selectedData[0][vlaueitem];
+                    arg[paramkey] = selectedData[0][valueitem];
                 } else if (Object.is(target, 'SINGLEDATA')) {
                     Object.assign(arg, selectedData[0]);
                 } else if (Object.is(target, 'MULTIKEY')) {
                     let keys = '';
                     selectedData.forEach(item => {
-                        let key = item[vlaueitem];
+                        let key = item[valueitem];
                         if (!Object.is(keys, '')) {
                             keys += ';';
                         }
@@ -1229,7 +1229,7 @@ export class IBizMDViewController extends IBizMainViewController {
         const selectedData: Array<any> = this.getMDCtrl().getSelection();
         if (!(selectedData == null || selectedData.length === 0)) {
 
-            let vlaueitem = 'srfkey';
+            let valueitem = 'srfkey';
             let paramkey = 'srfkeys';
             let paramitems = '';
             let paramjo = null;
@@ -1237,17 +1237,17 @@ export class IBizMDViewController extends IBizMainViewController {
 
             if (uiaction.actionparams) {
                 let actionparams = uiaction.actionparams;
-                vlaueitem = (actionparams.vlaueitem && !Object.is(actionparams.vlaueitem, '')) ? actionparams.vlaueitem.toLowerCase() : vlaueitem;
+                valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
                 infoitem = (actionparams.textitem && !Object.is(actionparams.textitem, '')) ? actionparams.textitem.toLowerCase() : infoitem;
                 paramjo = actionparams.paramjo ? actionparams.paramjo : {};
             }
 
             if (bSingle) {
-                paramitems = selectedData[0][vlaueitem];
+                paramitems = selectedData[0][valueitem];
             } else {
                 selectedData.forEach(item => {
-                    let key = item[vlaueitem];
+                    let key = item[valueitem];
                     if (!Object.is(paramitems, '')) {
                         paramitems += ';';
                     }
