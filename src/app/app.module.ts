@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID} from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,10 +12,8 @@ import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { RouteRoutingModule } from './routes-routing.module';
 
-import { IBizApp } from '@core/IBizApp';
-import { IBizHttp } from '@core/http/IBizHttp';
-import { IBizNotification } from '@core/notice/IBizNotification';
-import { SettingService } from '@core/setting.service';
+import { IBizApp, IBizHttp, IBizNotification, SettingService } from 'ibizsys';
+const iBizSysService = [IBizApp, IBizHttp, IBizNotification, SettingService];
 
 import { DefaultInterceptor } from '@core/net/default.interceptor';
 
@@ -41,10 +39,7 @@ registerLocaleData(zh);
   providers: [
     { provide: LOCALE_ID, useValue: 'zh-Hans' },
     { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
-    IBizApp,
-    IBizHttp,
-    IBizNotification,
-    SettingService
+    ...iBizSysService
   ],
   bootstrap: [AppComponent]
 })

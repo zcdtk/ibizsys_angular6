@@ -40,5 +40,6 @@ export { IBizComponentsModule } from './components/ibiz-components.module';
 export { IBizApp } from './service/IBizApp';
 export { IBizHttp } from './service/IBizHttp';
 export { IBizModal } from './service/IBizModal';
+export { IBizNotification } from './service/IBizNotification';
 export { SettingService } from './service/setting.service';
 // service end
