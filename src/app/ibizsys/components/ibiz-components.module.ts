@@ -9,6 +9,7 @@ import { IBizDatepickerComponent } from './ibiz-datepicker/ibiz-datepicker.compo
 import { IBizTimepickerComponent } from './ibiz-timepicker/ibiz-timepicker.component';
 import { IBizPictureComponent } from './ibiz-picture/ibiz-picture.component';
 import { IBizFileUploadComponent } from './ibiz-file-upload/ibiz-file-upload.component';
+import { IBizRichTextEditorComponent } from './ibiz-rich-text-editor/ibiz-rich-text-editor.component';
 import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
 
 const conponents = [
@@ -20,6 +21,7 @@ const conponents = [
     IBizPictureComponent,
     IBizFileUploadComponent,
     IBizSafeContantPipe,
+	IBizRichTextEditorComponent
 ];
 
 @NgModule({
