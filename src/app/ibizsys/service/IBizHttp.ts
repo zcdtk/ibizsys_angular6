@@ -3,8 +3,9 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 
 import { IBizEnvironment } from '@env/IBizEnvironment';
-import { IBizApp } from '@core/IBizApp';
-import { SettingService } from '@core/setting.service';
+import { IBizApp } from './IBizApp';
+import { SettingService } from './setting.service';
+
 
 /**
  * IBizHttp
