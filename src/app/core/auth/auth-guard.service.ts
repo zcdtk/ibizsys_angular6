@@ -3,8 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscriber } from 'rxjs';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
 import { IBizEnvironment } from '@env/IBizEnvironment';
-import { IBizApp } from '@core/IBizApp';
-import { SettingService } from '@core/setting.service';
+import { IBizApp, SettingService } from 'ibizsys';
 
 /**
  * 根节点路由守卫

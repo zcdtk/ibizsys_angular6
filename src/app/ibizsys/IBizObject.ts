@@ -1,7 +1,8 @@
 import { Observable, Subject } from 'rxjs';
-import { IBizHttp } from '@core/http/IBizHttp';
-import { IBizApp } from '@core/IBizApp';
-import { IBizNotification } from '@core/notice/IBizNotification';
+import { IBizApp } from './service/IBizApp';
+import { IBizHttp } from './service/IBizHttp';
+import { IBizNotification } from './service/IBizNotification';
+
 
 /**
  * IbizSys控制器借口对象

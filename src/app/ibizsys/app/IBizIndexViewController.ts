@@ -1,6 +1,7 @@
 import { IBizIndexViewControllerBase } from './IBizIndexViewControllerBase';
 import { IBizEvent } from '../IBizEvent';
-import { SettingService } from '@core/setting.service';
+import { SettingService } from '../service/setting.service';
+
 
 /**
  * 首页应用视图
