@@ -7,30 +7,36 @@ import { IBizFormGroupComponent } from './ibiz-form-group/ibiz-form-group.compon
 import { IBizFormItemComponent } from './ibiz-form-item/ibiz-form-item.component';
 import { IBizDatepickerComponent } from './ibiz-datepicker/ibiz-datepicker.component';
 import { IBizTimepickerComponent } from './ibiz-timepicker/ibiz-timepicker.component';
+import { IBizPictureComponent } from './ibiz-picture/ibiz-picture.component';
+import { IBizFileUploadComponent } from './ibiz-file-upload/ibiz-file-upload.component';
+import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
 
 const conponents = [
-  IBizFormComponent,
-  IBizFormGroupComponent,
-  IBizFormItemComponent,
-  IBizDatepickerComponent,
-  IBizTimepickerComponent
+    IBizFormComponent,
+    IBizFormGroupComponent,
+    IBizFormItemComponent,
+    IBizDatepickerComponent,
+    IBizTimepickerComponent,
+    IBizPictureComponent,
+    IBizFileUploadComponent,
+    IBizSafeContantPipe,
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-  ],
-  exports: [
-    ...conponents
-  ],
-  declarations: [
-    ...conponents
-  ],
-  entryComponents: [
-  ],
-  providers: [
-    DatePipe
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+    ],
+    exports: [
+        ...conponents
+    ],
+    declarations: [
+        ...conponents
+    ],
+    entryComponents: [
+    ],
+    providers: [
+        DatePipe
+    ]
 })
 export class IBizComponentsModule { }
