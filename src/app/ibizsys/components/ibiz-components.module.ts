@@ -10,6 +10,7 @@ import { IBizTimepickerComponent } from './ibiz-timepicker/ibiz-timepicker.compo
 import { IBizPictureComponent } from './ibiz-picture/ibiz-picture.component';
 import { IBizFileUploadComponent } from './ibiz-file-upload/ibiz-file-upload.component';
 import { IBizRichTextEditorComponent } from './ibiz-rich-text-editor/ibiz-rich-text-editor.component';
+import { IBizSelectComponent } from './ibiz-select/ibiz-select.component';
 import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
 
 const conponents = [
@@ -19,9 +20,10 @@ const conponents = [
     IBizDatepickerComponent,
     IBizTimepickerComponent,
     IBizPictureComponent,
-    IBizFileUploadComponent,
-    IBizSafeContantPipe,
-	IBizRichTextEditorComponent
+    IBizFileUploadComponent,  
+	IBizRichTextEditorComponent,
+	IBizSelectComponent,
+	IBizSafeContantPipe
 ];
 
 @NgModule({

@@ -1,0 +1,6 @@
+<div>
+  <nz-select #selectObj [nzPlaceHolder]="placeholder" nzAllowClear [attr.id]="name" [attr.name]="name" [(ngModel)]="$value"
+    (ngModelChange)="onValueChanged()" [nzDisabled]="disabled" [ngStyle]="styleCss" (nzOpenChange)="openChange($event)">
+    <nz-option *ngFor="let item of codelist" [nzLabel]="item.text" [nzValue]="item.value" [nzDisabled]="item.disabled"></nz-option>
+  </nz-select>
+</div>
