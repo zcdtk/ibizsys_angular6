@@ -24,6 +24,9 @@ export class IBizFormComponent {
     set fields(val) {
         this.context = { '$implicit': val };
     }
+
+    @Input() form: any;
+
     /**
      * 模板输出上下文对象
      *

@@ -647,6 +647,7 @@ export class IBizEditViewController extends IBizMainViewController {
                 const formActiveData = form.getActiveData();
                 // this.nzModalSubject.next({ ret: 'OK', data: formActiveData });
                 // this.nzModalSubject.next('DATACHANGE');
+                this.modalViewDataChange({ data: formActiveData });
             }
         }
     }

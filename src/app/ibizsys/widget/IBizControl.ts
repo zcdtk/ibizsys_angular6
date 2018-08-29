@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IBizControlBase } from './IBizControlBase';
 
 
@@ -39,6 +39,14 @@ export class IBizControl extends IBizControlBase {
     private $viewController: any;
 
     /**
+     * 部件http请求状态
+     *
+     * @type {boolean}
+     * @memberof IBizControl
+     */
+    public $isLoading: boolean = false;
+
+    /**
      * Creates an instance of IBizControl.
      * 创建 IBizControl 实例。 
      * 
@@ -74,7 +82,6 @@ export class IBizControl extends IBizControlBase {
      */
     public getBackendUrl(): string {
         let url: string = '';
-        let dynamicParams: any = {};
         if (this.$url) {
             url = this.$url;
         }
@@ -82,35 +89,7 @@ export class IBizControl extends IBizControlBase {
             if (!url) {
                 url = this.getViewController().getBackendUrl();
             }
-
-            // 动态视图参数
-            dynamicParams = this.getViewController().getDynamicParams();
-            if (dynamicParams && Object.keys(dynamicParams).length > 0) {
-                url = this.addOptionsForUrl(url, dynamicParams);
-            }
         }
-        return url;
-    }
-
-    /**
-     * 添加参数到指定的url中
-     *
-     * @param {string} url 路径
-     * @param {*} [opt={}] 参数
-     * @returns {string}
-     * @memberof IBizDynamicService
-     */
-    public addOptionsForUrl(url: string, opt: any = {}): string {
-        const keys: string[] = Object.keys(opt);
-        const isOpt: number = url.indexOf('?');
-        keys.forEach((key, index) => {
-            if (index === 0 && isOpt === -1) {
-                url += `?${key}=${opt[key]}`;
-            } else {
-                url += `&${key}=${opt[key]}`;
-            }
-        }
-        );
         return url;
     }
 
@@ -142,7 +121,18 @@ export class IBizControl extends IBizControlBase {
         } else {
             _url = this.getBackendUrl();
         }
-        return this.$iBizHttp.post(_url, param);
+        const subject = new Subject();
+        this.beginLoading();
+
+        const post = this.$iBizHttp.post(_url, param);
+        post.subscribe((success) => {
+            this.endLoading();
+            subject.next(success);
+        }, (error) => {
+            this.endLoading();
+            subject.error(error);
+        });
+        return subject.asObservable();
     }
 
     /**
@@ -161,5 +151,25 @@ export class IBizControl extends IBizControlBase {
             _url = this.getBackendUrl();
         }
         return this.$iBizHttp.post2(_url, param);
+    }
+
+    /** 
+     * 部件http请求
+     *
+     * @private
+     * @memberof IBizControl
+     */
+    private beginLoading(): void {
+        this.$isLoading = true;
+    }
+
+    /**
+     * 部件结束http请求
+     *
+     * @private
+     * @memberof IBizControl
+     */
+    private endLoading(): void {
+        this.$isLoading = false;
     }
 }

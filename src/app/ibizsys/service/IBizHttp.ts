@@ -17,22 +17,6 @@ import { SettingService } from './setting.service';
 export class IBizHttp {
 
     /**
-     * 是否加载
-     *
-     * @type {boolean}
-     * @memberof IBizHttp
-     */
-    public $isLoading: boolean = false;
-
-    /**
-     * 当前请求启动的Loading数量
-     *
-     * @type {number}
-     * @memberof IBizHttp
-     */
-    public $loadingCount: number = 0;
-
-    /**
      * 工程应用路径
      *
      * @private
@@ -67,7 +51,6 @@ export class IBizHttp {
             Object.assign(opt, { srfappdata: this.iBizApp.getAppData() });
         }
         const subject = new Subject();
-        this.beginLoading();
         const post = this.httpClient.post(this.Base + url, new HttpParams({ 'fromObject': opt }), {
             headers: new HttpHeaders({
                 'Accept': 'application/json',
@@ -75,7 +58,6 @@ export class IBizHttp {
             })
         });
         post.subscribe((data: any) => {
-            this.endLoading();
             if (data.notlogin) {
                 return;
             }
@@ -85,7 +67,6 @@ export class IBizHttp {
                 subject.error(data);
             }
         }, (error: any) => {
-            this.endLoading();
             subject.error(error);
         });
         return subject.asObservable();
@@ -141,10 +122,8 @@ export class IBizHttp {
      */
     public get(url: string): Observable<any> {
         const subject = new Subject();
-        this.beginLoading();
         const get = this.httpClient.get(this.Base + url);
         get.subscribe((data: any) => {
-            this.endLoading();
             if (data.notlogin) {
                 return;
             }
@@ -154,37 +133,8 @@ export class IBizHttp {
                 subject.error(data);
             }
         }, (error: any) => {
-            this.endLoading();
             subject.error(error);
         });
         return subject.asObservable();
-    }
-
-    /**
-     * 开始加载
-     *
-     * @memberof IBizHttp
-     */
-    public beginLoading(): void {
-        if (this.$loadingCount === 0) {
-            setTimeout(() => {
-                this.$isLoading = true;
-            });
-        }
-        this.$loadingCount++;
-    }
-
-    /**
-     * 加载结束
-     *
-     * @memberof IBizHttp
-     */
-    public endLoading(): void {
-        this.$loadingCount--;
-        if (this.$loadingCount === 0) {
-            setTimeout(() => {
-                this.$isLoading = false;
-            });
-        }
     }
 }

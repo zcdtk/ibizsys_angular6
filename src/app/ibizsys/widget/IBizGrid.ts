@@ -156,7 +156,7 @@ export class IBizGrid extends IBizMDControl {
     public load(arg: any = {}): void {
         let opt: any = {};
         Object.assign(opt, arg);
-        if (this.$loading) {
+        if (this.$isLoading) {
             return;
         }
         Object.assign(opt, { srfctrlid: this.getName(), srfaction: 'fetch' });
@@ -169,8 +169,6 @@ export class IBizGrid extends IBizMDControl {
 
         Object.assign(opt, { sort: JSON.stringify(this.$gridSortField) });
 
-        // 设置为正在加载，使load方法在加载中时不可用。
-        this.$loading = true;
         // 发送加载数据前事件
         this.fire(IBizEvent.IBizMDControl_BEFORELOAD, opt);
 
@@ -184,15 +182,12 @@ export class IBizGrid extends IBizMDControl {
                 if (response.errorMessage) {
                     this.$iBizNotification.error('', response.errorMessage);
                 }
-                this.$loading = false;
                 return;
             }
             this.$items = this.rendererDatas(response.items);
             this.$totalrow = response.totalrow;
             this.fire(IBizEvent.IBizMDControl_LOADED, response.items);
-            this.$loading = false;
         }, error => {
-            this.$loading = false;
             console.log(error.info);
         });
     }
@@ -207,7 +202,7 @@ export class IBizGrid extends IBizMDControl {
     public refresh(arg: any = {}): void {
         let opt: any = {};
         Object.assign(opt, arg);
-        if (this.$loading) {
+        if (this.$isLoading) {
             return;
         }
         Object.assign(opt, { srfctrlid: this.getName(), srfaction: 'fetch' });
@@ -220,8 +215,6 @@ export class IBizGrid extends IBizMDControl {
 
         Object.assign(opt, { sort: JSON.stringify(this.$gridSortField) });
 
-        // 设置为正在加载，使load方法在加载中时不可用。
-        this.$loading = true;
         // 发送加载数据前事件
         this.fire(IBizEvent.IBizMDControl_BEFORELOAD, opt);
 
@@ -235,16 +228,13 @@ export class IBizGrid extends IBizMDControl {
                 if (response.errorMessage) {
                     this.$iBizNotification.error('', response.errorMessage);
                 }
-                this.$loading = false;
                 return;
             }
 
             this.fire(IBizEvent.IBizMDControl_LOADED, response.items);
             this.$items = this.rendererDatas(response.items);
             this.$totalrow = response.totalrow;
-            this.$loading = false;
         }, error => {
-            this.$loading = false;
             console.log(error.info);
         });
     }
@@ -469,7 +459,7 @@ export class IBizGrid extends IBizMDControl {
      * @memberof IBizGrid
      */
     public sort(name: string, type: string): void {
-        let item: any = this.$gridSortField.find(item => Object.is(item.property, name));
+        let item: any = this.$gridSortField.find(_item => Object.is(_item.property, name));
         if (item === undefined) {
             if (Object.is('ascend', type)) {
                 this.$gridSortField.push({ property: name, direction: 'asc' });
@@ -480,8 +470,8 @@ export class IBizGrid extends IBizMDControl {
             }
         }
 
-        const index = this.$gridSortField.findIndex((item) => {
-            return Object.is(item.property, name);
+        const index = this.$gridSortField.findIndex((field) => {
+            return Object.is(field.property, name);
         });
 
         if (Object.is('ascend', type)) {
@@ -548,8 +538,8 @@ export class IBizGrid extends IBizMDControl {
             this.$rowsSelection = false;
             return true;
         }
-        this.$selection.forEach((data) => {
-            data.checked = false;
+        this.$selection.forEach((item) => {
+            item.checked = false;
         });
         this.$selection = [];
         data.checked = true;
@@ -617,7 +607,7 @@ export class IBizGrid extends IBizMDControl {
         const itemsName: Array<any> = Object.keys(this.$editItems);
         itemsName.forEach(name => {
             let item: any = {};
-            let _editor = JSON.stringify(this.$editItems[name]);
+            const _editor = JSON.stringify(this.$editItems[name]);
             Object.assign(item, JSON.parse(_editor));
             editItems[name] = item;
         });

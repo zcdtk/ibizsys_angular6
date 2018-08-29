@@ -1,3 +1,5 @@
-<form nz-form>
-    <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
-</form>
+<nz-spin [nzSpinning]="form.$isLoading">
+    <form nz-form>
+        <ng-container *ngTemplateOutlet="template; context: context"></ng-container>
+    </form>
+</nz-spin>

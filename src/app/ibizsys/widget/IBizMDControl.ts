@@ -36,12 +36,6 @@ export class IBizMDControl extends IBizControl {
      */
     public $selection: Array<any> = [];
 
-    /**
-     * 加载状态
-     * 
-     * @memberof IBizMDControl
-     */
-    public $loading = false;
 
     /**
      * Creates an instance of IBizMDControl.
@@ -93,7 +87,7 @@ export class IBizMDControl extends IBizControl {
      * @memberof IBizMDControl
      */
     public clickItem(item: any = {}): void {
-        if (this.$loading) {
+        if (this.$isLoading) {
             return;
         }
         this.setSelection([item]);
@@ -107,16 +101,6 @@ export class IBizMDControl extends IBizControl {
      */
     public activeItem(item): void {
 
-    }
-
-    /**
-     * 
-     * 
-     * @returns {boolean} 
-     * @memberof IBizMDControl
-     */
-    public isloading(): boolean {
-        return this.$loading;
     }
 
     /**

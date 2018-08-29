@@ -1,5 +1,6 @@
-
+import { Observable, Subject } from 'rxjs';
 import { NzModalService, NzModalRef } from 'ng-zorro-antd';
+
 import { IBizObject } from '../IBizObject';
 
 /**
@@ -28,6 +29,15 @@ export class IBizViewControllerBase extends IBizObject {
     public nzModalRef: NzModalRef;
 
     /**
+     * 模态视图被订阅观察对象
+     *
+     * @private
+     * @type {Subject<any>}
+     * @memberof IBizViewControllerBase
+     */
+    private modalSubject: Subject<any>;
+
+    /**
      * Creates an instance of IBizViewControllerBase.
      * 创建 IBizViewControllerBase 实例 
      * 
@@ -38,6 +48,41 @@ export class IBizViewControllerBase extends IBizObject {
         super(opts);
         this.nzModalService = opts.nzModalService;
         this.nzModalRef = opts.nzModalRef;
+    }
+
+    /**
+     * 模态视图数据状态，配合nzModal使用
+     *
+     * @protected
+     * @returns {Observable<any>}
+     * @memberof IBizViewControllerBase
+     */
+    protected modalViewDataState(): Observable<any> {
+        this.modalSubject = new Subject();
+        if (!this.isModal()) {
+            return this.modalSubject;
+        }
+        return this.modalSubject.asObservable();
+    }
+
+    /**
+     * 模态视图数据变化，配合nzModal使用
+     *
+     * @param {*} data
+     * @memberof IBizViewControllerBase
+     */
+    protected modalViewDataChange(data: any): void {
+        this.modalSubject.next(data);
+    }
+
+    /**
+     * 是否是模态视图
+     *
+     * @returns {boolean}
+     * @memberof IBizViewControllerBase
+     */
+    public isModal(): boolean {
+        return false;
     }
 }
 

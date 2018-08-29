@@ -58,7 +58,19 @@ export class IBizModal extends IBizControl {
         }
 
         const opt = this.getModalParam(options);
-        this.nzModalService.create(opt);
+        const modal = this.nzModalService.create(opt);
+        let refCompontent = null;
+        setTimeout(() => {
+            refCompontent = modal.getContentComponent();
+            console.log(refCompontent);
+            if (refCompontent) {
+                refCompontent.modalViewDataState().subscribe((data: any) => {
+                    console.log(data);
+                    subject.next(data);
+                });
+            }
+        }, 2000);
+
         return subject.asObservable();
     }
 
@@ -78,12 +90,7 @@ export class IBizModal extends IBizControl {
             options.nzWidth = this.getModalWidth();
         }
 
-        Object.assign(options, {
-            componentParams: {
-                modalViewParam: opt.viewParam ? opt.viewParam : {},
-            },
-            nzZIndex: zIndex
-        });
+        Object.assign(options, { nzComponentParams: { modalViewParam: opt.viewParam ? opt.viewParam : {} }, nzZIndex: zIndex });
         return options;
     }
 
