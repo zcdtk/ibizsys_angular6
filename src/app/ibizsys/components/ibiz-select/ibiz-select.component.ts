@@ -61,7 +61,7 @@ export class IBizSelectComponent extends IBizComponent implements OnInit {
             this.$value = val;
             this.selectObj.writeValue(val);
         } else {
-            this.$value = '';
+            this.selectObj.clearNgModel();
         }
     }
 
