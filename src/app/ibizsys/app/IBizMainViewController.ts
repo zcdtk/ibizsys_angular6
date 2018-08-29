@@ -360,6 +360,7 @@ export class IBizMainViewController extends IBizViewController {
     public closeWindow(): void {
         if (this.isModal()) {
             // this.nzModalSubject.destroy('onOk');
+            this.nzModalRef.destroy('onOk');
         } else if (this.$iBizApp.getFullScreen()) {
             const win = this.getWindow();
             win.close();

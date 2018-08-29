@@ -29,7 +29,7 @@ export class IBizModal extends IBizControl {
      * @type {*}
      * @memberof IBizModal
      */
-    private $result: any = {};
+    private $result: any;
 
     /**
      * Creates an instance of IBizModal.
@@ -62,14 +62,21 @@ export class IBizModal extends IBizControl {
         let refCompontent = null;
         setTimeout(() => {
             refCompontent = modal.getContentComponent();
-            console.log(refCompontent);
             if (refCompontent) {
-                refCompontent.modalViewDataState().subscribe((data: any) => {
-                    console.log(data);
-                    subject.next(data);
+                refCompontent.modalViewDataState().subscribe((state: any) => {
+                    console.log(state);
+                    if (state && Object.is(state.ret, 'DATACHANGE')) {
+                        this.$result = state.data;
+                    }
                 });
             }
         }, 2000);
+
+        modal.afterClose.subscribe((result) => {
+            if (result && Object.is(result, 'onOk')) {
+                subject.next({ ret: 'OK', data: this.$result });
+            }
+        });
 
         return subject.asObservable();
     }

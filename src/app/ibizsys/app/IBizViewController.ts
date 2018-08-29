@@ -908,8 +908,13 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
         if (modalService) {
             let opt: any = {};
             const modalZIndex = this.modalZIndex ? this.modalZIndex : 1000;
-            opt.modalZIndex = modalZIndex;
-            opt.viewParam = view.viewParam;
+            const params_name: Array<any> = Object.keys(view.viewParam);
+            params_name.forEach((name) => {
+                if (!view.viewParam[name] || Object.is(view.viewParam[name], '')) {
+                    delete view.viewParam[name];
+                }
+            });
+            Object.assign(opt, { modalZIndex: modalZIndex, viewParam: view.viewParam });
             return modalService.openModal(opt);
         }
     }
@@ -949,7 +954,7 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
 
         const params_name: Array<any> = Object.keys(params);
         params_name.forEach((name) => {
-            if (params[name] === undefined || Object.is(params[name], '')) {
+            if (!params[name] || Object.is(params[name], '')) {
                 delete params[name];
             }
         });

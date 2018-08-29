@@ -48,6 +48,7 @@ export class IBizViewControllerBase extends IBizObject {
         super(opts);
         this.nzModalService = opts.nzModalService;
         this.nzModalRef = opts.nzModalRef;
+        this.modalSubject = new Subject();
     }
 
     /**
@@ -58,7 +59,6 @@ export class IBizViewControllerBase extends IBizObject {
      * @memberof IBizViewControllerBase
      */
     protected modalViewDataState(): Observable<any> {
-        this.modalSubject = new Subject();
         if (!this.isModal()) {
             return this.modalSubject;
         }
