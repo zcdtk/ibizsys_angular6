@@ -14,19 +14,21 @@ export class IBizViewControllerBase extends IBizObject {
 
     /**
      * 打开模态框服务对象
-     * 
+     *
+     * @private
      * @type {NzModalService}
      * @memberof IBizViewControllerBase
      */
-    public nzModalService: NzModalService;
+    private nzModalService: NzModalService;
 
     /**
      * 监控模态框服务对象，回调使用
-     * 
+     *
+     * @private
      * @type {NzModalRef}
      * @memberof IBizViewControllerBase
      */
-    public nzModalRef: NzModalRef;
+    private nzModalRef: NzModalRef;
 
     /**
      * 模态视图被订阅观察对象
@@ -83,6 +85,36 @@ export class IBizViewControllerBase extends IBizObject {
      */
     public isModal(): boolean {
         return false;
+    }
+
+    /**
+     * 关闭模态框视图
+     *
+     * @param {string} state
+     * @memberof IBizViewControllerBase
+     */
+    public closeModal(state: string): void {
+        this.nzModalRef.destroy(state);
+    }
+
+    /**
+     * 获取模态框服务对象
+     *
+     * @returns {NzModalService}
+     * @memberof IBizViewControllerBase
+     */
+    public getModalService(): NzModalService {
+        return this.nzModalService;
+    }
+
+    /**
+     * 获取模态框操作对象
+     *
+     * @returns {NzModalRef}
+     * @memberof IBizViewControllerBase
+     */
+    public getModalRef(): NzModalRef {
+        return this.nzModalRef;
     }
 }
 

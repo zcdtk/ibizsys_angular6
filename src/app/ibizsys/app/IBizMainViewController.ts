@@ -286,33 +286,21 @@ export class IBizMainViewController extends IBizViewController {
                 let className: string;
                 if (uiaction.frontview.className) {
                     className = uiaction.frontview.className;
-                } else {
-                    className = uiaction.frontview.classname;
                 }
-                let opt: any = {};
+                let view: any = { className: className };
                 let data: any = this.getFrontUIActionParam(uiaction, params);
-
-                opt.modalZIndex = this.modalZIndex;
-                opt.viewParam = {};
+                view.viewParam = {};
                 if (data) {
-                    Object.assign(opt.viewParam, data);
+                    Object.assign(view.viewParam, data);
                 }
                 if (uiaction.frontview.viewParam) {
-                    Object.assign(opt.viewParam, uiaction.frontview.viewParam);
-                } else {
-                    Object.assign(opt.viewParam, uiaction.frontview.viewparam);
+                    Object.assign(view.viewParam, uiaction.frontview.viewParam);
                 }
-
-                // 打开模态框
-                const modalService: any = this.getModalService(className);
-                if (modalService) {
-
-                    modalService.openModal(opt).subscribe((result) => {
-                        if (result && Object.is(result.ret, 'OK')) {
-                            this.onWFUIFrontWindowClosed(result);
-                        }
-                    });
-                }
+                this.openModal(view).subscribe((result) => {
+                    if (result && Object.is(result.ret, 'OK')) {
+                        this.onWFUIFrontWindowClosed(result);
+                    }
+                });
                 return;
             }
         }
@@ -360,7 +348,8 @@ export class IBizMainViewController extends IBizViewController {
     public closeWindow(): void {
         if (this.isModal()) {
             // this.nzModalSubject.destroy('onOk');
-            this.nzModalRef.destroy('onOk');
+            // this.nzModalRef.destroy('onOk');
+            this.closeModal('onOk');
         } else if (this.$iBizApp.getFullScreen()) {
             const win = this.getWindow();
             win.close();

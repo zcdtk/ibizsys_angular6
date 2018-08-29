@@ -171,6 +171,14 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
     public $activatedRouteData: any = {};
 
     /**
+     * 关联模态视图服务对象
+     *
+     * @type {Map<string, any>}
+     * @memberof IBizViewController
+     */
+    public $refModalViewServices: Map<string, any> = new Map();
+
+    /**
      *Creates an instance of IBizViewController.
      * 创建 IBizViewController 实例
      * 
@@ -904,7 +912,7 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
      * @memberof IBizViewController
      */
     public openModal(view: any = {}): Observable<any> {
-        const modalService: any = this.getModalService(view.className);
+        const modalService: any = this.$refModalViewServices.get(view.className);
         if (modalService) {
             let opt: any = {};
             const modalZIndex = this.modalZIndex ? this.modalZIndex : 1000;
@@ -917,17 +925,6 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
             Object.assign(opt, { modalZIndex: modalZIndex, viewParam: view.viewParam });
             return modalService.openModal(opt);
         }
-    }
-
-    /**
-     * 获取打开视图模态框服务文件
-     * 
-     * @param {string} viewname  视图代码名称
-     * @returns {*} 
-     * @memberof IBizViewController
-     */
-    public getModalService(viewname: string): any {
-
     }
 
     /**
