@@ -51,12 +51,12 @@ export class IBizSelectComponent extends IBizComponent implements OnInit {
     @ViewChild('selectObj') selectObj: NzSelectComponent;
 
     /**
-     * 组件值
+     * 组件值设置
      * 
-     * @memberof IBizPickerComponent
+     * @param {*} val 
+     * @memberof IBizSelectComponent
      */
-    @Input()
-    set itemvalue(val) {
+    public setComponentValue(val: any) {
         if (!Object.is(val, '')) {
             this.$value = val;
             this.selectObj.writeValue(val);
