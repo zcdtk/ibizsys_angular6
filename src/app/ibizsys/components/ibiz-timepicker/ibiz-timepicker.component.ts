@@ -54,7 +54,7 @@ export class IBizTimepickerComponent extends IBizComponent {
 
     public setComponentValue(val) {
         if (!val) {
-            this.$time = val;
+            this.$time = null;
             return;
         }
         this.$time = new Date(0, 0, 0, 0, 0, 0, 0);
