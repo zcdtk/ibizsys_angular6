@@ -1,0 +1,6 @@
+<textarea nz-input [nzAutosize]="{'minRows':'3'}" [attr.id]="name"  name="name" [(ngModel)]="$value" (ngModelChange)="valueChange($event)" [disabled]="disabled" [ngStyle]="styleCss"></textarea>
+<ng-container *ngIf="dictId">
+    <nz-select [(ngModel)]="selectedValue" nzAllowClear [nzPlaceHolder]="'----请选择常用词条----'" (ngModelChange)="setValue($event)">
+        <nz-option *ngFor="let dictitem of  dictitems" [nzValue]="dictitem.text" [nzLabel]="dictitem.text"></nz-option>
+    </nz-select>
+</ng-container>

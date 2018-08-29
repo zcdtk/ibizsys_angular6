@@ -11,6 +11,7 @@ import { IBizPictureComponent } from './ibiz-picture/ibiz-picture.component';
 import { IBizFileUploadComponent } from './ibiz-file-upload/ibiz-file-upload.component';
 import { IBizRichTextEditorComponent } from './ibiz-rich-text-editor/ibiz-rich-text-editor.component';
 import { IBizSelectComponent } from './ibiz-select/ibiz-select.component';
+import { IBizTextareaComponent } from './ibiz-textarea/ibiz-textarea.component';
 import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
 
 const conponents = [
@@ -23,6 +24,7 @@ const conponents = [
     IBizFileUploadComponent,  
 	IBizRichTextEditorComponent,
 	IBizSelectComponent,
+	IBizTextareaComponent,
 	IBizSafeContantPipe
 ];
 
