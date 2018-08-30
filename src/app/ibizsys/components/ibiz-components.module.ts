@@ -1,4 +1,3 @@
-import { IBizDRPanelComponent } from './ibiz-drpanel/ibiz-drpanel.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
@@ -16,6 +15,7 @@ import { IBizTextareaComponent } from './ibiz-textarea/ibiz-textarea.component';
 import { IBizTextareaTenComponent } from './ibiz-textarea-ten/ibiz-textarea-ten.component';
 import { IBizPasswordComponent } from './ibiz-password/ibiz-password.component';
 import { IBizCheckboxComponent } from './ibiz-checkbox/ibiz-checkbox.component';
+import { IBizDRPanelComponent } from './ibiz-drpanel/ibiz-drpanel.component';
 import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
 
 const conponents = [
@@ -31,8 +31,8 @@ const conponents = [
     IBizTextareaComponent,
     IBizTextareaTenComponent,
     IBizSafeContantPipe,
-	IBizPasswordComponent,
-	IBizCheckboxComponent,
+    IBizPasswordComponent,
+    IBizCheckboxComponent,
     IBizDRPanelComponent
 ];
 
