@@ -2,6 +2,7 @@
 export { IBizIndexViewController } from './app/IBizIndexViewController';
 export { IBizEditViewController } from './app/IBizEditViewController';
 export { IBizGridViewController } from './app/IBizGridViewController';
+export { IBizGridView9Controller } from './app/IBizGridView9Controller';
 // viewcontroller end
 
 // control begin
