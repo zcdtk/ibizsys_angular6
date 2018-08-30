@@ -1,0 +1,43 @@
+:host {
+    padding:  0px !important;
+    margin-bottom: 16px;
+
+    .block-ui-wrapper {
+        display: none;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.12);
+        z-index: 5;
+        cursor: wait;
+
+        .block-ui-spinner {
+            position: absolute;
+            top: 40%;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            text-align: center
+        }
+
+        .block-ui-spinner > .message {
+            font-size: 1.6em;
+            text-align: center;
+            color: #373d41;
+        }
+    }
+    
+    .block-ui-wrapper.active {
+        display: block;
+    }
+}
+
+
+
+
+
+
+
