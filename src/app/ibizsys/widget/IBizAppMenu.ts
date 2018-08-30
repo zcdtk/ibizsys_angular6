@@ -11,12 +11,28 @@ import { IBizEvent } from '../IBizEvent';
 export class IBizAppMenu extends IBizControl {
 
     /**
+     * 应用功能数据
+     *
+     * @type {Map<string, any>}
+     * @memberof IBizAppMenu
+     */
+    public $appFunctions: Map<string, any> = new Map();
+
+    /**
      * 菜单数据项
      * 
      * @type {any[]}
      * @memberof IBizAppMenu
      */
-    public $items: any[];
+    public $items: Array<any> = [];
+
+    /**
+     * 选中项
+     *
+     * @type {*}
+     * @memberof IBizAppMenu
+     */
+    public $selectItem: any = {};
 
     /**
      * Creates an instance of IBizAppMenu.
@@ -27,6 +43,15 @@ export class IBizAppMenu extends IBizControl {
      */
     constructor(opts: any = {}) {
         super(opts);
+        this.setAppFunctions();
+    }
+
+    /**
+     * 设置应用功能参数
+     *
+     * @memberof IBizAppMenu
+     */
+    public setAppFunctions(): void {
     }
 
     /**
@@ -47,24 +72,35 @@ export class IBizAppMenu extends IBizControl {
     }
 
     /**
-     * 处理表单项，在服务对象中重写
-     * 
-     * @param {string} appfuncid 
-     * @returns {*} 
+     * 菜单选中
+     *
+     * @param {*} [item={}]
+     * @returns {*}
      * @memberof IBizAppMenu
      */
-    public renderMenuItemRoute(appfuncid: string): any {
-        return undefined;
+    public onSelectChange(item: any = {}): any {
+        // tslint:disable-next-line:prefer-const
+        let _item = {};
+        Object.assign(_item, item);
+        const appFunction = this.$appFunctions.get(item.appfuncid);
+        if (!appFunction) {
+            return;
+        }
+        Object.assign(_item, appFunction);
+        this.fire(IBizEvent.IBizAppMenu_MENUSELECTION, _item);
     }
 
     /**
-     * 菜单选中
-     * 
-     * @param {*} select 
-     * @returns {*} 
+     * 设置选中菜单
+     *
+     * @param {*} [item={}]
      * @memberof IBizAppMenu
      */
-    public onSelectChange(select: any): any {
-        this.fire(IBizEvent.IBizAppMenu_MENUSELECTION, select);
+    public setAppMenuSelected(item: any = {}): void {
+        for (const functionid in this.$appFunctions) {
+            if (this.$appFunctions.hasOwnProperty(functionid)) {
+                const appFunction = this.$appFunctions.get(functionid);
+            }
+        }
     }
 }

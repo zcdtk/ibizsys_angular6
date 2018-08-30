@@ -64,7 +64,6 @@ export class IBizModal extends IBizControl {
             refCompontent = modal.getContentComponent();
             if (refCompontent) {
                 refCompontent.modalViewDataState().subscribe((state: any) => {
-                    console.log(state);
                     if (state && Object.is(state.ret, 'DATACHANGE')) {
                         this.$result = state.data;
                     }

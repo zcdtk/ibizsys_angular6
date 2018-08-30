@@ -1,7 +1,6 @@
-import { IBizIndexViewControllerBase } from './IBizIndexViewControllerBase';
+import { IBizMainViewController } from './IBizMainViewController';
 import { IBizEvent } from '../IBizEvent';
 import { SettingService } from '../service/setting.service';
-
 
 /**
  * 首页应用视图
@@ -10,7 +9,7 @@ import { SettingService } from '../service/setting.service';
  * @class IBizIndexViewController
  * @extends {IBizMainViewController}
  */
-export class IBizIndexViewController extends IBizIndexViewControllerBase {
+export class IBizIndexViewController extends IBizMainViewController {
 
     /**
      * 是否收缩内容
@@ -61,6 +60,9 @@ export class IBizIndexViewController extends IBizIndexViewControllerBase {
             appMenu.on(IBizEvent.IBizAppMenu_LOADED).subscribe((items: Array<any>) => {
                 this.appMenuLoaded(items);
             });
+            appMenu.on(IBizEvent.IBizAppMenu_MENUSELECTION).subscribe((items: any) => {
+                this.appMenuSelected(items);
+            });
         }
     }
 
@@ -97,7 +99,22 @@ export class IBizIndexViewController extends IBizIndexViewControllerBase {
      * @memberof IBizIndexViewController
      */
     public appMenuLoaded(items: any[]): void {
-        super.appMenuLoaded(items);
+        const nextActiveRouterData = this.$iBizApp.getActivatedRouteDatas(this.$activatedRouteData.index + 1);
+        if (nextActiveRouterData) {
+            this.getAppMenu().setAppMenuSelected(nextActiveRouterData);
+        }
+    }
+
+    /**
+     * 应用菜单选中
+     *
+     * @param {*} [item={}]
+     * @memberof IBizIndexViewController
+     */
+    public appMenuSelected(item: any = {}): void {
+        if (item.codename) {
+            this.openView(item.codename, {});
+        }
     }
 
     /**
