@@ -633,8 +633,8 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
         if (codelist) {
             let result = '';
             const values = value.split(';');
-            values.forEach(value => {
-                const item = codelist.getItemByValue(value);
+            values.forEach(_value => {
+                const item = codelist.getItemByValue(_value);
                 if (item) {
                     result += '、' + item.text;
                 }
@@ -670,6 +670,7 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
         if (codelist) {
             codelist.$data.forEach(ele => {
                 const codevalue = ele.value;
+                // tslint:disable-next-line:no-bitwise
                 if ((parseInt(codevalue, 10) & nValue) > 0) {
                     if (strTextOr.length > 0) {
                         strTextOr += (textSeparator);
@@ -705,9 +706,9 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
         const codelist = this.getCodeList(codeListId);
         const arrayValue: Array<any> = value.split(valueSeparator);
 
-        arrayValue.forEach((value) => {
+        arrayValue.forEach((_value) => {
             let strText = '';
-            strText = this.renderCodeList_Normal(codeListId, value, emtpytext);
+            strText = this.renderCodeList_Normal(codeListId, _value, emtpytext);
             if (strTextOr.length > 0) {
                 strTextOr += (textSeparator);
             }
@@ -864,8 +865,9 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
             const routeActice = this.$activatedRoute;
             if (routeActice) {
                 routeActice.paramMap.subscribe((paramMap: ParamMap) => {
-                    let full_screen: boolean = false;
+                    let full_screen = false;
                     if (paramMap && paramMap.keys.length > 0) {
+                        // tslint:disable-next-line:prefer-const
                         let params: any = {};
                         //  全屏参数
                         if (paramMap.get('fullscreen') && Object.is(paramMap.get('fullscreen'), 'true')) {
@@ -914,6 +916,7 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
     public openModal(view: any = {}): Observable<any> {
         const modalService: any = this.$refModalViewServices.get(view.className);
         if (modalService) {
+            // tslint:disable-next-line:prefer-const
             let opt: any = {};
             const modalZIndex = this.modalZIndex ? this.modalZIndex : 1000;
             const params_name: Array<any> = Object.keys(view.viewParam);
@@ -936,6 +939,7 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
      * @memberof IBizViewController
      */
     public openView(routeString: string, routeParam: any = {}, queryParams?: any) {
+        // tslint:disable-next-line:prefer-const
         let params: any = {};
 
         //  全屏参数
@@ -985,7 +989,7 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
      */
     public isRoutePathItem(routeActive: ActivatedRoute, path: string) {
         if (routeActive && routeActive.routeConfig) {
-            let routes = routeActive.routeConfig.children;
+            const routes = routeActive.routeConfig.children;
             if (routes && routes instanceof Array) {
                 for (let i = 0; i < routes.length; i++) {
                     if (Object.is(routes[i].path, path)) {
@@ -1030,6 +1034,7 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
             return;
         }
 
+        // tslint:disable-next-line:prefer-const
         let activatedRouteData: any = {};
         if (this.$activatedRouteData.index === 0) {
             return;

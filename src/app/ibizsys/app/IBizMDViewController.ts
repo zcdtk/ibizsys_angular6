@@ -116,6 +116,7 @@ export class IBizMDViewController extends IBizMainViewController {
             if (this.isEnableQuickSearch()) {
                 const columns: any = mdctrl.getColumns();
                 const columns_name: Array<any> = Object.keys(columns);
+                // tslint:disable-next-line:prefer-const
                 let _quickFields: Array<any> = [];
                 columns_name.forEach(name => {
                     const index: number = this.$quickSearchEntityDEFields.findIndex(item => Object.is(item.name, name));
@@ -164,6 +165,7 @@ export class IBizMDViewController extends IBizMainViewController {
     public onLoad(): void {
         super.onLoad();
         if (this.getSearchForm()) {
+            // tslint:disable-next-line:prefer-const
             let viewparams: any = {};
             Object.assign(viewparams, this.getViewParam());
             this.getSearchForm().autoLoad(viewparams);
@@ -290,6 +292,7 @@ export class IBizMDViewController extends IBizMainViewController {
      */
     public onStoreBeforeLoad(args: any = {}): void {
 
+        // tslint:disable-next-line:prefer-const
         let fetchParam: any = {};
         if (this.getViewParam() && Object.keys(this.getViewParam()).length > 0) {
             Object.assign(fetchParam, this.getViewParam());
@@ -414,7 +417,7 @@ export class IBizMDViewController extends IBizMainViewController {
             const name_arr: Array<any> = Object.keys(toolbar.getItems());
             const btn_items = toolbar.getItems();
             name_arr.forEach((name) => {
-                let item: any = btn_items[name];
+                const item: any = btn_items[name];
                 if (Object.is(item.tag, 'NewRow')) {
                     toolbar.setItemDisabled(name, false);
                 }
@@ -451,6 +454,7 @@ export class IBizMDViewController extends IBizMainViewController {
      */
     public onNewData(): void {
 
+        // tslint:disable-next-line:prefer-const
         let loadParam = {};
         if (this.getViewParam()) {
             Object.assign(loadParam, this.getViewParam());
@@ -583,6 +587,7 @@ export class IBizMDViewController extends IBizMainViewController {
      */
     public doNewDataNormal(arg: any = {}): any {
 
+        // tslint:disable-next-line:prefer-const
         let view = this.getNewDataView(arg);
         if (view == null) {
             return false;
@@ -594,6 +599,7 @@ export class IBizMDViewController extends IBizMainViewController {
         if (!view.routerlink || Object.is(view.routerlink, '')) {
             return false;
         }
+        // tslint:disable-next-line:prefer-const
         let viewParam: any = {};
         Object.assign(viewParam, view.viewParam);
 
@@ -612,6 +618,7 @@ export class IBizMDViewController extends IBizMainViewController {
      */
     public onEditData(arg: any = {}): void {
 
+        // tslint:disable-next-line:prefer-const
         let loadParam: any = {};
         if (this.getViewParam()) {
             Object.assign(loadParam, this.getViewParam());
@@ -630,7 +637,7 @@ export class IBizMDViewController extends IBizMainViewController {
             Object.assign(loadParam, { srfkey: arg.data.srfkey, srfdeid: arg.data.srfdeid });
         }
 
-        let editMode = this.getEditMode(arg.data);
+        const editMode = this.getEditMode(arg.data);
         if (editMode) {
             loadParam.srfeditmode = editMode;
             loadParam.srfviewmode = editMode;
@@ -650,6 +657,7 @@ export class IBizMDViewController extends IBizMainViewController {
      * @memberof IBizMDViewController
      */
     public doEditDataNormal(arg: any = {}): any {
+        // tslint:disable-next-line:prefer-const
         let view = this.getEditDataView(arg);
         if (view == null) {
             return false;
@@ -661,10 +669,12 @@ export class IBizMDViewController extends IBizMainViewController {
         if (!view.routerlink || Object.is(view.routerlink, '')) {
             return false;
         }
+        // tslint:disable-next-line:prefer-const
         let viewParam: any = {};
         Object.assign(viewParam, view.viewParam);
 
         if (Object.keys(viewParam).length > 0) {
+            // tslint:disable-next-line:no-inferrable-types
             let srfeditmode: string = '';
             if (viewParam.srfeditmode && !Object.is(viewParam.srfeditmode, '')) {
                 srfeditmode = viewParam.srfeditmode.split('@').join('__');
@@ -699,6 +709,7 @@ export class IBizMDViewController extends IBizMainViewController {
         }
 
         if (!openMode || Object.is(openMode, '') || Object.is(openMode, 'INDEXVIEWTAB')) {
+            // tslint:disable-next-line:prefer-const
             let data: any = {};
             Object.assign(data, view.viewParam);
             this.openView(view.routerlink, data);
@@ -1116,6 +1127,7 @@ export class IBizMDViewController extends IBizMainViewController {
             let keys = '';
 
             selectedData.forEach((element, index) => {
+                // tslint:disable-next-line:prefer-const
                 let key: string = element.srfkey;
                 if (!Object.is(keys, '')) {
                     keys += ';';
@@ -1153,6 +1165,7 @@ export class IBizMDViewController extends IBizMainViewController {
      */
     public getFrontUIActionParam(uiaction: any = {}, params: any = {}): any {
 
+        // tslint:disable-next-line:prefer-const
         let arg: any = {};
         const front_arg = super.getFrontUIActionParam(uiaction, params);
         if (front_arg) {
@@ -1176,6 +1189,7 @@ export class IBizMDViewController extends IBizMainViewController {
                 let paramkey = 'srfkeys';
                 let paramjo = null;
                 if (uiaction.actionparams) {
+                    // tslint:disable-next-line:prefer-const
                     let actionparams = uiaction.actionparams;
                     valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                     paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
@@ -1189,6 +1203,7 @@ export class IBizMDViewController extends IBizMainViewController {
                 } else if (Object.is(target, 'MULTIKEY')) {
                     let keys = '';
                     selectedData.forEach(item => {
+                        // tslint:disable-next-line:prefer-const
                         let key = item[valueitem];
                         if (!Object.is(keys, '')) {
                             keys += ';';
@@ -1215,6 +1230,7 @@ export class IBizMDViewController extends IBizMainViewController {
      * @memberof IBizMDViewController
      */
     public getBackendUIActionParam(uiaction: any = {}, params: any = {}): any {
+        // tslint:disable-next-line:prefer-const
         let arg: any = {};
         if (this.getParentMode()) {
             Object.assign(arg, this.getParentMode());
@@ -1236,6 +1252,7 @@ export class IBizMDViewController extends IBizMainViewController {
             let infoitem = 'srfmajortext';
 
             if (uiaction.actionparams) {
+                // tslint:disable-next-line:prefer-const
                 let actionparams = uiaction.actionparams;
                 valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
@@ -1247,6 +1264,7 @@ export class IBizMDViewController extends IBizMainViewController {
                 paramitems = selectedData[0][valueitem];
             } else {
                 selectedData.forEach(item => {
+                    // tslint:disable-next-line:prefer-const
                     let key = item[valueitem];
                     if (!Object.is(paramitems, '')) {
                         paramitems += ';';

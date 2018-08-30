@@ -141,6 +141,7 @@ export class IBizMainViewController extends IBizViewController {
      */
     public getFrontUIActionParam(uiaction: any = {}, params: any = {}): any {
 
+        // tslint:disable-next-line:prefer-const
         let arg: any = {};
         if (uiaction.refreshview) {
             arg.callback = function (win) {
@@ -159,6 +160,7 @@ export class IBizMainViewController extends IBizViewController {
      * @memberof IBizMainViewController
      */
     public getBackendUIActionParam(uiaction: any = {}, params: any = {}): any {
+        // tslint:disable-next-line:prefer-const
         let arg: any = {};
         return arg;
     }
@@ -171,11 +173,13 @@ export class IBizMainViewController extends IBizViewController {
      * @memberof IBizMainViewController
      */
     public openUIActionView(uiaction: any = {}, viewparam: any = {}): void {
+        // tslint:disable-next-line:prefer-const
         let frontview = uiaction.frontview;
         frontview.viewParam = viewparam;
 
         // 视图顶级打开
         if (Object.is(uiaction.fronttype, 'TOP')) {
+            // tslint:disable-next-line:no-inferrable-types
             let href: string = '';
             if (!Object.is(frontview.openMode, 'INDEXVIEWTAB') && !Object.is(frontview.openMode, 'POPUPAPP')) {
                 this.$iBizNotification.warning('警告', '该视图打开方式，请选择顶级容器分页或独立程序弹出！');
@@ -186,11 +190,12 @@ export class IBizMainViewController extends IBizViewController {
             href = `${href}/data-v`;
 
             const _names: Array<any> = Object.keys(viewparam);
+            // tslint:disable-next-line:no-inferrable-types
             let urlparams: string = '';
             _names.forEach(name => {
                 urlparams += `;${name}=${viewparam[name]}`;
             });
-            let url: string = `${href}/${frontview.className}${urlparams}`;
+            const url = `${href}/${frontview.className}${urlparams}`;
             window.open(url, '_blank');
             return;
         }
@@ -227,6 +232,7 @@ export class IBizMainViewController extends IBizViewController {
                 if (!viewparam) {
                     viewparam = {};
                 }
+                // tslint:disable-next-line:prefer-const
                 let frontview = uiaction.frontview;
                 if (frontview.redirectview) {
                     this.redirectOpenView({ redirectUrl: frontview.backendurl, viewParam: viewparam });
@@ -239,7 +245,9 @@ export class IBizMainViewController extends IBizViewController {
             }
 
             if (Object.is(uiaction.fronttype, 'OPENHTMLPAGE')) {
+                // tslint:disable-next-line:prefer-const
                 let viewparam = this.getFrontUIActionParam(uiaction, params);
+                // tslint:disable-next-line:no-inferrable-types
                 let urlparams: string = '';
                 const _names: Array<any> = Object.keys(viewparam);
                 _names.forEach(name => {
@@ -252,7 +260,7 @@ export class IBizMainViewController extends IBizViewController {
         }
 
         if (Object.is(uiaction.actionmode, 'BACKEND')) {
-            let param = this.getBackendUIActionParam(uiaction, params);
+            const param = this.getBackendUIActionParam(uiaction, params);
             if (!param) {
                 return;
             }
@@ -287,8 +295,8 @@ export class IBizMainViewController extends IBizViewController {
                 if (uiaction.frontview.className) {
                     className = uiaction.frontview.className;
                 }
-                let view: any = { className: className };
-                let data: any = this.getFrontUIActionParam(uiaction, params);
+                const view: any = { className: className };
+                const data: any = this.getFrontUIActionParam(uiaction, params);
                 view.viewParam = {};
                 if (data) {
                     Object.assign(view.viewParam, data);
@@ -445,6 +453,7 @@ export class IBizMainViewController extends IBizViewController {
      * @memberof IBizMainViewController
      */
     public redirectOpenView(view: any): void {
+        // tslint:disable-next-line:prefer-const
         let viewParam: any = {};
         viewParam.srfviewparam = JSON.stringify(view.viewParam);
         Object.assign(viewParam, { 'srfaction': 'GETRDVIEW' });
@@ -468,7 +477,7 @@ export class IBizMainViewController extends IBizViewController {
                         Object.assign(view.viewParam, response.rdview.srfviewparam);
                     }
 
-                    let routeLink: string = response.rdview.viewurl;
+                    const routeLink: string = response.rdview.viewurl;
                     if (routeLink.lastIndexOf('.jsp') !== -1) {
                         this.$iBizNotification.error('错误', `视图类型jsp不支持，请检查配置`);
                         return;
@@ -477,7 +486,7 @@ export class IBizMainViewController extends IBizViewController {
                     let routeActiveItem: ActivatedRoute = this.$activatedRoute;
                     while (true) {
                         if (this.isRoutePathItem(routeActiveItem, routeLink)) {
-                            let queryParams: any = {};
+                            const queryParams: any = {};
                             if (view.viewParam.srfdeid && !Object.is(view.viewParam.srfdeid, '')) {
                                 queryParams['srfdeid'] = view.viewParam.srfdeid;
                             }

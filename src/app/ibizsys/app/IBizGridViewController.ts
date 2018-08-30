@@ -160,7 +160,7 @@ export class IBizGridViewController extends IBizMDViewController {
             //     }
             // });
         } else {
-            let selectedData = this.getGrid().getSelection();
+            const selectedData = this.getGrid().getSelection();
             if (!selectedData || selectedData == null || selectedData.length === 0) {
                 return;
             }
@@ -168,6 +168,7 @@ export class IBizGridViewController extends IBizMDViewController {
             let dataInfo = '';
 
             selectedData.forEach((record, index) => {
+                // tslint:disable-next-line:prefer-const
                 let srfmajortext = record.srfmajortext;
                 if (index < 5) {
                     if (!Object.is(dataInfo, '')) {
@@ -227,6 +228,7 @@ export class IBizGridViewController extends IBizMDViewController {
 
             let keys = '';
             selectedData.forEach((record) => {
+                // tslint:disable-next-line:prefer-const
                 let key = record.srfkey;
                 if (!Object.is(keys, '')) {
                     keys += ';';
@@ -236,7 +238,7 @@ export class IBizGridViewController extends IBizMDViewController {
             arg.srfkeys = keys;
         }
 
-        let grid: any = this.getGrid();
+        const grid: any = this.getGrid();
         if (grid) {
             grid.remove(arg);
         }
@@ -250,6 +252,7 @@ export class IBizGridViewController extends IBizMDViewController {
      * @memberof IBizGridViewController
      */
     public addDataBatch(selectedDatas: Array<any>): void {
+        // tslint:disable-next-line:prefer-const
         let arg: any = {};
 
         if (!selectedDatas || selectedDatas == null || selectedDatas.length === 0) {
@@ -268,6 +271,7 @@ export class IBizGridViewController extends IBizMDViewController {
 
         let keys = '';
         selectedDatas.forEach((record) => {
+            // tslint:disable-next-line:prefer-const
             let key = record.srfkey;
             if (!Object.is(keys, '')) {
                 keys += ';';
@@ -275,7 +279,7 @@ export class IBizGridViewController extends IBizMDViewController {
             keys += key;
         });
         arg.srfkeys = keys;
-        let grid: any = this.getGrid();
+        const grid: any = this.getGrid();
         if (grid) {
             grid.addBatch(arg);
         }
@@ -300,17 +304,18 @@ export class IBizGridViewController extends IBizMDViewController {
             if (!param) {
                 return;
             }
+            // tslint:disable-next-line:no-shadowed-variable
             const arg = { data: Object.assign(params, param) };
             this.onEditData(arg);
             return;
         }
 
-        let selectedData = gridCtrl.getSelection();
+        const selectedData = gridCtrl.getSelection();
         if (!selectedData || selectedData == null || selectedData.length === 0) {
             return;
         }
 
-        let arg = { data: selectedData[0] };
+        const arg = { data: selectedData[0] };
         this.onEditData(arg);
     }
 
@@ -324,7 +329,7 @@ export class IBizGridViewController extends IBizMDViewController {
     public getBackendUIActionParam(uiaction: any = {}): any {
 
         if (Object.is(uiaction.actiontarget, 'SINGLEKEY') || Object.is(uiaction.actiontarget, 'MULTIKEY')) {
-            let selectedData: Array<any> = this.getGrid().getSelection();
+            const selectedData: Array<any> = this.getGrid().getSelection();
             if (!selectedData && selectedData == null || selectedData.length === 0) {
                 return null;
             }
@@ -336,6 +341,7 @@ export class IBizGridViewController extends IBizMDViewController {
             let infoitem = 'srfmajortext';
 
             if (uiaction.actionparams) {
+                // tslint:disable-next-line:prefer-const
                 let actionparams = uiaction.actionparams;
                 valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
@@ -344,11 +350,13 @@ export class IBizGridViewController extends IBizMDViewController {
             }
 
             let dataInfo = '';
-            let firstOnly: boolean = (Object.is(uiaction.actiontarget, 'SINGLEKEY'));
+            const firstOnly: boolean = (Object.is(uiaction.actiontarget, 'SINGLEKEY'));
             selectedData.some((record: any = {}, index: number) => {
+                // tslint:disable-next-line:prefer-const
                 let srfmajortext = record[infoitem];
 
                 if (valueitem) {
+                    // tslint:disable-next-line:prefer-const
                     let temp = record[valueitem];
                     if (!Object.is(paramitems, '')) {
                         paramitems += ';';
@@ -366,6 +374,7 @@ export class IBizGridViewController extends IBizMDViewController {
                     return false;
                 }
             });
+            // tslint:disable-next-line:prefer-const
             let data = { dataInfo: dataInfo };
             data[paramkey] = paramitems;
             if (paramjo) {

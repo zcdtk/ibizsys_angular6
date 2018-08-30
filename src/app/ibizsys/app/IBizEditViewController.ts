@@ -133,6 +133,7 @@ export class IBizEditViewController extends IBizMainViewController {
         super.onLoad();
         const editForm: any = this.getForm();
         if (editForm) {
+            // tslint:disable-next-line:prefer-const
             let viewParams: any = {};
             Object.assign(viewParams, this.getViewParam());
             if (viewParams && (viewParams.srfkeys && !Object.is(viewParams.srfkeys, ''))) {
@@ -330,6 +331,7 @@ export class IBizEditViewController extends IBizMainViewController {
         const dataAccAction = form.getdataaccaction();
         this.calcToolbarItemState(!newdata, dataAccAction);
 
+        // tslint:disable-next-line:no-inferrable-types
         let info: string = '';
         if (newdata) {
             info = '新建';
@@ -349,7 +351,7 @@ export class IBizEditViewController extends IBizMainViewController {
         if (!this.isModal() && Object.keys(this.$activatedRouteData).length > 0) {
             const data = { fullcaption: _StrInfo, caption: this.$dataInfo };
             Object.assign(this.$activatedRouteData, data);
-            this.$iBizApp.updateActivatedRouteDatas(this.$activatedRouteData)
+            this.$iBizApp.updateActivatedRouteDatas(this.$activatedRouteData);
         }
     }
 
@@ -486,7 +488,7 @@ export class IBizEditViewController extends IBizMainViewController {
     public doSaveAndExit(): void {
 
         this.$afterformsaveaction = 'exit';
-        let window = this.getWindow();
+        const window = this.getWindow();
         // if (window) {
         //     window.dialogResult = 'cancel';
         // }
@@ -545,18 +547,19 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public doCopy(): void {
+        // tslint:disable-next-line:prefer-const
         let arg: any = {};
         Object.assign(arg, this.getViewParam());
         arg.srfkey = '';
         if (!this.getForm()) {
             return;
         }
-        let srforikey = this.getForm().findField('srforikey');
+        const srforikey = this.getForm().findField('srforikey');
         if (srforikey) {
             arg.srfsourcekey = srforikey.getValue();
         }
         if (!arg.srfsourcekey || Object.is(arg.srfsourcekey, '')) {
-            let srfkey = this.getForm().findField('srfkey');
+            const srfkey = this.getForm().findField('srfkey');
             if (srfkey) {
                 arg.srfsourcekey = srfkey.getValue();
             }
@@ -702,7 +705,7 @@ export class IBizEditViewController extends IBizMainViewController {
         }
 
         if (Object.is(uiaction.actionmode, 'WFBACKEND')) {
-            let arg = {
+            const arg = {
                 srfwfiatag: uiaction.tag
             };
             this.getForm().wfsubmit(arg);
@@ -719,7 +722,7 @@ export class IBizEditViewController extends IBizMainViewController {
      */
     public startWF(arg: any = {}): void {
 
-        let startuiaction = this.getUIAction('WFStartWizard');
+        const startuiaction = this.getUIAction('WFStartWizard');
         if (startuiaction) {
             this.doUIAction(startuiaction, {});
         } else {
@@ -766,6 +769,7 @@ export class IBizEditViewController extends IBizMainViewController {
      * @memberof IBizEditViewController
      */
     public getFrontUIActionParam(uiaction: any = {}): any {
+        // tslint:disable-next-line:prefer-const
         let arg = super.getFrontUIActionParam(uiaction);
         if (Object.is(uiaction.actiontarget, 'SINGLEKEY') || Object.is(uiaction.actiontarget, 'MULTIKEY')) {
 
@@ -774,6 +778,7 @@ export class IBizEditViewController extends IBizMainViewController {
             let paramjo = null;
             let paramitems = null;
             if (uiaction.actionparams) {
+                // tslint:disable-next-line:prefer-const
                 let actionparams = uiaction.actionparams;
                 valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
@@ -790,6 +795,7 @@ export class IBizEditViewController extends IBizMainViewController {
                     paramitems = field.getValue();
                 }
             }
+            // tslint:disable-next-line:prefer-const
             let data = {};
             data[paramkey] = paramitems;
             if (paramjo) {
@@ -814,6 +820,7 @@ export class IBizEditViewController extends IBizMainViewController {
             let paramjo = null;
             let infoitem = 'srfmajortext';
             if (uiaction.actionparams) {
+                // tslint:disable-next-line:prefer-const
                 let actionparams = uiaction.actionparams;
                 valueitem = (actionparams.valueitem && !Object.is(actionparams.valueitem, '')) ? actionparams.valueitem.toLowerCase() : valueitem;
                 paramkey = (actionparams.paramitem && !Object.is(actionparams.paramitem, '')) ? actionparams.paramitem.toLowerCase() : paramkey;
@@ -832,11 +839,13 @@ export class IBizEditViewController extends IBizMainViewController {
             if (field) {
                 dataInfo = field.getValue();
             }
+            // tslint:disable-next-line:prefer-const
             let data = { dataInfo: dataInfo };
             data[paramkey] = keys;
             if (paramjo) {
                 Object.assign(data, paramjo);
             }
+            // tslint:disable-next-line:prefer-const
             let formData = this.getForm().getValues();
             if (formData.srfkey) {
                 delete formData.srfkey;
