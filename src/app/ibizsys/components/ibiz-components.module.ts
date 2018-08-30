@@ -15,6 +15,7 @@ import { IBizSelectComponent } from './ibiz-select/ibiz-select.component';
 import { IBizTextareaComponent } from './ibiz-textarea/ibiz-textarea.component';
 import { IBizTextareaTenComponent } from './ibiz-textarea-ten/ibiz-textarea-ten.component';
 import { IBizPasswordComponent } from './ibiz-password/ibiz-password.component';
+import { IBizCheckboxComponent } from './ibiz-checkbox/ibiz-checkbox.component';
 import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
 
 const conponents = [
@@ -31,6 +32,7 @@ const conponents = [
     IBizTextareaTenComponent,
     IBizSafeContantPipe,
 	IBizPasswordComponent,
+	IBizCheckboxComponent,
     IBizDRPanelComponent
 ];
 
