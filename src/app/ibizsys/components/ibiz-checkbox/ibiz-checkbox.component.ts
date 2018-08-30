@@ -27,6 +27,22 @@ export class IBizCheckboxComponent extends IBizComponent {
     private checkedValues: Array<any> = [];
 
     /**
+    * 模式的类型
+    *
+    * @type {string}
+    * @memberof IBizCheckboxComponent
+    */
+    @Input() orMode: string;
+
+    /**
+     * 数据存储分隔符
+     *
+     * @type {string}
+     * @memberof IBizCheckboxComponent
+     */
+    @Input() valueSeparator: string;
+
+    /**
      * 代码表
      *
      * @memberof IBizCheckboxComponent
@@ -55,27 +71,9 @@ export class IBizCheckboxComponent extends IBizComponent {
      * @memberof IBizCheckboxComponent
      */
     @Input()
-    set itemvalue(value: string) {
-        this.handleData(this.checkedValues, value);
+    set itemvalue(val: string) {
+        this.handleData(this.checkedValues, val);
     }
-
-    /**
-     * 模式的类型
-     *
-     * @type {string}
-     * @memberof IBizCheckboxComponent
-     */
-    @Input()
-    orMode: string;
-
-    /**
-     * 数据存储分隔符
-     *
-     * @type {string}
-     * @memberof IBizCheckboxComponent
-     */
-    @Input()
-    valueSeparator: string;
 
     constructor() {
         super();
@@ -138,30 +136,29 @@ export class IBizCheckboxComponent extends IBizComponent {
      * @memberof IBizCheckboxComponent
      */
     private handleData(oldValue: Array<any>, newValue: string) {
+        this.items.forEach(item => {
+            item.checked = false;
+        });
         if (!newValue) {
             return;
         }
-
+        this.checkedValues = [];
         if (!this.orMode || Object.is(this.orMode, '')) {
             this.orMode = 'str';
         }
         if (!this.valueSeparator || Object.is(this.valueSeparator, '')) {
             this.valueSeparator = ';';
         }
-        this.items.forEach(item => {
-            item.checked = false;
-        });
         if (Object.is(this.orMode, 'num')) {
             const nVal: number = parseInt(newValue, 10);
             this.items.forEach(item => {
                 const inputValue: number = parseInt(item.value, 10);
                 if ((nVal & inputValue) === inputValue) {
                     item.checked = true;
-                    this.checkedValues.push(item);
+                    this.checkedValues.push(item.value);
                 }
             });
         } else if (Object.is(this.orMode, 'str')) {
-            this.checkedValues = [];
             const values: Array<any> = newValue.split(this.valueSeparator);
             values.forEach(value => {
                 const index: number = this.items.findIndex(item => Object.is(item.value, value));
@@ -171,7 +168,7 @@ export class IBizCheckboxComponent extends IBizComponent {
                 }
             });
 
-            
+
         }
     }
 
