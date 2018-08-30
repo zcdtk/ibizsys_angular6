@@ -14,7 +14,6 @@ import { IBizSelectComponent } from './ibiz-select/ibiz-select.component';
 import { IBizTextareaComponent } from './ibiz-textarea/ibiz-textarea.component';
 import { IBizTextareaTenComponent } from './ibiz-textarea-ten/ibiz-textarea-ten.component';
 import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
-import { IBizDRPanelComponent } from './ibiz-drpanel/ibiz-drpanel.component';
 
 const conponents = [
     IBizFormComponent,
@@ -23,13 +22,12 @@ const conponents = [
     IBizDatepickerComponent,
     IBizTimepickerComponent,
     IBizPictureComponent,
-    IBizFileUploadComponent,
-    IBizRichTextEditorComponent,
-    IBizSelectComponent,
-    IBizTextareaComponent,
-    IBizTextareaTenComponent,
-    IBizSafeContantPipe,
-    IBizDRPanelComponent
+    IBizFileUploadComponent,  
+	IBizRichTextEditorComponent,
+	IBizSelectComponent,
+	IBizTextareaComponent,
+	IBizTextareaTenComponent,
+	IBizSafeContantPipe
 ];
 
 @NgModule({
@@ -41,7 +39,7 @@ const conponents = [
         ...conponents
     ],
     declarations: [
-        ...conponents,
+        ...conponents
     ],
     entryComponents: [
     ],
