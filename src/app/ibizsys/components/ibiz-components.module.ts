@@ -14,6 +14,7 @@ import { IBizRichTextEditorComponent } from './ibiz-rich-text-editor/ibiz-rich-t
 import { IBizSelectComponent } from './ibiz-select/ibiz-select.component';
 import { IBizTextareaComponent } from './ibiz-textarea/ibiz-textarea.component';
 import { IBizTextareaTenComponent } from './ibiz-textarea-ten/ibiz-textarea-ten.component';
+import { IBizPasswordComponent } from './ibiz-password/ibiz-password.component';
 import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
 
 const conponents = [
@@ -29,6 +30,7 @@ const conponents = [
     IBizTextareaComponent,
     IBizTextareaTenComponent,
     IBizSafeContantPipe,
+	IBizPasswordComponent,
     IBizDRPanelComponent
 ];
 
