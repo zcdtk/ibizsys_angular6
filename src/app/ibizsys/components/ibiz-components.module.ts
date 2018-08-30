@@ -1,3 +1,4 @@
+import { IBizDRPanelComponent } from './ibiz-drpanel/ibiz-drpanel.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
@@ -22,12 +23,13 @@ const conponents = [
     IBizDatepickerComponent,
     IBizTimepickerComponent,
     IBizPictureComponent,
-    IBizFileUploadComponent,  
-	IBizRichTextEditorComponent,
-	IBizSelectComponent,
-	IBizTextareaComponent,
-	IBizTextareaTenComponent,
-	IBizSafeContantPipe
+    IBizFileUploadComponent,
+    IBizRichTextEditorComponent,
+    IBizSelectComponent,
+    IBizTextareaComponent,
+    IBizTextareaTenComponent,
+    IBizSafeContantPipe,
+    IBizDRPanelComponent
 ];
 
 @NgModule({
