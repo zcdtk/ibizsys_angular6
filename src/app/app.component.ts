@@ -10,16 +10,16 @@ import { IBizApp } from 'ibizsys';
     template: `<router-outlet></router-outlet>`,
 })
 export class AppComponent implements OnInit {
-    // title = 'angularapp';
 
     private separator = ' - ';
+
     constructor(private router: Router, private title: Title, private ibizapp: IBizApp) {
     }
 
     public ngOnInit(): void {
         this.router.events.pipe(filter(evt => evt instanceof NavigationEnd)).subscribe((evt) => {
             const routerData = this.ibizapp.getActivatedRouteDatas(this.ibizapp.$activatedRouteDatas.length - 1);
-            this.title.setTitle(`${routerData.title}${this.separator}${IBizEnvironment.BaseUrl}`);
+            this.title.setTitle(`${routerData.title}${this.separator}${IBizEnvironment.name}`);
         });
     }
 }
