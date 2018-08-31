@@ -8,13 +8,14 @@ import { Observable, of } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 // import { _HttpClient } from '@delon/theme';
 import { IBizEnvironment } from '@env/IBizEnvironment';
+import { NzModalService } from 'ng-zorro-antd';
 
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
  */
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
-    constructor(private injector: Injector) { }
+    constructor(private injector: Injector, private nzModalService: NzModalService) { }
 
     /**
      * 设置登录
@@ -25,6 +26,7 @@ export class DefaultInterceptor implements HttpInterceptor {
     private goLogin() {
         const router = this.injector.get(Router);
 
+        this.nzModalService.closeAll();
         const curUrl = decodeURIComponent(window.location.href);
         if (IBizEnvironment.UacAuth) {
             if (window.location.href.indexOf('/uacclient/uaclogin.do') === -1) {
