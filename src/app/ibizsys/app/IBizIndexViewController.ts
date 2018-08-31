@@ -112,8 +112,8 @@ export class IBizIndexViewController extends IBizMainViewController {
      * @memberof IBizIndexViewController
      */
     public appMenuSelected(item: any = {}): void {
-        if (item.codename) {
-            this.openView(item.codename, {});
+        if (item.routerlink) {
+            this.openView(item.routerlink, item.viewParams);
         }
     }
 
