@@ -1,6 +1,7 @@
 // viewcontroller begin
 export { IBizIndexViewController } from './app/IBizIndexViewController';
 export { IBizEditViewController } from './app/IBizEditViewController';
+export { IBizEditView2Controller } from './app/IBizEditView2Controller';
 export { IBizGridViewController } from './app/IBizGridViewController';
 export { IBizGridView9Controller } from './app/IBizGridView9Controller';
 // viewcontroller end
@@ -13,6 +14,7 @@ export { IBizEditForm } from './widget/IBizEditForm';
 export { IBizToolbar } from './widget/IBizToolbar';
 export { IBizGrid } from './widget/IBizGrid';
 export { IBizSearchForm } from './widget/IBizSearchForm';
+export { IBizDRBar } from './widget/IBizDRBar';
 // control end
 
 // formitem begin
