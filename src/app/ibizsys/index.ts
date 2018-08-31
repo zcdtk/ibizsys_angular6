@@ -4,6 +4,7 @@ export { IBizEditViewController } from './app/IBizEditViewController';
 export { IBizEditView2Controller } from './app/IBizEditView2Controller';
 export { IBizGridViewController } from './app/IBizGridViewController';
 export { IBizGridView9Controller } from './app/IBizGridView9Controller';
+export { IBizChartViewController } from './app/IBizChartViewController';
 // viewcontroller end
 
 // control begin
@@ -15,6 +16,7 @@ export { IBizToolbar } from './widget/IBizToolbar';
 export { IBizGrid } from './widget/IBizGrid';
 export { IBizSearchForm } from './widget/IBizSearchForm';
 export { IBizDRBar } from './widget/IBizDRBar';
+export { IBizChart } from './widget/IBizChart';
 // control end
 
 // formitem begin

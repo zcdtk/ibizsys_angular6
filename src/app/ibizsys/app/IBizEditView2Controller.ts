@@ -49,11 +49,11 @@ export class IBizEditView2Controller extends IBizEditViewController {
         const drBar: any = this.getDRBar();
         if (drBar) {
             // 关系数据部件加载完成
-            drBar.on(IBizEvent.IBizDRBar_DRBARLOADED, (item) => {
+            drBar.on(IBizEvent.IBizDRBar_DRBARLOADED).subscribe((item) => {
                 this.DRBarLoaded(item);
             });
             // 关系部件选中变化
-            drBar.on(IBizEvent.IBizDRBar_DRBARSELECTCHANGE, (item) => {
+            drBar.on(IBizEvent.IBizDRBar_DRBARSELECTCHANGE).subscribe((item) => {
                 this.DRBarItemChangeSelect(item);
             });
         }
