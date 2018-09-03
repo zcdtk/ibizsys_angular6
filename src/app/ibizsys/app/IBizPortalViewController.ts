@@ -13,11 +13,10 @@ export class IBizPortalViewController extends IBizMainViewController {
     /**
      * 门户部件
      *
-     * @private
      * @type {Map<String, any>}
      * @memberof IBizPortalViewController
      */
-    private $portalCtrls: Map<String, any> = new Map();
+    public $portalCtrls: Map<String, any> = new Map();
 
     /**
      * Creates an instance of IBizPortalViewController.
