@@ -90,10 +90,10 @@ export class IBizViewControllerBase extends IBizObject {
     /**
      * 关闭模态框视图
      *
-     * @param {string} state
+     * @param {string} [state]
      * @memberof IBizViewControllerBase
      */
-    public closeModal(state: string): void {
+    public closeModal(state?: string): void {
         this.nzModalRef.destroy(state);
     }
 

@@ -9,6 +9,10 @@ export { IBizDataViewController } from './app/IBizDataViewController';
 export { IBizPickupDataViewController } from './app/IBizPickupDataViewController';
 export { IBizPickupGridViewController } from './app/IBizPickupGridViewController';
 export { IBizPickupTreeViewController } from './app/IBizPickupTreeViewController';
+export { IBizPickupViewController } from './app/IBizPickupViewController';
+export { IBizPickupView2Controller } from './app/IBizPickupView2Controller';
+export { IBizMPickupViewController } from './app/IBizMPickupViewController';
+export { IBizMPickupView2Controller } from './app/IBizMPickupView2Controller';
 // viewcontroller end
 
 // control begin
