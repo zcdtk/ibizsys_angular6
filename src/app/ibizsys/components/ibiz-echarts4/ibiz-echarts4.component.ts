@@ -1,5 +1,4 @@
 import { IBizEvent } from './../../IBizEvent';
-import { IBizChart } from 'app/ibizsys/widget/IBizChart';
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 import echarts from 'echarts';
 
@@ -28,10 +27,10 @@ export class IBizEcharts4Component implements OnInit {
     /**
      * 图表部件服务对象
      *
-     * @type {IBizChart}
+     * @type {*}
      * @memberof IBizEcharts4Component
      */
-    @Input() ctrl: IBizChart;
+    @Input() ctrl: any;
 
     /**
      * Creates an instance of IBizEcharts4Component.
