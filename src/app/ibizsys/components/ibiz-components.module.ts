@@ -17,6 +17,7 @@ import { IBizPasswordComponent } from './ibiz-password/ibiz-password.component';
 import { IBizCheckboxComponent } from './ibiz-checkbox/ibiz-checkbox.component';
 import { IBizDRPanelComponent } from './ibiz-drpanel/ibiz-drpanel.component';
 import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
+import { IBizEcharts4Component } from './ibiz-echarts4/ibiz-echarts4.component';
 
 const conponents = [
     IBizFormComponent,
@@ -33,7 +34,8 @@ const conponents = [
     IBizSafeContantPipe,
     IBizPasswordComponent,
     IBizCheckboxComponent,
-    IBizDRPanelComponent
+    IBizDRPanelComponent,
+	IBizEcharts4Component
 ];
 
 @NgModule({
