@@ -225,4 +225,20 @@ export class IBizSearchViewController extends IBizMainViewController {
     public onDataActivated(): void {
 
     }
+
+    /**
+     * 搜索表单打开
+     *
+     * @returns {void}
+     * @memberof IBizSearchViewController
+     */
+    public openSearchForm(): void {
+        if (!this.isEnableQuickSearch()) {
+            return;
+        }
+        const searchForm = this.getSearchForm();
+        if (searchForm) {
+            searchForm.setOpen(!searchForm.$opened);
+        }
+    }
 }
