@@ -5,6 +5,10 @@ export { IBizEditView2Controller } from './app/IBizEditView2Controller';
 export { IBizGridViewController } from './app/IBizGridViewController';
 export { IBizGridView9Controller } from './app/IBizGridView9Controller';
 export { IBizChartViewController } from './app/IBizChartViewController';
+export { IBizDataViewController } from './app/IBizDataViewController';
+export { IBizPickupDataViewController } from './app/IBizPickupDataViewController';
+export { IBizPickupGridViewController } from './app/IBizPickupGridViewController';
+export { IBizPickupTreeViewController } from './app/IBizPickupTreeViewController';
 // viewcontroller end
 
 // control begin
