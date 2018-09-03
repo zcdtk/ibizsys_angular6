@@ -35,7 +35,7 @@ const conponents = [
     IBizPasswordComponent,
     IBizCheckboxComponent,
     IBizDRPanelComponent,
-	IBizEcharts4Component
+    IBizEcharts4Component
 ];
 
 @NgModule({
