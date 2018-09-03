@@ -24,7 +24,7 @@
     "core-js": "^2.5.4",
     "echarts": "^4.1.0",
     "font-awesome": "^4.7.0",
-    "ng-zorro-antd": "^1.4.0",
+    "ng-zorro-antd": "^1.4.1",
     "rxjs": "^6.0.0",
     "tinymce": "^4.7.13",
     "zone.js": "~0.8.26"
