@@ -1,0 +1,9 @@
+<nz-select [ngStyle]="styleCss" #autocomplete [nzAllowClear]="true" [nzPlaceHolder]="'请输入'" [nzServerSearch]="true" [(ngModel)]="selectedValue"
+  (nzOnSearch)="searchChange($event)" (nzScrollToBottom)="scrollToBottom()" (nzOpenChange)="openChange($event)" [nzShowSearch]="true">
+  <nz-option *ngFor="let option of items" nzCustomContent [nzLabel]="option.text" [nzValue]="option.value">
+    <span [innerHTML]="option.actext|iBizSafeContant:'html'"></span>
+  </nz-option>
+  <nz-option [nzLabel]="'disabled'" nzCustomContent  [nzDisabled]="true" [nzValue]="'disabled'" *ngIf="loading">
+    <nz-spin></nz-spin>
+  </nz-option>
+</nz-select>
