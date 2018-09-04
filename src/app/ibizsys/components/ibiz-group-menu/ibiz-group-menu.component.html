@@ -1,0 +1,8 @@
+<ng-container *ngFor="let item of $items">
+    <div nz-card-grid [ngClass]="{active:item.id === selectData.id}">
+        <a (click)="onSelect(item)">
+            <div><i [attr.class]="item.iconcls == '' ? 'fa fa-cogs':item.iconcls"></i></div>
+            <div> {{item.text}}</div>
+        </a>
+    </div>
+</ng-container>
