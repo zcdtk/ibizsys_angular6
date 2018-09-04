@@ -1,0 +1,13 @@
+<div class="ibiz-pickup {{editortype}}" style="position: relative;" [ngStyle]="styleCss">
+  <nz-select [nzDisabled]="disabled" [attr.id]="name" *ngIf="editortype!=='picker'" nzShowSearch [nzPlaceHolder]="'请选择..'"
+    nzAllowClear [(ngModel)]="selectValue" (ngModelChange)="onValueChange($event)" (nzSearchChange)="searchItems($event)" (nzOpenChange)="onOpenChange($event)"
+    [ngStyle]="styleCss">
+    <nz-option *ngFor="let item of items" nzCustomContent [nzLabel]="item.text" [nzValue]="item.value">
+      <span [innerHTML]="item.actext|iBizSafeContant:'html'"></span>
+    </nz-option>
+  </nz-select>
+  <input nz-input [disabled]="disabled" *ngIf="editortype==='picker'" [type]="'text'" [(ngModel)]="selectText" [placeholder]="'请选择...'">
+  <div *ngIf="editortype!=='ac' && editortype!=='picker_list'" class="ibiz-pickup-search" (click)="openPickupView()">
+    <i class="anticon anticon-search"></i>
+  </div>
+</div>

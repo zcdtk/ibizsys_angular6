@@ -20,6 +20,7 @@ import { IBizSafeContantPipe } from './ibiz-safe-contant.pipe';
 import { IBizEcharts4Component } from './ibiz-echarts4/ibiz-echarts4.component';
 import { IBizAutocompleteComponent } from './ibiz-autocomplete/ibiz-autocomplete.component';
 import { IBizGroupMenuComponent } from './ibiz-group-menu/ibiz-group-menu.component';
+import { IBizPickerComponent } from './ibiz-picker/ibiz-picker.component';
 
 const conponents = [
     IBizFormComponent,
@@ -39,7 +40,8 @@ const conponents = [
     IBizDRPanelComponent,
     IBizEcharts4Component,
     IBizAutocompleteComponent,
-    IBizGroupMenuComponent
+    IBizGroupMenuComponent,
+    IBizPickerComponent
 ];
 
 @NgModule({
