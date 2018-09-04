@@ -14,6 +14,7 @@ export { IBizPickupView2Controller } from './app/IBizPickupView2Controller';
 export { IBizMPickupViewController } from './app/IBizMPickupViewController';
 export { IBizMPickupView2Controller } from './app/IBizMPickupView2Controller';
 export { IBizPortalViewController } from './app/IBizPortalViewController';
+export { IBizCustomViewController } from './app/IBizCustomViewController';
 // viewcontroller end
 
 // control begin
