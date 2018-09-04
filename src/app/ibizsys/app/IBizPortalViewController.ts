@@ -49,10 +49,7 @@ export class IBizPortalViewController extends IBizMainViewController {
 
         this.$portalCtrls.forEach((ctrl) => {
             if (ctrl) {
-                // ctrl.on(IBizStaticVariables.LOADED, (data) => {
-                //     this.portalCtrlLoaded(data);
-                // });
-                ctrl.on(IBizEvent.IBizAppMenu_MENUSELECTION, (data) => {
+                ctrl.on(IBizEvent.IBizAppMenu_MENUSELECTION).subscribe((data) => {
                     this.onMenuSelection(data);
                 });
             }
@@ -93,18 +90,15 @@ export class IBizPortalViewController extends IBizMainViewController {
     }
 
     /**
-     * 菜单选中跳转路由
+     * 快捷菜单选中跳转路由
      * 
      * @param {*} data 
      * @memberof IBizPortalViewController
      */
     public onMenuSelection(data: any) {
-        // if (data && data.link) {
-        //     if (this.$activatedRoute['_routerState']) {
-        //         const url = this.$activatedRoute['_routerState'].snapshot.url;
-        //         this.$router.navigate([url + '/' + data.link, {}]);
-        //     }
-        // }
+        if (data && data.routerlink && !Object.is(data.routerlink, '')) {
+            this.openView(data.routerlink, data.viewParams);
+        }
     }
 
 }
