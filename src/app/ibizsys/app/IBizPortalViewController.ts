@@ -47,17 +47,16 @@ export class IBizPortalViewController extends IBizMainViewController {
     public onInitComponents(): void {
         super.onInitComponents();
 
-        for (const key in this.$portalCtrls) {
-            if (this.$portalCtrls.has(key)) {
-                const portalCtrl: any = Object.getOwnPropertyDescriptor(this.$portalCtrls, key).value;
-                // portalCtrl.on(IBizStaticVariables.LOADED, (data) => {
+        this.$portalCtrls.forEach((ctrl) => {
+            if (ctrl) {
+                // ctrl.on(IBizStaticVariables.LOADED, (data) => {
                 //     this.portalCtrlLoaded(data);
                 // });
-                portalCtrl.on(IBizEvent.IBizAppMenu_MENUSELECTION, (data) => {
+                ctrl.on(IBizEvent.IBizAppMenu_MENUSELECTION, (data) => {
                     this.onMenuSelection(data);
                 });
             }
-        }
+        });
     }
 
     /**
@@ -67,10 +66,9 @@ export class IBizPortalViewController extends IBizMainViewController {
      */
     public onLoad(): void {
         super.onLoad();
-        this.$portalCtrls.forEach((key) => {
-            const portalCtrl = this.$portalCtrls.get(key);
-            if (typeof portalCtrl.load !== 'undefined' && portalCtrl.load instanceof Function) {
-                portalCtrl.load(this.$viewParam);
+        this.$portalCtrls.forEach((ctrl) => {
+            if (ctrl && typeof ctrl.load !== 'undefined' && ctrl.load instanceof Function) {
+                ctrl.load(this.$viewParam);
             }
         });
     }
@@ -101,12 +99,12 @@ export class IBizPortalViewController extends IBizMainViewController {
      * @memberof IBizPortalViewController
      */
     public onMenuSelection(data: any) {
-        if (data && data.link) {
-            if (this.$activatedRoute['_routerState']) {
-                const url = this.$activatedRoute['_routerState'].snapshot.url;
-                this.$router.navigate([url + '/' + data.link, {}]);
-            }
-        }
+        // if (data && data.link) {
+        //     if (this.$activatedRoute['_routerState']) {
+        //         const url = this.$activatedRoute['_routerState'].snapshot.url;
+        //         this.$router.navigate([url + '/' + data.link, {}]);
+        //     }
+        // }
     }
 
 }
