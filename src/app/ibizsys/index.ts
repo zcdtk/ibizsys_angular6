@@ -27,6 +27,7 @@ export { IBizSearchForm } from './widget/IBizSearchForm';
 export { IBizDRBar } from './widget/IBizDRBar';
 export { IBizChart } from './widget/IBizChart';
 export { IBizPickupViewPanel } from './widget/IBizPickupViewPanel';
+export { IBizDashboard } from './widget/IBizDashboard';
 // control end
 
 // formitem begin
