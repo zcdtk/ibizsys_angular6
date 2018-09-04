@@ -154,6 +154,7 @@ export class IBizGrid extends IBizMDControl {
      * @memberof IBizGrid
      */
     public load(arg: any = {}): void {
+        // tslint:disable-next-line:prefer-const
         let opt: any = {};
         Object.assign(opt, arg);
         if (this.$isLoading) {
@@ -200,6 +201,7 @@ export class IBizGrid extends IBizMDControl {
      * @memberof IBizGrid
      */
     public refresh(arg: any = {}): void {
+        // tslint:disable-next-line:prefer-const
         let opt: any = {};
         Object.assign(opt, arg);
         if (this.$isLoading) {
@@ -351,6 +353,7 @@ export class IBizGrid extends IBizMDControl {
      * @memberof IBizGrid
      */
     public exportData(arg: any = {}): void {
+        // tslint:disable-next-line:prefer-const
         let params: any = {};
         this.fire(IBizEvent.IBizMDControl_BEFORELOAD, params);
         if (params.search) {
@@ -459,6 +462,7 @@ export class IBizGrid extends IBizMDControl {
      * @memberof IBizGrid
      */
     public sort(name: string, type: string): void {
+        // tslint:disable-next-line:prefer-const
         let item: any = this.$gridSortField.find(_item => Object.is(_item.property, name));
         if (item === undefined) {
             if (Object.is('ascend', type)) {
@@ -603,9 +607,11 @@ export class IBizGrid extends IBizMDControl {
         if (!srfkey) {
             this.$iBizNotification.warning('警告', '数据异常');
         }
+        // tslint:disable-next-line:prefer-const
         let editItems: any = {};
         const itemsName: Array<any> = Object.keys(this.$editItems);
         itemsName.forEach(name => {
+            // tslint:disable-next-line:prefer-const
             let item: any = {};
             const _editor = JSON.stringify(this.$editItems[name]);
             Object.assign(item, JSON.parse(_editor));
@@ -635,10 +641,11 @@ export class IBizGrid extends IBizMDControl {
      */
     public setEditItemDisabled(srfkey: string, type: number): void {
         if (this.$state && this.$state.hasOwnProperty(srfkey)) {
+            // tslint:disable-next-line:prefer-const
             let item = this.$state[srfkey];
             const itemsName = Object.keys(item);
             itemsName.forEach(name => {
-                let disabled: boolean = (item[name].enabledcond === 3 || item[name].enabledcond === type);
+                const disabled: boolean = (item[name].enabledcond === 3 || item[name].enabledcond === type);
                 item[name].disabled = !disabled;
             });
             Object.assign(this.$state[srfkey], item);
@@ -732,6 +739,7 @@ export class IBizGrid extends IBizMDControl {
     public editRowSave(data: any = {}, rowindex: number): void {
         const _index: number = this.$backupData.findIndex(item => Object.is(item.srfkey, data.srfkey));
         const srfaction: string = (_index !== -1) ? 'update' : 'create';
+        // tslint:disable-next-line:prefer-const
         let params: any = { srfaction: srfaction, srfctrlid: 'grid' };
         const _names: Array<any> = Object.keys(data);
         _names.forEach(name => {
@@ -836,6 +844,7 @@ export class IBizGrid extends IBizMDControl {
      * @memberof IBizGrid
      */
     public updateGridEditItems(srfufimode: string, data: any = {}): void {
+        // tslint:disable-next-line:prefer-const
         let opt = { srfaction: 'updategridedititem', srfufimode: srfufimode, srfctrlid: 'grid' };
         const _names: Array<any> = Object.keys(data);
         _names.forEach(name => {
@@ -863,6 +872,7 @@ export class IBizGrid extends IBizMDControl {
      * @memberof IBizGrid
      */
     public newRowAjax(param: any = {}): void {
+        // tslint:disable-next-line:prefer-const
         let opt: any = {};
         Object.assign(opt, param);
         this.fire(IBizEvent.IBizMDControl_BEFORELOAD, opt);

@@ -190,6 +190,7 @@ export class IBizMDControl extends IBizControl {
      * @memberof IBizMDControl
      */
     public doUIAction(arg: any = {}): void {
+        // tslint:disable-next-line:prefer-const
         let params: any = {};
         if (arg) {
             Object.assign(params, arg);
@@ -219,6 +220,7 @@ export class IBizMDControl extends IBizControl {
      * @memberof IBizMDControl
      */
     public addBatch(arg: any = {}): void {
+        // tslint:disable-next-line:prefer-const
         let params: any = {};
         if (arg) {
             Object.assign(params, arg);
