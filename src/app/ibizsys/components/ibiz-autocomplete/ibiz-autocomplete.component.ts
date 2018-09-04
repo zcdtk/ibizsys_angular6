@@ -1,36 +1,14 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NzSelectComponent } from 'ng-zorro-antd';
+
 import { IBizHttp } from 'app/ibizsys/service/IBizHttp';
+import { IBizComponent } from '../ibiz-component';
 
 @Component({
     selector: 'app-ibiz-autocomplete',
     templateUrl: './ibiz-autocomplete.component.html'
 })
-export class IBizAutocompleteComponent{
-
-    /**
-       * 编辑器名称
-       *
-       * @type {string}
-       * @memberof IBizAutocompleteComponent
-       */
-    @Input() name: string;
-
-    /**
-     * 是否启用
-     *
-     * @type {boolean}
-     * @memberof IBizAutocompleteComponent
-     */
-    @Input() disabled: boolean;
-
-    /**
-     * 表单部件对象
-     *
-     * @type {*}
-     * @memberof IBizAutocompleteComponent
-     */
-    @Input() form: any;
+export class IBizAutocompleteComponent extends IBizComponent {
 
     /**
      * 是否强制选择
@@ -39,14 +17,6 @@ export class IBizAutocompleteComponent{
      * @memberof IBizAutocompleteComponent
      */
     @Input() forceselection: boolean;
-
-    /**
-     * 宽高样式
-     *
-     * @type {*}
-     * @memberof IBizAutocompleteComponent
-     */
-    @Input() styleCss: any;
 
     /**
      * 选择部件对象
@@ -65,13 +35,12 @@ export class IBizAutocompleteComponent{
     @Input() valueitem: string;
 
     /**
-     * 编辑器值
-     *
-     * @type {string}
+     *  组件值设置
+     * 
+     * @param {*} val 
      * @memberof IBizAutocompleteComponent
      */
-    @Input()
-    set value(val) {
+    public setComponentValue(val: any) {
         if (Object.is(val, '')) {
             this.selectObj.clearNgModel();
             this.initParams();
@@ -101,30 +70,7 @@ export class IBizAutocompleteComponent{
      * @memberof IBizAutocompleteComponent
      */
     set selectedValue(val: string) {
-        let _item: Array<any> = [];
-        if (val === null) {
-            _item.push({ text: '', value: '' });
-        } else {
-            _item = this.items.filter(item => Object.is(item.value, val));
-            if (_item.length !== 1) {
-                return;
-            }
-        }
 
-        this._value = _item[0].value;
-        if (!this.form) {
-            return;
-        }
-        let _field = this.form.findField(this.name);
-        if (_field) {
-            _field.setValue(_item[0].text);
-        }
-        if (this.valueitem && !Object.is(this.valueitem, '')) {
-            let _valueitem = this.form.findField(this.valueitem);
-            if (_valueitem) {
-                _valueitem.setValue(_item[0].value);
-            }
-        }
     }
 
     /**
@@ -168,7 +114,7 @@ export class IBizAutocompleteComponent{
      * @type {number}
      * @memberof IBizAutocompleteComponent
      */
-    private _tempSize: number = 50;
+    private _tempSize: number = 13;
 
     /**
      * 每页显示数量
@@ -213,8 +159,9 @@ export class IBizAutocompleteComponent{
      * @param {IBizHttp} http
      * @memberof IBizAutocompleteComponent
      */
-    constructor(private http: IBizHttp) { }
-
+    constructor(private http: IBizHttp) {
+        super();
+    }
     /**
      * 初始化参数
      *
@@ -228,6 +175,40 @@ export class IBizAutocompleteComponent{
         this.limit = this._tempSize;
         this.items = [];
         this.initDynamicItems = false;
+    }
+
+    /**
+     * 选中option回调
+     * 
+     * @param {*} val 
+     * @returns {void} 
+     * @memberof IBizAutocompleteComponent
+     */
+    public optionChange(val: any): void {
+        let _item: Array<any> = [];
+        if (val === null) {
+            _item.push({ text: '', value: '' });
+        } else {
+            _item = this.items.filter(item => Object.is(item.value, val));
+            if (_item.length !== 1) {
+                return;
+            }
+        }
+
+        this._value = _item[0].value;
+        if (!this.form) {
+            return;
+        }
+        let _field = this.form.findField(this.name);
+        if (_field) {
+            _field.setValue(_item[0].text);
+        }
+        if (this.valueitem && !Object.is(this.valueitem, '')) {
+            let _valueitem = this.form.findField(this.valueitem);
+            if (_valueitem) {
+                _valueitem.setValue(_item[0].value);
+            }
+        }
     }
 
     /**
