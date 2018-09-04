@@ -114,7 +114,7 @@ export class IBizAutocompleteComponent extends IBizComponent {
      * @type {number}
      * @memberof IBizAutocompleteComponent
      */
-    private _tempSize: number = 13;
+    private _tempSize: number = 50;
 
     /**
      * 每页显示数量
