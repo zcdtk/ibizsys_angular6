@@ -82,11 +82,11 @@ export class IBizAppMenu extends IBizControl {
         // tslint:disable-next-line:prefer-const
         let _item = {};
         Object.assign(_item, item);
-        const _appFunction: Array<any> = this.$appFunctions.find(appfunction => Object.is(appfunction.appfuncid, item.appfuncid));
-        if (!_appFunction || _appFunction.length === 0) {
+        const _appFunction: any = this.$appFunctions.find(appfunction => Object.is(appfunction.appfuncid, item.appfuncid));
+        if (!_appFunction) {
             return;
         }
-        Object.assign(_item, _appFunction[0]);
+        Object.assign(_item, _appFunction);
         this.fire(IBizEvent.IBizAppMenu_MENUSELECTION, _item);
     }
 
