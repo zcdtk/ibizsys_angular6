@@ -13,10 +13,10 @@ export class IBizAppMenu extends IBizControl {
     /**
      * 应用功能数据
      *
-     * @type {Map<string, any>}
+     * @type {Array<any>}
      * @memberof IBizAppMenu
      */
-    public $appFunctions: Map<string, any> = new Map();
+    public $appFunctions: Array<any> = [];
 
     /**
      * 菜单数据项
@@ -82,11 +82,11 @@ export class IBizAppMenu extends IBizControl {
         // tslint:disable-next-line:prefer-const
         let _item = {};
         Object.assign(_item, item);
-        const appFunction = this.$appFunctions.get(item.appfuncid);
-        if (!appFunction) {
+        const _appFunction: Array<any> = this.$appFunctions.find(appfunction => Object.is(appfunction.appfuncid, item.appfuncid));
+        if (!_appFunction || _appFunction.length === 0) {
             return;
         }
-        Object.assign(_item, appFunction);
+        Object.assign(_item, _appFunction[0]);
         this.fire(IBizEvent.IBizAppMenu_MENUSELECTION, _item);
     }
 
@@ -97,10 +97,5 @@ export class IBizAppMenu extends IBizControl {
      * @memberof IBizAppMenu
      */
     public setAppMenuSelected(item: any = {}): void {
-        for (const functionid in this.$appFunctions) {
-            if (this.$appFunctions.hasOwnProperty(functionid)) {
-                const appFunction = this.$appFunctions.get(functionid);
-            }
-        }
     }
 }
