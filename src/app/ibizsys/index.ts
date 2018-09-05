@@ -32,6 +32,8 @@ export { IBizPickupViewPanel } from './widget/IBizPickupViewPanel';
 export { IBizDashboard } from './widget/IBizDashboard';
 export { IBizList } from './widget/IBizList';
 export { IBizCustom } from './widget/IBizCustom';
+export { IBizTreeExpBar } from './widget/IBizTreeExpBar';
+export { IBizTree } from './widget/IBizTree';
 // control end
 
 // formitem begin

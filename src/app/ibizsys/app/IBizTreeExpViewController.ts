@@ -68,7 +68,7 @@ export class IBizTreeExpViewController extends IBizMainViewController {
         super.onInitComponents();
         const treeExpBar = this.getTreeExpBar();
         if (treeExpBar) {
-            treeExpBar.on(IBizEvent.IBizTreeExpBar_SELECTIONCHANGE, (data) => {
+            treeExpBar.on(IBizEvent.IBizTreeExpBar_SELECTIONCHANGE).subscribe((data) => {
                 this.treeExpBarSelectionChange(data);
             });
         }
