@@ -78,7 +78,7 @@ export class IBizPickupViewController extends IBizMainViewController {
         if (pickupViewPanel.getSelections().length !== 1) {
             return;
         }
-        this.modalViewDataChange({ ret: 'DATACHANGE', selection: pickupViewPanel.getSelections() });
+        this.modalViewDataChange({ ret: 'DATACHANGE', data: pickupViewPanel.getSelections() });
         this.closeWindow();
     }
 

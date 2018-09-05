@@ -102,7 +102,7 @@ export class IBizMPickupViewController extends IBizMainViewController {
         if (this.MPickupResult.$selections.length === 0) {
             return;
         }
-        this.modalViewDataChange({ ret: 'DATACHANGE', selection: this.MPickupResult.$selections });
+        this.modalViewDataChange({ ret: 'DATACHANGE', data: this.MPickupResult.$selections });
         this.closeWindow();
     }
 
