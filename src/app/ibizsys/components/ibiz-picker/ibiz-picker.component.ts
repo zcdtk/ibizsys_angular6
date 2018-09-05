@@ -1,13 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IBizNotification } from 'app/ibizsys/service/IBizNotification';
 import { IBizHttp } from './../../service/IBizHttp';
+import { IBizComponent } from '../ibiz-component';
 
 @Component({
     selector: 'app-ibiz-picker',
     templateUrl: './ibiz-picker.component.html',
     styleUrls: ['./ibiz-picker.component.less']
 })
-export class IBizPickerComponent {
+export class IBizPickerComponent extends IBizComponent {
 
     /**
        * ac数组对象
@@ -50,14 +51,6 @@ export class IBizPickerComponent {
     @Input() valueitem: string;
 
     /**
-     * 组件名称
-     * 
-     * @type {string}
-     * @memberof IBizPickerComponent
-     */
-    @Input() name: string;
-
-    /**
      * 代码表url
      * 
      * @type {string}
@@ -73,21 +66,6 @@ export class IBizPickerComponent {
      */
     @Input() editortype: string;
 
-    /**
-     * 是否启用
-     * 
-     * @type {boolean}
-     * @memberof IBizPickerComponent
-     */
-    @Input() disabled: boolean;
-
-    /**
-     * 选择编辑器样式
-     *
-     * @type {*}
-     * @memberof IBizPickerComponent
-     */
-    @Input() styleCss: any;
 
     /**
      * 选择模态框服务对象
@@ -96,30 +74,6 @@ export class IBizPickerComponent {
      * @memberof IBizPickerComponent
      */
     @Input() pickupModalService: any;
-
-    /**
-     * 表单部件对象
-     * 
-     * @type {*}
-     * @memberof IBizPickerComponent
-     */
-    @Input() form: any;
-
-    /**
-     * 表格部件对象，行编辑使用
-     *
-     * @type {*}
-     * @memberof IBizPickerComponent
-     */
-    @Input() grid: any;
-
-    /**
-     * 表格行数据，行编辑使用
-     *
-     * @type {*}
-     * @memberof IBizPickerComponent
-     */
-    @Input() data: any;
 
     /**
      * 该控件对象的所有配置数据
@@ -215,7 +169,9 @@ export class IBizPickerComponent {
      * @param {IBizHttp} $http 
      * @memberof IBizPickerComponent
      */
-    constructor(public $http: IBizHttp, public iBizNotification: IBizNotification) { }
+    constructor(public $http: IBizHttp, public iBizNotification: IBizNotification) {
+        super();
+    }
 
     /**
      * 选中值发生改变
@@ -396,8 +352,8 @@ export class IBizPickerComponent {
         this.pickupModalService.openModal(opt).subscribe((result) => {
             if (result && Object.is(result.ret, 'OK')) {
                 let item: any = {};
-                if (result.selection) {
-                    Object.assign(item, result.selection[0]);
+                if (result.data) {
+                    Object.assign(item, result.data[0]);
                 }
                 this.state = true;
 
