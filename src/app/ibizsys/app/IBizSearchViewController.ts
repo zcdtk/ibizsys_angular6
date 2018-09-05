@@ -23,7 +23,7 @@ export class IBizSearchViewController extends IBizMainViewController {
      * @type {*}
      * @memberof IBizSearchViewController
      */
-    public $bQuickSearchValue: any;
+    public $searchValue: any;
 
     /**
      * Creates an instance of IBizSearchViewController.
@@ -190,8 +190,8 @@ export class IBizSearchViewController extends IBizMainViewController {
             Object.assign(fetchParam, this.getSearchCond());
         }
         // 获取快速搜索里的搜索参数
-        if (this.isEnableQuickSearch() && this.$bQuickSearchValue !== undefined) {
-            args.search = this.$bQuickSearchValue;
+        if (this.isEnableQuickSearch() && this.$searchValue !== undefined) {
+            args.search = this.$searchValue;
         }
         Object.assign(args, fetchParam);
     }
@@ -239,6 +239,44 @@ export class IBizSearchViewController extends IBizMainViewController {
         const searchForm = this.getSearchForm();
         if (searchForm) {
             searchForm.setOpen(!searchForm.$opened);
+        }
+    }
+
+    /**
+     * 搜索按钮执行搜索
+     *
+     * @memberof IBizSearchViewController
+     */
+    public btnSearch(): void {
+        if (this.isEnableQuickSearch()) {
+            this.onSearchFormSearched(true);
+        }
+    }
+
+    /**
+     * 清空快速搜索值
+     *
+     * @memberof IBizSearchViewController
+     */
+    public clearQuickSearchValue(): void {
+        this.$searchValue = undefined;
+        this.onRefresh();
+    }
+
+    /**
+     * 执行快速搜索
+     *
+     * @param {*} $event
+     * @returns {void}
+     * @memberof IBizSearchViewController
+     */
+    public onQuickSearch($event: any): void {
+        if (!$event || $event.keyCode !== 13) {
+            return;
+        }
+
+        if (this.isEnableQuickSearch()) {
+            this.onSearchFormSearched(true);
         }
     }
 }
