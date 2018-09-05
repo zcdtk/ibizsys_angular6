@@ -97,5 +97,47 @@ export class IBizAppMenu extends IBizControl {
      * @memberof IBizAppMenu
      */
     public setAppMenuSelected(item: any = {}): void {
+        console.log(item);
+        if (!item) {
+            return;
+        }
+        this.$selectItem = {};
+        const appfunction = this.$appFunctions.find(_appfunction => Object.is(_appfunction.routerlink, item.routerlink));
+        if (!appfunction) {
+            return;
+        }
+        const _selectItem = this.getSelectMenuItem(this.$items, appfunction);
+
+        if (_selectItem && Object.keys(_selectItem).length > 0) {
+            Object.assign(this.$selectItem, _selectItem);
+        }
+    }
+
+    /**
+     * 获取选中菜单项
+     *
+     * @private
+     * @param {Array<any>} items
+     * @param {*} [appfunction={}]
+     * @returns {*}
+     * @memberof IBizAppMenu
+     */
+    private getSelectMenuItem(items: Array<any>, appfunction: any = {}): any {
+        // tslint:disable-next-line:prefer-const
+        let item = {};
+        items.some(_item => {
+            if (Object.is(_item.appfuncid, appfunction.appfuncid)) {
+                Object.assign(item, _item);
+                return true;
+            }
+            if (_item.items) {
+                const subItem = this.getSelectMenuItem(_item.items, appfunction);
+                if (subItem && Object.keys(subItem).length > 0) {
+                    Object.assign(item, subItem);
+                    return true;
+                }
+            }
+        });
+        return item;
     }
 }

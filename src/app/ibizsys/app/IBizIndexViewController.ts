@@ -76,6 +76,10 @@ export class IBizIndexViewController extends IBizMainViewController {
         const appMenu = this.getAppMenu();
         if (appMenu) {
             appMenu.load();
+            if (this.$activatedRouteData && this.$activatedRouteData.index) {
+                const nextRouterData = this.$iBizApp.$activatedRouteDatas[this.$activatedRouteData.index + 1];
+                appMenu.setAppMenuSelected(nextRouterData);
+            }
         }
         this.setMianMenuState();
     }
