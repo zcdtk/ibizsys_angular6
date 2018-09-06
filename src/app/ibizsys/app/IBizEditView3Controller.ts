@@ -32,7 +32,8 @@ export class IBizEditView3Controller extends IBizEditViewController {
         super.onInitComponents();
         const drTab: any = this.getDRTab();
         if (drTab) {
-            drTab.on(IBizEvent.IBizDRTab_SELECTCHANGE, (data) => {
+            // 关系分页部件数据变化
+            drTab.on(IBizEvent.IBizDRTab_SELECTCHANGE).subscribe((data) => {
                 this.doDRTabSelectChange(data);
             });
         }
