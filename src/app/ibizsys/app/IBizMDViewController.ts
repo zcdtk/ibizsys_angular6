@@ -734,18 +734,17 @@ export class IBizMDViewController extends IBizMainViewController {
             }
         });
 
-
         return true;
     }
 
     /**
      * 获取编辑模式
-     * 
-     * @param {any} data 
-     * @returns {*} 
+     *
+     * @param {*} [data={}]
+     * @returns {*}
      * @memberof IBizMDViewController
      */
-    public getEditMode(data): any {
+    public getEditMode(data: any = {}): any {
         return data.srfdatatype;
     }
 
