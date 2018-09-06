@@ -1,5 +1,9 @@
-<nz-upload [nzAction]="url" [nzFileList]="fileList" [nzLimit]="1"  (nzChange)="handleChange($event)" [nzRemove]="remove">
-  <button nz-button>
-    <i class="anticon anticon-upload"></i><span>Upload</span>
-  </button>
-</nz-upload>
+<div [ngStyle]="styleCss">
+    <nz-upload [nzAction]="url" [nzFileList]="fileList" [nzDisabled]="disabled" [nzLimit]="1" (nzChange)="handleChange($event)"
+        [nzRemove]="remove">
+        <button nz-button [disabled]="disabled">
+            <i class="anticon anticon-upload"></i>
+            <span>上传文件</span>
+        </button>
+    </nz-upload>
+</div>
