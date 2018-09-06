@@ -1,5 +1,5 @@
 import { UploadFile } from 'ng-zorro-antd';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { IBizComponent } from '../ibiz-component';
 import { IBizEnvironment } from '@env/IBizEnvironment';
@@ -9,7 +9,7 @@ import { IBizEnvironment } from '@env/IBizEnvironment';
     templateUrl: './ibiz-file-upload.component.html',
     styleUrls: ['./ibiz-file-upload.component.less']
 })
-export class IBizFileUploadComponent extends IBizComponent {
+export class IBizFileUploadComponent extends IBizComponent implements OnInit {
 
     /**
      * 文件上传参数
@@ -65,6 +65,32 @@ export class IBizFileUploadComponent extends IBizComponent {
     }
 
     /**
+     * 设置上传url
+     * 
+     * @memberof IBizFileUploadComponent
+     */
+    public ngOnInit(): void {
+        super.ngOnInit();
+        let uploadUrl = this.url;
+        if (this.form && this.params && this.params.uploadparams && !Object.is(this.params.uploadparams, '')) {
+            let fields: string[] = this.params.uploadparams.split(';');
+            fields.forEach((item) => {
+                let fieldItem = this.form.findField(item);
+                if (fieldItem) {
+                    uploadUrl += '&' + item + '=' + fieldItem.value;
+                }
+            });
+        }
+        if (this.form && this.params && typeof this.params.customparams === 'object') {
+            const _names: Array<any> = Object.keys(this.params.customparams);
+            _names.forEach((key) => {
+                uploadUrl += '&' + key + '=' + this.params.customparams[key];
+            });
+        }
+        this.url = uploadUrl;
+    }
+
+    /**
      * 设置上传文件值绑定
      *
      * @param {*} val
@@ -93,14 +119,13 @@ export class IBizFileUploadComponent extends IBizComponent {
      */
     public handleChange(info: any): void {
         const fileList = info.fileList;
-        // 2. read from response and show file link
         if (info.file.response && info.file.response.ret === 0 && info.file.response.files && info.file.response.files.length > 0) {
             info.file.url = this.getDownLoadFile(info.file.response.files[0]);
             let _items: Array<any> = [];
             this.$items.forEach(item => {
-                _items.push({ name: item.name, id: item.id });
+                _items.push({ name: item.name, id: item.id, url: item.url });
             });
-            _items.push(info.file.response.files[0]);
+            _items.push(Object.assign(info.file.response.files[0], { url: info.file.url }));
             if (!this.form) {
                 return;
             }
@@ -109,8 +134,6 @@ export class IBizFileUploadComponent extends IBizComponent {
                 itemField.setValue(_items.length > 0 ? JSON.stringify(_items) : '');
             }
         }
-
-        // 3. filter successfully uploaded files according to response from server
         this.fileList = fileList.filter(item => {
             if (item.response) {
                 return item.response.status === 'success';
@@ -131,7 +154,7 @@ export class IBizFileUploadComponent extends IBizComponent {
         }
         let _items: Array<any> = [];
         datas.forEach(item => {
-            _items.push({ name: item.name, id: item.id });
+            _items.push({ name: item.name, id: item.id, url: item.url });
         });
         const itemField = this.form.findField(this.name);
         if (itemField) {
