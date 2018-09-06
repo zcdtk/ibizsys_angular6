@@ -35,6 +35,7 @@ export { IBizList } from './widget/IBizList';
 export { IBizCustom } from './widget/IBizCustom';
 export { IBizTreeExpBar } from './widget/IBizTreeExpBar';
 export { IBizTree } from './widget/IBizTree';
+export { IBizDRTab } from './widget/IBizDRTab';
 // control end
 
 // formitem begin
