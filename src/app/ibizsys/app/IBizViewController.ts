@@ -899,6 +899,8 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
 
         if (this.isInited()) {
             if (this.$viewParam.refreshView) {
+                this.$viewParam = {};
+                Object.assign(this.$viewParam, param);
                 delete this.$viewParam.refreshView;
                 this.onLoad();
             }
