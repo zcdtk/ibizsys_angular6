@@ -2,6 +2,7 @@
 export { IBizIndexViewController } from './app/IBizIndexViewController';
 export { IBizEditViewController } from './app/IBizEditViewController';
 export { IBizEditView2Controller } from './app/IBizEditView2Controller';
+export { IBizEditView3Controller } from './app/IBizEditView3Controller';
 export { IBizGridViewController } from './app/IBizGridViewController';
 export { IBizGridView9Controller } from './app/IBizGridView9Controller';
 export { IBizChartViewController } from './app/IBizChartViewController';
