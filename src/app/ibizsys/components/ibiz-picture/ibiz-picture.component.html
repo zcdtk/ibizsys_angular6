@@ -1,20 +1,16 @@
-<nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/" nzListType="picture-card" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 3"
-    [nzPreview]="handlePreview">
+<div [ngStyle]="styleCss">
+<nz-upload [nzAction]="url" nzListType="picture-card" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 9" [nzPreview]="handlePreview"
+    (nzChange)="handleChange($event)" [nzRemove]="remove" [nzDisabled]="disabled">
     <i class="anticon anticon-plus"></i>
-    <div class="ant-upload-text">Upload</div>
+    <div class="ant-upload-text">上传图片</div>
 </nz-upload>
 <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
     <ng-template #modalContent>
-        <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+        <div style="position:relative" >
+            <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+            <div class="ibiz_data_icon"><i class="anticon anticon-download"  (click)="downloadImg()"></i></div>
+            <div class="ibiz_data_popDownload"  ></div>
+        </div>
     </ng-template>
 </nz-modal>
-
-<!-- <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
-    <button nz-button>
-        <i class="anticon anticon-upload"></i><span>Select File</span>
-    </button>
-</nz-upload>
-<button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0"
-    style="margin-top: 16px">
-    {{ uploading ? 'Uploading' : 'Start Upload' }}
-</button> -->
+</div>
