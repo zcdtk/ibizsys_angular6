@@ -294,4 +294,14 @@ export class IBizTreeExpBar extends IBizControl {
         }
     }
 
+    /**
+     * 获取计数器名称，在发布器中重写
+     *
+     * @returns {string}
+     * @memberof IBizTreeExpBar
+     */
+    public getUICounterName(): string {
+        return undefined;
+    }
+
 }
