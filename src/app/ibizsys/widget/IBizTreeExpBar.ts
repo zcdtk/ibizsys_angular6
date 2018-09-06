@@ -41,7 +41,7 @@ export class IBizTreeExpBar extends IBizControl {
         const viewController = this.getViewController();
         if (viewController) {
             viewController.on(IBizEvent.IBizViewController_INITED).subscribe(() => {
-                const tree = viewController.getControl(this.getName() + '_tree');
+                const tree = viewController.$controls.get(this.getName() + '_tree');
                 this.tree = tree;
                 if (this.tree) {
                     this.tree.on(IBizEvent.IBizTree_SELECTIONCHANGE).subscribe((args) => {
@@ -66,7 +66,7 @@ export class IBizTreeExpBar extends IBizControl {
     public getTree(): any {
         const viewController = this.getViewController();
         if (viewController) {
-            return viewController.getControl(this.getName() + '_tree');
+            return viewController.$controls.get(this.getName() + '_tree');
         }
         return undefined;
     }
@@ -80,7 +80,7 @@ export class IBizTreeExpBar extends IBizControl {
     public getExpTab(): any {
         const viewController = this.getViewController();
         if (viewController) {
-            return viewController.getControl('exptab');
+            return viewController.$controls.get('exptab');
         }
         return undefined;
     }
@@ -115,7 +115,7 @@ export class IBizTreeExpBar extends IBizControl {
     public getPVPanel(): any {
         const viewController = this.getViewController();
         if (viewController) {
-            return viewController.getControl('pickupviewpanel');
+            return viewController.$controls.get('pickupviewpanel');
         }
         return undefined;
     }
@@ -135,6 +135,8 @@ export class IBizTreeExpBar extends IBizControl {
         }
 
         const record: any = records[0];
+
+        this.setTreeSelect(record);
 
         // 替换键值
         const nodeids: Array<any> = record.id.split(';');
@@ -271,6 +273,24 @@ export class IBizTreeExpBar extends IBizControl {
         if (nodes.length > 0) {
             Object.assign(this.node, nodes[0]);
             this.onTreeSelectionChange([this.node]);
+        }
+    }
+
+    /**
+     * 设置树选中数据
+     *
+     * @private
+     * @param {*} [item={}]
+     * @memberof IBizTreeExpBar
+     */
+    private setTreeSelect(item: any = {}): void {
+        const viewController = this.getViewController();
+        if (viewController) {
+            const tree = viewController.$controls.get(this.getName() + '_tree');
+            this.tree = tree;
+            if (this.tree) {
+                this.tree.setSelectTreeItem(item);
+            }
         }
     }
 

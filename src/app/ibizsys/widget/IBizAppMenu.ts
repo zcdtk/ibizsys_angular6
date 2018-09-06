@@ -97,7 +97,6 @@ export class IBizAppMenu extends IBizControl {
      * @memberof IBizAppMenu
      */
     public setAppMenuSelected(item: any = {}): void {
-        console.log(item);
         if (!item) {
             return;
         }

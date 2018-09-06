@@ -1,5 +1,6 @@
 import { IBizControl } from './IBizControl';
 import { IBizEvent } from '../IBizEvent';
+import { NzTreeNode, NzFormatEmitEvent } from 'ng-zorro-antd';
 
 /**
  * 树部件服务对象
@@ -11,20 +12,20 @@ import { IBizEvent } from '../IBizEvent';
 export class IBizTree extends IBizControl {
 
     /**
-     * 树部件是否收缩，默认展开
-     * 
-     * @type {boolean}
-     * @memberof IBizTree
-     */
-    public $isCollapsed: boolean = true;
-
-    /**
      * 数据项节点集合
      * 
      * @type {Array<any>}
      * @memberof IBizTree
      */
     public $items: Array<any> = [];
+
+    /**
+     * 树节点数据
+     *
+     * @type {Array<any>}
+     * @memberof IBizTree
+     */
+    public $nodes: Array<any> = [];
 
     /**
      * 默认节点
@@ -36,20 +37,12 @@ export class IBizTree extends IBizControl {
     private node: any = {};
 
     /**
-     * 树节点操作行为处理
-     * 
+     * 选中数据项
+     *
+     * @type {Array<string>}
      * @memberof IBizTree
      */
-    public options = {
-        getChildren: (node: any) => {
-            if (node && node.data) {
-                this.node = node.data;
-            }
-            return new Promise((resolve, reject) => {
-                this.loadChildren(resolve);
-            });
-        }
-    };
+    public $selectedKeys: Array<string> = [];
 
     /**
      * Creates an instance of IBizTree.
@@ -81,7 +74,10 @@ export class IBizTree extends IBizControl {
                 this.$iBizNotification.error('错误', result.info);
                 return;
             }
-            this.$items = this.formatTreeData(result.items);
+            this.$items = [...result.items];
+            this.$items.forEach((item) => {
+                this.$nodes.push(new NzTreeNode({ title: item.text, key: item.srfkey, children: [] }));
+            });
             this.fire(IBizEvent.IBizTree_CONTEXTMENU, this.$items);
         }, (error) => {
             this.$iBizNotification.error('错误', error.info);
@@ -139,76 +135,121 @@ export class IBizTree extends IBizControl {
 
     }
 
-    /**
-     * 格式化树数据
-     * 
-     * @private
-     * @param {Array<any>} items 
-     * @returns {Array<any>} 
-     * @memberof IBizTree
-     */
-    private formatTreeData(items: Array<any>): Array<any> {
-        // tslint:disable-next-line:prefer-const
-        let data: Array<any> = [];
-        items.forEach((item) => {
-            // tslint:disable-next-line:prefer-const
-            let tempData: any = {};
-            Object.assign(tempData, item);
-            tempData.name = tempData.text;
-            tempData.hasChildren = true;
-            data.push(tempData);
-
-        });
-        return data;
-    }
-
-    /**
-     * 树节点激活加载子数据
-     *
-     * @private
-     * @param {*} resolve
-     * @memberof IBizTree
-     */
-    private loadChildren(resolve: any): void {
-        // tslint:disable-next-line:prefer-const
-        let param: any = {
-            srfnodeid: this.node.id ? this.node.id : '#', srfaction: 'fetch', srfrender: 'JSTREE',
+    public mouseAction(name: string, e: NzFormatEmitEvent): void {
+        if (!Object.is(name, 'expand') || (!e || !e.node || !e.node.origin)) {
+            return;
+        }
+        if (e.node.getChildren().length !== 0 || !e.node.isExpanded) {
+            return;
+        }
+        const node = e.node.origin;
+        const _treeitem = this.getTreeItem(this.$items, node.key);
+        if (Object.keys(_treeitem).length === 0) {
+            return;
+        }
+        const param: any = {
+            srfnodeid: _treeitem.id ? _treeitem.id : '#', srfaction: 'fetch', srfrender: 'JSTREE',
             srfviewparam: JSON.stringify(this.getViewController().getViewParam()),
             srfctrlid: this.getName()
         };
 
         this.post2(param).subscribe((result) => {
             if (result.ret !== 0) {
-                this.$iBizNotification.error('错误', result.info);
-                resolve([]);
-                this.node.hasChildren = false;
                 return;
             }
-            const _items = [...this.formatTreeData(result.items)];
-            if (_items.length === 0) {
-                this.node.hasChildren = false;
+            if (!result.items || !Array.isArray(result.items)) {
+                return;
             }
-            resolve(_items);
-
+            if (result.items.length === 0) {
+                e.node.isLeaf = true;
+            } else {
+                // tslint:disable-next-line:prefer-const
+                let data: Array<any> = [];
+                result.items.forEach((item) => {
+                    data.push({ title: item.text, key: item.srfkey, children: [] });
+                });
+                this.addTreeChildItems(this.$items, node.key, result.items);
+                e.node.addChildren(data);
+            }
         }, (error) => {
             this.$iBizNotification.error('错误', error.info);
-            this.node.hasChildren = false;
-            resolve([]);
         });
     }
 
     /**
+     * 获取数据数据节点
+     *
+     * @private
+     * @param {Array<any>} items
+     * @param {string} srfkey
+     * @returns {*}
+     * @memberof IBizTree
+     */
+    private getTreeItem(items: Array<any>, srfkey: string): any {
+        // tslint:disable-next-line:prefer-const
+        let _item: any = {};
+        items.some(item => {
+            if (Object.is(item.srfkey, srfkey)) {
+                Object.assign(_item, item);
+                return true;
+            }
+            if (item.items) {
+                const subItem = this.getTreeItem(item.items, srfkey);
+                if (subItem && Object.keys(subItem).length > 0) {
+                    Object.assign(_item, subItem);
+                    return true;
+                }
+            }
+        });
+        return _item;
+    }
+
+    /**
+     * 添加子节点数据值树数据中
+     *
+     * @private
+     * @param {Array<any>} items
+     * @param {string} srfkey
+     * @param {Array<any>} childItems
+     * @memberof IBizTree
+     */
+    private addTreeChildItems(items: Array<any>, srfkey: string, childItems: Array<any>): void {
+        items.some(item => {
+            if (Object.is(item.srfkey, srfkey)) {
+                item.items = [];
+                Object.assign(item, { items: childItems });
+                return true;
+            }
+            if (item.items) {
+                this.addTreeChildItems(item.items, srfkey, childItems);
+            }
+        });
+    }
+
+    /**
+     * 设置树选中数据节点
+     *
+     * @private
+     * @param {*} [item={}]
+     * @memberof IBizTree
+     */
+    public setSelectTreeItem(item: any = {}): void {
+        this.$selectedKeys = [];
+        this.$selectedKeys.push(item.srfkey);
+    }
+
+    /**
      * 树节点激活选中数据
-     * 
-     * @param {*} $event 
+     *
+     * @param {*} $event
      * @memberof IBizTree
      */
     public onEvent($event: any): void {
-        if ($event && Object.is($event.eventName, 'activate')) {
-            this.fire(IBizEvent.IBizTree_SELECTIONCHANGE, [$event.node.data]);
-        }
-        if ($event && Object.is($event.eventName, 'deactivate')) {
-            this.fire(IBizEvent.IBizTree_DATAACTIVATED, [$event.node.data]);
+        if ($event && Object.is($event.eventName, 'click')) {
+            const record = $event.node.origin;
+            const _item = this.getTreeItem(this.$items, record.key);
+            this.fire(IBizEvent.IBizTree_SELECTIONCHANGE, [_item]);
         }
     }
 }
+
