@@ -21,6 +21,7 @@ import { IBizEcharts4Component } from './ibiz-echarts4/ibiz-echarts4.component';
 import { IBizAutocompleteComponent } from './ibiz-autocomplete/ibiz-autocomplete.component';
 import { IBizGroupMenuComponent } from './ibiz-group-menu/ibiz-group-menu.component';
 import { IBizPickerComponent } from './ibiz-picker/ibiz-picker.component';
+import { IBizMpickerComponent } from './ibiz-mpicker/ibiz-mpicker.component';
 
 const conponents = [
     IBizFormComponent,
@@ -41,7 +42,8 @@ const conponents = [
     IBizEcharts4Component,
     IBizAutocompleteComponent,
     IBizGroupMenuComponent,
-    IBizPickerComponent
+    IBizPickerComponent,
+    IBizMpickerComponent
 ];
 
 @NgModule({
