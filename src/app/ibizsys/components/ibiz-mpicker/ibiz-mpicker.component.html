@@ -1,7 +1,7 @@
 <div class="ibiz-mpickup" style="position: relative;" [ngStyle]="styleCss">
     <nz-select nzKeepUnListOptions [nzMode]="'multiple'" [nzDisabled]="disabled" [nzPlaceHolder]="'请选择..'" [(ngModel)]="selectValues"
-        (ngModelChange)="onValueChange($event)" (nzOpenChange)="onOpenChange($event)" (nzSearchChange)="searchItems($event)"
-        (nzScrollToBottom)="scrollToBottom()">
+        (ngModelChange)="onValueChange($event)" (nzOpenChange)="onOpenChange($event)" (nzOnSearch)="searchItems($event)"
+        (nzScrollToBottom)="scrollToBottom()"  [nzDisabled]="disabled">
         <nz-option *ngFor="let item of items" nzCustomContent [nzLabel]="item.srfmajortext" [nzValue]="item.srfkey">
             <span [innerHTML]="item.actext|iBizSafeContant:'html'"></span>
         </nz-option>

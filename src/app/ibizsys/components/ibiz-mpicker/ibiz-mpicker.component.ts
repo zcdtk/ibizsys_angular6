@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IBizHttp } from 'app/ibizsys/service/IBizHttp';
+import { IBizComponent } from 'app/ibizsys/components/ibiz-component';
 
 @Component({
     selector: 'app-ibiz-mpicker',
     templateUrl: './ibiz-mpicker.component.html',
     styleUrls: ['./ibiz-mpicker.component.less']
 })
-export class IBizMpickerComponent {
+export class IBizMpickerComponent extends IBizComponent {
 
     /**
        * 选中的数据对象集合
@@ -42,44 +43,12 @@ export class IBizMpickerComponent {
     private flag: boolean = true;
 
     /**
-     * 控件样式对象
-     * 
-     * @type {*}
-     * @memberof IBizMPickerComponent
-     */
-    @Input() styleCss: any = {};
-
-    /**
-     * 组件名称
-     * 
-     * @type {string}
-     * @memberof IBizMPickerComponent
-     */
-    @Input() name: string;
-
-    /**
-     * 组件是否启用
-     * 
-     * @type {boolean}
-     * @memberof IBizMPickerComponent
-     */
-    @Input() disabled: boolean;
-
-    /**
      * 组件选择模态框服务对象
      * 
      * @type {*}
      * @memberof IBizMPickerComponent
      */
     @Input() pickupModalService: any;
-
-    /**
-     * 表单对象
-     * 
-     * @type {*}
-     * @memberof IBizMPickerComponent
-     */
-    @Input() form: any;
 
     /**
     * 分页加载
@@ -134,12 +103,23 @@ export class IBizMpickerComponent {
     public _value: string = '';
 
     /**
-     * 表单项值
+     * Creates an instance of IBizMPickerComponent.
+     * 创建 IBizMPickerComponent 对象
      * 
+     * @param {IBizHttp} $http 
      * @memberof IBizMPickerComponent
      */
-    @Input()
-    set itemvalue(val) {
+    constructor(public $http: IBizHttp) {
+        super();
+    }
+
+    /**
+     * 组件值设置
+     * 
+     * @param {*} val 
+     * @memberof IBizMpickerComponent
+     */
+    public setComponentValue(val: any) {
         if (Object.is(val, '')) {
             this.initParams();
         }
@@ -174,15 +154,6 @@ export class IBizMpickerComponent {
             this.flag = true;
         }
     }
-
-    /**
-     * Creates an instance of IBizMPickerComponent.
-     * 创建 IBizMPickerComponent 对象
-     * 
-     * @param {IBizHttp} $http 
-     * @memberof IBizMPickerComponent
-     */
-    constructor(public $http: IBizHttp) { }
 
     /**
      * 选中值发生改变
@@ -266,8 +237,8 @@ export class IBizMpickerComponent {
         this.pickupModalService.openModal(opt).subscribe((result) => {
             if (result && Object.is(result.ret, 'OK')) {
                 this.selectItems = [];
-                if (Array.isArray(result.selection)) {
-                    result.selection.forEach((data) => {
+                if (Array.isArray(result.data)) {
+                    result.data.forEach((data) => {
                         this.selectItems.push({ srfkey: data.srfkey, srfmajortext: data.srfmajortext });
                     });
                 }
