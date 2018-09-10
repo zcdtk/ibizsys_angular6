@@ -2,6 +2,8 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, AfterViewInit, Input, OnDestroy } from '@angular/core';
 import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizComponent } from '../ibiz-component';
+
 
 import 'tinymce';
 import 'tinymce/themes/modern';
@@ -15,6 +17,7 @@ import 'tinymce/plugins/code';
 import 'tinymce/plugins/fullscreen';
 import 'tinymce/plugins/preview';
 
+
 declare let tinymce: any;
 
 @Component({
@@ -22,7 +25,7 @@ declare let tinymce: any;
     template: `<textarea [id]="elementID"></textarea>`,
     styles: []
 })
-export class IBizRichTextEditorComponent implements AfterViewInit, OnDestroy {
+export class IBizRichTextEditorComponent extends IBizComponent implements AfterViewInit, OnDestroy {
 
     /**
      * 语言
@@ -31,65 +34,6 @@ export class IBizRichTextEditorComponent implements AfterViewInit, OnDestroy {
      * @memberof IBizRichTextEditorComponent
      */
     public langu: string = 'zh_CN';
-    /**
-     * 是否禁用
-     * 
-     * @type {boolean}
-     * @memberof IBizRichTextEditorComponent
-     */
-    @Input()
-    disabled: boolean;
-
-    /**
-     * 高度
-     *
-     * @type {*}
-     * @memberof IBizRichTextEditorComponent
-     */
-    @Input()
-    height: any;
-
-    /**
-     * 宽度
-     *
-     * @type {*}
-     * @memberof IBizRichTextEditorComponent
-     */
-    @Input()
-    width: any;
-
-    /**
-     * 表单项名称
-     *
-     * @type {string}
-     * @memberof IBizRichTextEditorComponent
-     */
-    @Input()
-    name: string;
-
-    /**
-     * 表单部件对象
-     *
-     * @type {*}
-     * @memberof IBizRichTextEditorComponent
-     */
-    @Input()
-    form: any;
-
-    /**
-     * 表单项值
-     *
-     * @type {*}
-     * @memberof IBizRichTextEditorComponent
-     */
-    @Input()
-    set itemValue(val: any) {
-        if (val) {
-            tinymce.remove('#' + this.elementID);
-            this.Init(val);
-        }
-    }
-
 
     /**
      * 标签节点ID
@@ -97,8 +41,7 @@ export class IBizRichTextEditorComponent implements AfterViewInit, OnDestroy {
      * @type {string}
      * @memberof IBizRichTextEditorComponent
      */
-    @Input()
-    elementID: string;
+    @Input() elementID: string;
 
     /**
      * 编辑器
@@ -109,6 +52,19 @@ export class IBizRichTextEditorComponent implements AfterViewInit, OnDestroy {
     private editor;
 
     /**
+     * 表单项值
+     *
+     * @type {*}
+     * @memberof IBizRichTextEditorComponent
+     */
+    public setComponentValue(val: any) {
+        if (val) {
+            tinymce.remove('#' + this.elementID);
+            this.Init(val);
+        }
+    }
+
+    /**
      * Creates an instance of IBizRichTextEditorComponent.
      * 创建 IBizRichTextEditorComponent 实例
      * 
@@ -116,7 +72,7 @@ export class IBizRichTextEditorComponent implements AfterViewInit, OnDestroy {
      * @memberof IBizRichTextEditorComponent
      */
     constructor(private http: HttpClient) {
-
+        super();
     }
 
     /**
@@ -212,8 +168,6 @@ export class IBizRichTextEditorComponent implements AfterViewInit, OnDestroy {
 
         });
     }
-
-
 
     /**
      * 文件上传处理
