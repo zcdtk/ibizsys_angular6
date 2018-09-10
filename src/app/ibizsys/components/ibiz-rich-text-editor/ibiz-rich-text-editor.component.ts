@@ -125,7 +125,14 @@ export class IBizRichTextEditorComponent implements AfterViewInit, OnDestroy {
      * @memberof IBizRichTextEditorComponent
      */
     public ngAfterViewInit(): void {
-        this.Init('');
+        if (!this.editor) {
+            let timeNum = setInterval(() => {
+                if (this.editor) {
+                    clearInterval(timeNum);
+                }
+                this.Init('');
+            }, 100);
+        }
     }
 
     /**
