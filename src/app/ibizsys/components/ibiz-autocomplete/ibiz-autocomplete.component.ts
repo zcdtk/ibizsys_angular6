@@ -11,6 +11,12 @@ import { IBizComponent } from '../ibiz-component';
 })
 export class IBizAutocompleteComponent extends IBizComponent {
 
+    /**
+     * 编辑器类型
+     * 
+     * @type {string}
+     * @memberof IBizAutocompleteComponent
+     */
     @Input() editorType: string;
 
     /**
