@@ -1,10 +1,11 @@
-<nz-select #autocomplete [ngStyle]="styleCss" [nzPlaceHolder]="'请输入'" [nzFilterOption]="false" [nzDisabled]="disabled" [nzServerSearch]="true"
-    [ngModel]="selectedValue" (nzOnSearch)="searchChange($event)" (nzOpenChange)="openChange($event)" [nzAllowClear]="true" [nzShowSearch]="true"
-    (ngModelChange)="optionChange($event)" (nzScrollToBottom)="scrollToBottom()">
+<nz-select class="ibiz-{{editorType}}" #autocomplete [ngStyle]="styleCss" [nzPlaceHolder]="'请输入'" [nzFilterOption]="false"
+    [nzDisabled]="disabled" [nzServerSearch]="true" [ngModel]="selectedValue" (nzOnSearch)="searchChange($event)" (nzOpenChange)="openChange($event)"
+    [nzAllowClear]="true" [nzShowSearch]="true" (ngModelChange)="optionChange($event)" (nzScrollToBottom)="scrollToBottom()">
     <nz-option *ngFor="let option of items" nzCustomContent [nzLabel]="option.text" [nzValue]="option.value">
         <span [innerHTML]="option.actext|iBizSafeContant:'html'"></span>
     </nz-option>
     <nz-option [nzLabel]="'disabled'" nzCustomContent [nzDisabled]="true" [nzValue]="'disabled'" *ngIf="loading">
-        <nz-spin></nz-spin>
+        <nz-spin>
+            <i class="anticon anticon-loading anticon-spin loading-icon"></i> Loading Data...</nz-spin>
     </nz-option>
 </nz-select>

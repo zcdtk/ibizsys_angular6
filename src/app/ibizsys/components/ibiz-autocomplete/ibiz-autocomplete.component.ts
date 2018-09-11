@@ -6,9 +6,12 @@ import { IBizComponent } from '../ibiz-component';
 
 @Component({
     selector: 'app-ibiz-autocomplete',
-    templateUrl: './ibiz-autocomplete.component.html'
+    templateUrl: './ibiz-autocomplete.component.html',
+    styleUrls: ['./ibiz-autocomplete.component.less'],
 })
 export class IBizAutocompleteComponent extends IBizComponent {
+
+    @Input() editorType: string;
 
     /**
      * 是否强制选择
@@ -114,7 +117,7 @@ export class IBizAutocompleteComponent extends IBizComponent {
      * @type {number}
      * @memberof IBizAutocompleteComponent
      */
-    private _tempSize: number = 50;
+    private _tempSize: number = 14;
 
     /**
      * 每页显示数量
