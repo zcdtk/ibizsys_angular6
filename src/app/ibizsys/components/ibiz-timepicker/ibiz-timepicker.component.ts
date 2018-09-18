@@ -35,6 +35,9 @@ export class IBizTimepickerComponent extends IBizComponent {
 
     public openChange(flag: Boolean): void {
         if (!flag) {
+            if (!this.$time) {
+                return;
+            }
             let timeStr = (this.$time.toTimeString()).substring(0, 8);
             if (!timeStr) {
                 return;
@@ -57,29 +60,36 @@ export class IBizTimepickerComponent extends IBizComponent {
             this.$time = null;
             return;
         }
-        this.$time = new Date(0, 0, 0, 0, 0, 0, 0);
+        if(!this.$time){
+            this.$time = new Date(0, 0, 0, 0, 0, 0, 0);
+        }
         if (Object.is(this.datefmt, 'HH:mm:ss')) {
             let times: Array<any> = val.split(":");
             this.$time.setHours(times[0]);
             this.$time.setMinutes(times[1]);
             this.$time.setSeconds(times[2]);
+            return;
         }
         if (Object.is(this.datefmt, 'HH:mm')) {
             let times: Array<any> = val.split(":");
             this.$time.setHours(times[0]);
             this.$time.setMinutes(times[1]);
+            return;
         }
         if (Object.is(this.datefmt, 'HH')) {
             let times: Array<any> = val.split(":");
             this.$time.setHours(times[0]);
+            return;
         }
         if (Object.is(this.datefmt, 'mm')) {
             let times: Array<any> = val.split(":");
             this.$time.setMinutes(times[1]);
+            return;
         }
         if (Object.is(this.datefmt, 'ss')) {
             let times: Array<any> = val.split(":");
             this.$time.setSeconds(times[2]);
+            return;
         }
 
     }
