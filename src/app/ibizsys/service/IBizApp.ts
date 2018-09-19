@@ -13,6 +13,31 @@ import { Injectable } from '@angular/core';
 export class IBizApp {
 
     /**
+     * 应用数据
+     *
+     * @private
+     * @type {string}
+     * @memberof IBizApp
+     */
+    private $appData: string;
+
+    /**
+     * 激活分页数据
+     *
+     * @type {number}
+     * @memberof IBizApp
+     */
+    public $activeTabView: number = 0;
+
+    /**
+     * 激活路由数据
+     *
+     * @type {Array<any>}
+     * @memberof IBizApp
+     */
+    public $activatedRouteDatas: Array<any> = [];
+
+    /**
      * 是否全屏，默认显示菜单与头部导航文件
      * 
      * @private
@@ -20,6 +45,14 @@ export class IBizApp {
      * @memberof IBizApp
      */
     private $fullScreen: boolean = false;
+
+    /**
+     * 已加载视图控制器对象
+     * 
+     * @type {Array<any>}
+     * @memberof IBizApp
+     */
+    public $ibizViewControllers: Array<any> = [];
 
     /**
      * 显示菜单
@@ -31,35 +64,9 @@ export class IBizApp {
     private $showMenu: boolean = true;
 
     /**
-     * 已加载视图控制器对象
-     * 
-     * @type {Array<any>}
-     * @memberof IBizApp
-     */
-    public $ibizViewControllers: Array<any> = [];
-
-    /**
-     * 所有激活路由参数
-     * 
-     * @type {Array<any>}
-     * @memberof IBizApp
-     */
-    public $activatedRouteDatas: Array<any> = [];
-
-    /**
-     * 应用数据
-     *
-     * @private
-     * @type {string}
-     * @memberof IBizApp
-     */
-    private $appData: string;
-
-    /**
      * Creates an instance of IBizApp.
      * 创建 IBizApp 实例
      * 
-     * @param {SettingsService} themeSettings 
      * @memberof IBizApp
      */
     constructor() { }
@@ -239,10 +246,22 @@ export class IBizApp {
         return this.$showMenu;
     }
 
+    /**
+     * 获取应用AppData
+     *
+     * @returns {string}
+     * @memberof IBizApp
+     */
     public getAppData(): string {
         return this.$appData;
     }
 
+    /**
+     * 设置应用AppData
+     *
+     * @param {string} appdata
+     * @memberof IBizApp
+     */
     public setAppData(appdata: string): void {
         this.$appData = appdata;
     }

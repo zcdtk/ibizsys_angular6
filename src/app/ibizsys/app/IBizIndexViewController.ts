@@ -1,6 +1,8 @@
 import { IBizMainViewController } from './IBizMainViewController';
 import { IBizEvent } from '../IBizEvent';
 import { SettingService } from '../service/setting.service';
+import { NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 /**
  * 首页应用视图
@@ -36,6 +38,8 @@ export class IBizIndexViewController extends IBizMainViewController {
      */
     public viewtype: string = 'index';
 
+    private $indexRouteRvents: any;
+
     /**
      * Creates an instance of IBizIndexViewController.
      * 创建 IBizIndexViewController 实例
@@ -46,6 +50,20 @@ export class IBizIndexViewController extends IBizMainViewController {
     constructor(opts: any = {}) {
         super(opts);
         this.settingService = opts.settingService;
+    }
+
+    public onInit(): void {
+        this.$indexRouteRvents = this.$router.events.pipe(filter(evt => evt instanceof NavigationEnd)).subscribe((evt: NavigationEnd) => {
+            if ((Object.keys(this.$activatedRouteData).length === 0)) {
+                return;
+            }
+
+            const childRouteData: any = this.$iBizApp.getActivatedRouteDatas(this.$activatedRouteData.index + 1);
+            if (Object.keys(childRouteData).length > 0) {
+                console.log(childRouteData);
+            }
+        });
+        super.onInit();
     }
 
     /**
@@ -82,6 +100,13 @@ export class IBizIndexViewController extends IBizMainViewController {
             }
         }
         this.setMianMenuState();
+    }
+
+    public onDestroy(): void {
+        super.onDestroy();
+        if (this.$indexRouteRvents) {
+            this.$indexRouteRvents.unsubscribe();
+        }
     }
 
     /**
@@ -129,20 +154,6 @@ export class IBizIndexViewController extends IBizMainViewController {
      */
     public getAppMenu(): any {
         return this.$controls.get('appmenu');
-    }
-
-    /**
-     * 导航数据跳转处理
-     * 
-     * @param {*} [data={}] 
-     * @memberof IBizIndexViewController
-     */
-    public navigationLink(data: any = {}) {
-        Object.assign(data, { breadcrumbs: true });
-        this.$iBizApp.updateActivatedRouteDatas(data);
-        if (data.routerurl) {
-            this.$router.navigateByUrl(data.routerurl);
-        }
     }
 
     /**

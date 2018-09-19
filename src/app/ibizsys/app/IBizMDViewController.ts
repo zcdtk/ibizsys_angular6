@@ -662,20 +662,21 @@ export class IBizMDViewController extends IBizMainViewController {
         if (view == null) {
             return false;
         }
-        // let openMode = view.openMode;
-        // if (!openMode || Object.is(openMode, '')) {
-        //     view.openMode = 'INDEXVIEWTAB';
-        // }
+        const openMode = view.openMode;
+        if (!openMode || Object.is(openMode, '')) {
+            view.openMode = 'INDEXVIEWTAB';
+        }
+
         if (!view.routerlink || Object.is(view.routerlink, '')) {
             return false;
         }
+
         // tslint:disable-next-line:prefer-const
         let viewParam: any = {};
         Object.assign(viewParam, view.viewParam);
 
         if (Object.keys(viewParam).length > 0) {
-            // tslint:disable-next-line:no-inferrable-types
-            let srfeditmode: string = '';
+            let srfeditmode = '';
             if (viewParam.srfeditmode && !Object.is(viewParam.srfeditmode, '')) {
                 srfeditmode = viewParam.srfeditmode.split('@').join('__');
             }
@@ -708,7 +709,7 @@ export class IBizMDViewController extends IBizMainViewController {
             return false;
         }
 
-        if (!openMode || Object.is(openMode, '') || Object.is(openMode, 'INDEXVIEWTAB')) {
+        if (!openMode || Object.is(openMode, 'INDEXVIEWTAB')) {
             // tslint:disable-next-line:prefer-const
             let data: any = {};
             Object.assign(data, view.viewParam);
@@ -733,6 +734,7 @@ export class IBizMDViewController extends IBizMainViewController {
                 this.onRefresh();
             }
         });
+
 
         return true;
     }
