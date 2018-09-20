@@ -3,7 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscriber } from 'rxjs';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
 import { IBizEnvironment } from '@env/ibiz-environment';
-import { IBizApp, SettingService } from 'ibizsys';
+import { IBizApp, SettingService, IBizNotification } from 'ibizsys';
 
 /**
  * 根节点路由守卫
@@ -18,11 +18,14 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     /**
      * Creates an instance of AuthGuard.
      * 创建 AuthGuard 实例
+     * 
      * @param {HttpClient} httpClient
-     * @param {ITokenService} tokenService
+     * @param {IBizApp} iBizApp
+     * @param {SettingService} setting
+     * @param {IBizNotification} iBizNotification
      * @memberof AuthGuard
      */
-    constructor(private httpClient: HttpClient, private iBizApp: IBizApp, private setting: SettingService) { }
+    constructor(private httpClient: HttpClient, private iBizApp: IBizApp, private setting: SettingService, private iBizNotification: IBizNotification) { }
 
     /**
      * 根据主题UI 服务对象判断是否登录
@@ -59,6 +62,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
      * @memberof AuthGuard
      */
     private post(route: ActivatedRouteSnapshot, observer: Subscriber<boolean>): void {
+        // tslint:disable-next-line:no-inferrable-types
         let url: string = '';
         if (route.data && route.data.hasOwnProperty('backendurl')) {
             url = route.data.backendurl;
@@ -66,6 +70,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
             observer.next(true);
         }
 
+        // tslint:disable-next-line:prefer-const
         let opt: any = { srfaction: 'loadappdata' };
         if (route.params && Object.keys(route.params).length > 0) {
             Object.assign(opt, route.params);
@@ -85,9 +90,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
                 if (data.remotetag) {
                     this.iBizApp.setAppData(data.remotetag);
                 }
+            } else {
+                this.iBizNotification.error('错误', data.info);
             }
             observer.next(true);
-        }, () => {
+        }, (error) => {
+            this.iBizNotification.error('错误', error.info);
             observer.next(true);
         });
     }
