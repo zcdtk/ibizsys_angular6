@@ -713,7 +713,15 @@ export class IBizMDViewController extends IBizMainViewController {
             // tslint:disable-next-line:prefer-const
             let data: any = {};
             Object.assign(data, view.viewParam);
-            this.openView(view.routerlink, data);
+            // this.openView(view.routerlink, data);
+            const url = this.getWindowOpenURL(`/data-v/${view.routerlink}`, Object.assign(data, { fullscreen: true }));
+            window.open(url, '_blank');
+            window.addEventListener('callback', () => {
+                console.log('回调处理');
+            });
+            window.onbeforeunload = function() {
+                console.log('回调处理');
+            };
             return false;
         }
 

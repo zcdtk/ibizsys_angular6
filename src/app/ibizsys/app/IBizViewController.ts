@@ -982,6 +982,60 @@ export class IBizViewController extends IBizViewControllerBase implements OnInit
     }
 
     /**
+     * 获取window.open() url 路径
+     *
+     * @param {string} url 应用下hash后路径
+     * @param {*} [routeParam={}] 路由参数
+     * @param {*} [queryParams] 订阅参数
+     * @returns {string} 绝对路径
+     * @memberof IBizViewController
+     */
+    public getWindowOpenURL(url: string, routeParam: any = {}, queryParams?: any): string {
+
+        // 路由参数
+        const route_param_keys = Object.keys(routeParam);
+        // tslint:disable-next-line:prefer-const
+        let route_param_arr: Array<any> = [];
+        route_param_keys.forEach(key => {
+            if (routeParam[key]) {
+                route_param_arr.push(`${key}=${routeParam[key]}`);
+            }
+        });
+
+        //  订阅参数
+        if (!queryParams) {
+            queryParams = {};
+        }
+        this.$activatedRoute.queryParamMap.subscribe((paramMap: ParamMap) => {
+            if (paramMap.keys.length > 0) {
+                paramMap.keys.forEach((key) => {
+                    queryParams[key] = paramMap.get(key);
+                });
+            }
+        });
+        const query_params_keys = Object.keys(queryParams);
+        // tslint:disable-next-line:prefer-const
+        let query_params_arr: Array<any> = [];
+        query_params_keys.forEach(key => {
+            if (queryParams[key]) {
+                query_params_arr.push(`${key}=${queryParams[key]}`);
+            }
+        });
+
+        const locaction = window.location;
+        // tslint:disable-next-line:prefer-const
+        let baseUrl = `${locaction.origin}${location.pathname}#${url}`;
+        if (route_param_arr.length > 0) {
+            baseUrl = `${baseUrl};${route_param_arr.join(';')}`;
+        }
+        if (query_params_arr.length > 0) {
+            baseUrl = `${baseUrl}?${query_params_arr.join('&')}`;
+        }
+
+        return baseUrl;
+    }
+
+    /**
      * 判断给定路径是否在传入的路由对象中
      * 
      * @param {ActivatedRoute} routeActive 路由对象
