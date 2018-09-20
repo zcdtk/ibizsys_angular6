@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NzMessageService, UploadFile } from 'ng-zorro-antd';
+import { UploadFile } from 'ng-zorro-antd';
 
 import { IBizEnvironment } from '@env/IBizEnvironment';
 import { IBizComponent } from '../ibiz-component';

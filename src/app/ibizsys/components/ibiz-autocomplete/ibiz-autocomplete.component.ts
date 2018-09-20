@@ -1,8 +1,8 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NzSelectComponent } from 'ng-zorro-antd';
 
-import { IBizHttp } from 'app/ibizsys/service/IBizHttp';
 import { IBizComponent } from '../ibiz-component';
+import { IBizHttp } from 'ibizsys';
 
 @Component({
     selector: 'app-ibiz-autocomplete',

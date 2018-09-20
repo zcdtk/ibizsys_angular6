@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NzSelectComponent } from 'ng-zorro-antd';
 
 import { IBizComponent } from '../ibiz-component';
-import { IBizHttp } from './../../service/IBizHttp';
+import { IBizHttp } from 'ibizsys';
 
 @Component({
     selector: 'app-ibiz-select',

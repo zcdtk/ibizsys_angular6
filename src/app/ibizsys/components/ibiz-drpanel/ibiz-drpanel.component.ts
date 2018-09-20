@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IBizEvent } from '../../IBizEvent';
+import { IBizEvent } from './../../ibiz-event';
 
 @Component({
     selector: 'app-ibiz-drpanel',

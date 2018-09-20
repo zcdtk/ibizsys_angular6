@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IBizNotification } from 'app/ibizsys/service/IBizNotification';
-import { IBizHttp } from './../../service/IBizHttp';
+import { Component, Input } from '@angular/core';
+import { IBizNotification, IBizHttp } from 'ibizsys';
 import { IBizComponent } from '../ibiz-component';
 
 @Component({

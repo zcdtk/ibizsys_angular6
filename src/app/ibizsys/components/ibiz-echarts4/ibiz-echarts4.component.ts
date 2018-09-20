@@ -1,4 +1,4 @@
-import { IBizEvent } from './../../IBizEvent';
+import { IBizEvent } from './../../ibiz-event';
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 import echarts from 'echarts';
 
