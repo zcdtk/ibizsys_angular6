@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IBizHttp } from 'ibizsys';
+import { Component, Input } from '@angular/core';
 import { IBizComponent } from '../ibiz-component';
+import { IBizHttp } from '../../service/ibiz-http';
 
 @Component({
     selector: 'app-ibiz-mpicker',

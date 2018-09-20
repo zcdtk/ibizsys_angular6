@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { IBizNotification, IBizHttp } from 'ibizsys';
 import { IBizComponent } from '../ibiz-component';
+import { IBizHttp } from '../../service/ibiz-http';
+import { IBizNotification } from '../../service/ibiz-notification';
 
 @Component({
     selector: 'app-ibiz-picker',

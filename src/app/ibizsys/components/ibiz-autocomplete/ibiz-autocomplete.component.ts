@@ -2,7 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { NzSelectComponent } from 'ng-zorro-antd';
 
 import { IBizComponent } from '../ibiz-component';
-import { IBizHttp } from 'ibizsys';
+import { IBizHttp } from '../../service/ibiz-http';
 
 @Component({
     selector: 'app-ibiz-autocomplete',
