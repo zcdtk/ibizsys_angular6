@@ -3,7 +3,7 @@
         (ngModelChange)="onValueChange($event)" (nzOpenChange)="onOpenChange($event)" (nzOnSearch)="searchItems($event)"
         (nzScrollToBottom)="scrollToBottom()"  [nzDisabled]="disabled">
         <nz-option *ngFor="let item of items" nzCustomContent [nzLabel]="item.srfmajortext" [nzValue]="item.srfkey">
-            <span [innerHTML]="item.actext|iBizSafeContant:'html'"></span>
+            <span [innerHTML]="item.actext?item.actext:item.srfmajortext|iBizSafeContant:'html'"></span>
         </nz-option>
     </nz-select>
     <i style="position: absolute;right: 6px;top:15px;" class="anticon anticon-search" (click)="openPickupView()"></i>
