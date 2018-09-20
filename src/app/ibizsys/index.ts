@@ -1,59 +1,59 @@
 // viewcontroller begin
-export { IBizIndexViewController } from './app/IBizIndexViewController';
-export { IBizEditViewController } from './app/IBizEditViewController';
-export { IBizEditView2Controller } from './app/IBizEditView2Controller';
-export { IBizEditView3Controller } from './app/IBizEditView3Controller';
-export { IBizGridViewController } from './app/IBizGridViewController';
-export { IBizGridView9Controller } from './app/IBizGridView9Controller';
-export { IBizChartViewController } from './app/IBizChartViewController';
-export { IBizDataViewController } from './app/IBizDataViewController';
-export { IBizPickupDataViewController } from './app/IBizPickupDataViewController';
-export { IBizPickupGridViewController } from './app/IBizPickupGridViewController';
-export { IBizPickupTreeViewController } from './app/IBizPickupTreeViewController';
-export { IBizPickupViewController } from './app/IBizPickupViewController';
-export { IBizPickupView2Controller } from './app/IBizPickupView2Controller';
-export { IBizMPickupViewController } from './app/IBizMPickupViewController';
-export { IBizMPickupView2Controller } from './app/IBizMPickupView2Controller';
-export { IBizPortalViewController } from './app/IBizPortalViewController';
-export { IBizCustomViewController } from './app/IBizCustomViewController';
-export { IBizTreeExpViewController } from './app/IBizTreeExpViewController';
-export { IBizWFExpViewController } from './app/IBizWFExpViewController';
+export { IBizIndexViewController } from './app/ibiz-index-view-controller';
+export { IBizEditViewController } from './app/ibiz-edit-view-controller';
+export { IBizEditView2Controller } from './app/ibiz-edit-view2-controller';
+export { IBizEditView3Controller } from './app/ibiz-edit-view3-controller';
+export { IBizGridViewController } from './app/ibiz-grid-view-controller';
+export { IBizGridView9Controller } from './app/ibiz-grid-view9-controller';
+export { IBizChartViewController } from './app/ibiz-chart-view-controller';
+export { IBizDataViewController } from './app/ibiz-data-view-controller';
+export { IBizPickupDataViewController } from './app/ibiz-pickup-data-view-controller';
+export { IBizPickupGridViewController } from './app/ibiz-pickup-grid-view-controller';
+export { IBizPickupTreeViewController } from './app/ibiz-pickup-tree-view-controller';
+export { IBizPickupViewController } from './app/ibiz-pickup-view-controller';
+export { IBizPickupView2Controller } from './app/ibiz-pickup-view2-controller';
+export { IBizMPickupViewController } from './app/ibiz-mpickup-view-controller';
+export { IBizMPickupView2Controller } from './app/ibiz-mpickup-view2-controller';
+export { IBizPortalViewController } from './app/ibiz-portal-view-controller';
+export { IBizCustomViewController } from './app/ibiz-custom-view-controller';
+export { IBizTreeExpViewController } from './app/ibiz-tree-exp-view-controller';
+export { IBizWFExpViewController } from './app/ibiz-WFExp-view-controller';
 // viewcontroller end
 
 // control begin
-export { IBizAppMenu } from './widget/IBizAppMenu';
-export { IBizDynamicControl } from './widget/IBizDynamicControl';
-export { IBizDynamicEditForm } from './widget/IBizDynamicEditForm';
-export { IBizEditForm } from './widget/IBizEditForm';
-export { IBizToolbar } from './widget/IBizToolbar';
-export { IBizGrid } from './widget/IBizGrid';
-export { IBizSearchForm } from './widget/IBizSearchForm';
-export { IBizDRBar } from './widget/IBizDRBar';
-export { IBizChart } from './widget/IBizChart';
-export { IBizPickupViewPanel } from './widget/IBizPickupViewPanel';
-export { IBizDashboard } from './widget/IBizDashboard';
-export { IBizList } from './widget/IBizList';
-export { IBizCustom } from './widget/IBizCustom';
-export { IBizTreeExpBar } from './widget/IBizTreeExpBar';
-export { IBizTree } from './widget/IBizTree';
-export { IBizDRTab } from './widget/IBizDRTab';
+export { IBizAppMenu } from './widget/ibiz-app-menu';
+export { IBizDynamicControl } from './widget/ibiz-dynamic-control';
+export { IBizDynamicEditForm } from './widget/ibiz-dynamic-editForm';
+export { IBizEditForm } from './widget/ibiz-edit-form';
+export { IBizToolbar } from './widget/ibiz-toolbar';
+export { IBizGrid } from './widget/ibiz-grid';
+export { IBizSearchForm } from './widget/ibiz-search-form';
+export { IBizDRBar } from './widget/ibiz-drbar';
+export { IBizChart } from './widget/ibiz-chart';
+export { IBizPickupViewPanel } from './widget/ibiz-pickup-view-panel';
+export { IBizDashboard } from './widget/ibiz-dashboard';
+export { IBizList } from './widget/ibiz-list';
+export { IBizCustom } from './widget/ibiz-custom';
+export { IBizTreeExpBar } from './widget/ibiz-tree-exp-bar';
+export { IBizTree } from './widget/ibiz-tree';
+export { IBizDRTab } from './widget/ibiz-drtab';
 // control end
 
 // formitem begin
-export { IBizFormField } from './formitem/IBizFormField';
-export { IBizFormDRPanel } from './formitem/IBizFormDRPanel';
-export { IBizFormGroup } from './formitem/IBizFormGroup';
-export { IBizFormIFrame } from './formitem/IBizFormIFrame';
-export { IBizFormRawItem } from './formitem/IBizFormRawItem';
-export { IBizFormTabPage } from './formitem/IBizFormTabPage';
-export { IBizFormTabPanel } from './formitem/IBizFormTabPanel';
+export { IBizFormField } from './formitem/ibiz-form-field';
+export { IBizFormDRPanel } from './formitem/ibiz-form-drpanel';
+export { IBizFormGroup } from './formitem/ibiz-form-group';
+export { IBizFormIFrame } from './formitem/ibiz-form-iframe';
+export { IBizFormRawItem } from './formitem/ibiz-form-raw-item';
+export { IBizFormTabPage } from './formitem/ibiz-form-tab-page';
+export { IBizFormTabPanel } from './formitem/ibiz-form-tab-panel';
 // formitem end
 
 // uitl begin
-export { IBizCodeList } from './util/IBizCodeList';
-export { IBizUICounter } from './util/IBizUICounter';
-export { IBizUtil } from './util/IBizUtil';
-export { IBizXMLWriter } from './util/IBizXMLWriter';
+export { IBizCodeList } from './util/ibiz-code-list';
+export { IBizUICounter } from './util/ibiz-uicounter';
+export { IBizUtil } from './util/ibiz-util';
+export { IBizXMLWriter } from './util//ibiz-xmlwriter';
 // util end
 
 // module begin
@@ -62,9 +62,9 @@ export { IBizComponentsModule } from './components/ibiz-components.module';
 
 
 // service begin
-export { IBizApp } from './service/IBizApp';
-export { IBizHttp } from './service/IBizHttp';
-export { IBizModal } from './service/IBizModal';
-export { IBizNotification } from './service/IBizNotification';
+export { IBizApp } from './service/ibiz-app';
+export { IBizHttp } from './service/ibiz-http';
+export { IBizModal } from './service/ibiz-modal';
+export { IBizNotification } from './service/ibiz-notification';
 export { SettingService } from './service/setting.service';
 // service end
