@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, AfterViewInit, Input, OnDestroy } from '@angular/core';
-import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizEnvironment } from '@env/ibiz-environment';
 import { IBizComponent } from '../ibiz-component';
 
 

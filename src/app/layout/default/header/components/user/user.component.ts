@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizEnvironment } from '@env/ibiz-environment';
 import { SettingService, IBizHttp, IBizNotification } from 'ibizsys';
 
 

@@ -1,4 +1,4 @@
-import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizEnvironment } from '@env/ibiz-environment';
 import { Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';

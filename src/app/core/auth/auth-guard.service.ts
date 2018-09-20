@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscriber } from 'rxjs';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
-import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizEnvironment } from '@env/ibiz-environment';
 import { IBizApp, SettingService } from 'ibizsys';
 
 /**

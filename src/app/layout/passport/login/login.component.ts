@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizEnvironment } from '@env/ibiz-environment';
 import { IBizHttp, SettingService } from 'ibizsys';
 
 @Component({

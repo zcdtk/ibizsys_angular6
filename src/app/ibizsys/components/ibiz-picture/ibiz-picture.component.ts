@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UploadFile } from 'ng-zorro-antd';
 
-import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizEnvironment } from '@env/ibiz-environment';
 import { IBizComponent } from '../ibiz-component';
 
 @Component({

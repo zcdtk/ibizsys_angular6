@@ -7,7 +7,7 @@ import {
 import { Observable, of } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 // import { _HttpClient } from '@delon/theme';
-import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizEnvironment } from '@env/ibiz-environment';
 import { NzModalService } from 'ng-zorro-antd';
 
 /**

@@ -2,7 +2,7 @@ import { UploadFile } from 'ng-zorro-antd';
 import { Component, Input, OnInit } from '@angular/core';
 
 import { IBizComponent } from '../ibiz-component';
-import { IBizEnvironment } from '@env/IBizEnvironment';
+import { IBizEnvironment } from '@env/ibiz-environment';
 
 @Component({
     selector: 'app-ibiz-file-upload',
