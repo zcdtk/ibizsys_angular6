@@ -103,7 +103,9 @@ export class IBizFileUploadComponent extends IBizComponent implements OnInit {
         }
         try {
             let data = JSON.parse(val);
-            [...this.fileList] = data;
+            if (this.fileList.length === 0) {
+                [...this.fileList] = data;
+            }
             [...this.$items] = data;
         } catch (error) {
             console.log(error);
@@ -134,12 +136,6 @@ export class IBizFileUploadComponent extends IBizComponent implements OnInit {
                 itemField.setValue(_items.length > 0 ? JSON.stringify(_items) : '');
             }
         }
-        this.fileList = fileList.filter(item => {
-            if (item.response) {
-                return item.response.status === 'success';
-            }
-            return true;
-        });
     }
 
     /**
@@ -160,7 +156,12 @@ export class IBizFileUploadComponent extends IBizComponent implements OnInit {
         if (itemField) {
             itemField.setValue(_items.length > 0 ? JSON.stringify(_items) : '');
         }
-        return true;
+        this.fileList.forEach((item,index) =>{
+            if(item.id === file.id){
+                this.fileList.splice(index,1);
+                return true;
+            }
+        });
     }
 
     /**
